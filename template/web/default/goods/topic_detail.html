@@ -1,0 +1,42 @@
+{extend name="$base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="WEB_CSS/goods_topic_detail.css">
+{/block}
+{block name="main"}
+<div class="topic-scroll">
+	<img src="{$info['scroll_img']}">
+</div>
+<div class="topic-goods">
+	<div class="sale-container">
+		<div class="wrapper">
+			<h3>{$info['topic_name']}</h3>
+			<div class="goods-list">
+				<ul>
+					{foreach name="info['goods-list']" id="v"}
+					<li>
+						<a href="{:__URL('SHOP_MAIN/goods/detail','goods_id='.$v['goods_id'])}" class="img-a">
+							<img src="{:__IMG($v['picture_info']['pic_cover_small'])}" alt="{$v['goods_name']}" class="topic-img lazy-load">
+						</a>
+						<div class="goods-content">
+							<span class="goods-name"><a href="{:__URL('SHOP_MAIN/goods/detail','goods_id='.$v['goods_id'])}" >{$v['goods_name']}</a></span>
+							{in name="$v.point_exchange_type" value="0,2"}
+								<span class="goods-price">￥{$v['promotion_price']}</span>
+							{else/}
+								{if $v['point_exchange_type'] == 1 && $v['promotion_price'] > 0}
+									<span class="goods-price">￥{$v.promotion_price}+{$v.point_exchange}{:lang("goods_integral")}</span>
+								{else/}
+									<span class="goods-price">{$v.point_exchange}{:lang("goods_integral")}</span>
+								{/if}
+							{/in}
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="WEB_JS/goods_topic_detail.js"></script>
+{/block}

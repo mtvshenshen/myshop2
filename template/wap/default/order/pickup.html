@@ -1,0 +1,37 @@
+{extend name="$base" /}
+{block name="resources"}
+<style type="text/css">
+body{background: #fff;}
+.share-box-middle{padding-top:30px;}
+.share-box-top{padding-top: 10px;}
+.share-box{margin-top:52px;background-color:#FFF;padding-top:15px;padding-bottom:15px;}
+.share-box-top{text-align:center;height:30px;line-height:30px;}
+.share-box-bottom{text-align:center;}
+.share-box-bottom span{display:inline-block;padding:10px;background-color:#f0f0f0;border-radius:2px;}
+.share-box-middle-qrcode{width:40%;margin:10px  auto;}
+.share-box-middle-qrcode img{width:100%;}
+</style>
+{/block}
+
+{block name="main"}
+{php}
+$order_id = input('orderId', 0);
+$data = api('System.Order.getPickupQecode', ['order_id' => $order_id]);
+$data = $data['data'];
+{/php}
+
+<div class="share-box">
+	<div class="share-box-middle">
+		<div class="share-box-middle-qrcode">
+    		<img src="{:__IMG($data['path'])}"/>
+		</div>
+	</div>
+    <div class="share-box-top">
+        请将该提货码出示给门店审核人员进行提货
+    </div>
+</div>
+		
+{/block}
+
+{block name="bottom"}{/block}
+

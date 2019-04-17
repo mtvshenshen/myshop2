@@ -1,0 +1,35 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/distribution_account_detail.css">
+{/block}
+{block name="head_operation"}{/block}
+{block name="main"}
+{php}
+	$type_id = request()->get('type_id', "");
+	$info = api("System.Distribution.accountRecordsList",['type_id' => $type_id]);
+	$info = $info['data'];
+{/php}
+<div class="tabs-content">
+	<div id="withdraw">
+	{if condition="$info['account_records_detail'] eq null"}
+	<div class="nothing-data" align="center">
+		<img src="WAP_IMG/distribution/wap_nodata.png"/>
+		<div class="ns-text-color-black">您还没有佣金！</div>
+	</div>
+	{else/}
+	  <table width="100%">
+	    {volist name="$info['account_records_detail']" id="vo"}
+	       <tr>
+		       <td>
+					<p><span class="text-name ns-text-color-black">{$vo.type_name}</span><span class="text-money ns-text-color">¥{$vo.money}</span></p>
+					<p><span class="text-2">{:getTimeStampTurnTime($vo.create_time)}</span></p>
+				</td>
+	       </tr>
+	    {/volist}
+	  </table>
+	{/if}
+	</div>
+</div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}{/block}

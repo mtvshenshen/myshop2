@@ -1,0 +1,73 @@
+{extend name="$base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="WEB_CSS/article_type.css">
+{/block}
+{block name="main"}
+{php}
+	//文章分类列表
+	$class_list = api("System.Article.articleClassList");
+	$class_list = $class_list['data']['data'];
+
+	$info = api("System.Article.articleInfo", ["article_id"=>$article_id]);
+	$info = $info['data'];
+
+	$condition = [];
+	$condition['article_id'] = ['gt',$article_id];
+	$condition['class_id'] = $info["class_id"];
+	$condition['status'] = 2;
+
+	//上一篇
+	$prev_info = api("System.Article.articleFirst", ["condition"=>$condition, "order"=>"article_id asc"]);
+	$prev_info = $prev_info['data'];
+	//下一篇
+	$condition['article_id'] = ['lt',$article_id];
+	$next_info = api("System.Article.articleFirst", ["condition"=>$condition, "order"=>"article_id desc"]);
+	$next_info = $next_info['data'];
+{/php}
+<div class="help">
+	<ol class="breadcrumb">
+	  <li><a href="{:__URL('SHOP_MAIN')}">{:lang('home_page')}</a></li>
+	  <li class="active">{:lang('article_center')}</li>
+	</ol>
+	<div class="category">
+		<h3 class="ns-bg-color">{:lang('article_center')}</h3>
+		<ul>
+			{foreach name="$class_list" id="cms"}
+			{if condition="$cms['pid'] eq '0'"}
+			<li>
+				<div class="ns-bg-color-gray">
+					<a href="javascript:;" title="{$cms.name}">{$cms.name}</a>
+					<i class="{if condition='$cms.class_id eq $pid'}icon-sort-up{else/}icon-sort-down{/if}"></i>
+				</div>
+				<ul {if condition="$cms['class_id'] neq $pid"}class="dis-no"{/if}>
+				{foreach name="$class_list" id="cms_item"}
+					{if condition="$cms_item['pid'] eq $cms['class_id']"}
+					<li>
+						<a href="{:__URL('SHOP_MAIN/article/lists','class_id='.$cms_item['class_id'].'&pid='.$cms_item['pid'])}" target="_self" title="{$cms_item.name}" {if condition="$cms_item['class_id'] eq $class_id"}class="ns-text-color"{/if}>{$cms_item.name}</a>
+					</li>
+					{/if}
+				{/foreach}
+				</ul>
+			</li>
+			{/if}
+			{/foreach}
+		</ul>
+	</div>
+    
+	<div class="detail clearfix">
+		<h3 class="ns-border-color-gray">{$info['title']}</h3>
+		<time>发布时间：{$info.create_time|date="Y-m-d H:i:s",###} &nbsp;&nbsp;&nbsp;&nbsp;{notempty name="$info.author"}作者：{$info.author}{/notempty}</time>
+		<div class="content">{$info['content']}</div>
+		{notempty name="prev_info"}
+		<a href="{:__URL('SHOP_MAIN/article/detail', 'article_id='.$prev_info.article_id.'&class_id='.$news.class_id.'&pid='.$pid)}" class="pull-left text-over">上一篇：{$prev_info.title}</a>
+		{/notempty}
+		{notempty name="next_info"}
+		<a href="{:__URL('SHOP_MAIN/article/detail', 'article_id='.$next_info.article_id.'&class_id='.$news.class_id.'&pid='.$pid)}" class="pull-right text-over">下一篇：{$next_info.title}</a>
+		{/notempty}
+	</div>
+</div>
+<input type="hidden" value="{$pid}" id="hidden_id" />
+{/block}
+{block name="script"}
+<script type="text/javascript" src="WEB_JS/article_type.js"></script>
+{/block}

@@ -1,0 +1,183 @@
+@CHARSET "UTF-8";
+ .order-detail .order-detail-l{float:left;margin-right:10px;}
+.order-detail .order-detail-l .icon-orders-small,
+.order-detail .order-detail-l .icon-address-small,
+.order-detail .order-detail-l .icon-double-round,
+.order-detail .order-detail-l .icon-talks-small {width:20px;line-height:22px; text-align:center;font-size:25px;}
+.order-detail .order-detail-r{overflow:hidden}
+.order-detail .order-detail-r ul{margin:0;list-style:none;font-size:12px;}
+.order-detail .order-detail-r ul li { padding:0 0 4px 0;}
+.order-detail .order-detail-r ul li:last-child { padding-bottom:0;}
+.order-detail .order-detail-r .name,
+.order-detail .order-detail-r .name .label{line-height:12px;font-size:12px; }
+.order-detail .order-detail-r .label {padding:0;background:none; }
+.order-detail .order-detail-r .label.log-title{font-size:14px;}
+.order-detail-sum {padding:10px 15px;border-bottom:1px solid #FF834C;background:#FF834C;color:#fff;}
+.order-detail-sum .sum-r-ul .status{line-height:14px;font-size:14px; }
+.order-detail-sum .sum-r-ul .label {color:#fff;}
+.order-detail-address {padding:0 15px;background:#fff;}
+.order-detail-address .address-out {padding:10px 0;border-bottom:1px solid #e3e3e3; }
+.order-detail-logistics{position:relative;padding:0 15px;background:#fff;}
+.order-detail-logistics .logistics-out{display:block;padding:10px 0;border-bottom: 1px solid #e3e3e3;}
+.order-detail-logistics .leftpoint{position: absolute;top:15px;left:17px;background:#45a5cf;width:15px;height:15px;border: 2px solid #b6e9ff;border-radius:50%;z-index:2;}
+.order-detail-logistics .leftline{position:absolute;left:24px;width:1px;top:20px;bottom:20px;background:#e5e5e5;z-index:1;}
+.order-detail-logistics .log-r{margin-left:25px;}
+.order-detail-logistics .log-r-ul li .log-time{color:#999;}
+.order-detail-logistics .arrow{position:absolute;top:45%;right:20px;background: url("../images/icon-ps.png") -55px 0;width:6px;height:11px;}
+.order-detail-noLogistics{padding:0 15px;background:#fff;}
+.order-detail-noLogistics .noLogistics-out{padding: 10px 0;border-bottom:1px solid #e3e3e3;}
+.order-detail-noLogistics .alert-no{color:#999;}
+.order-detail-remark {padding:0 15px;background:#fff;}
+.order-detail-remark .remark-out {padding:10px 0; border-bottom:1px solid #e3e3e3;}
+.order-detail .list-myorder{margin:10px 0 0px 0;padding-top:0px;border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3;background:#fff;}
+.order-detail .distribution-info p{font-size: 12px;margin-bottom: 0;padding-left: 25px;}
+.order-detail .list-myorder .text{font-size:12px;overflow:hidden;}
+.order-detail .list-myorder .pro-name{color:#666;font-size:12px;}
+.order-detail .list-myorder .pro-pric{margin-top:5px;font-size:12px;}
+.order-detail .list-myorder .pro-pric span{font-size:12px;}
+.order-detail .list-myorder .pro-pec{font-size:12px;}
+.order-detail .list-myorder .pro-pec .color{margin-right:5px;font-size:12px;}
+.order-detail .list-myorder .pro-return{font-size:14px;}
+.order-detail .money-row{line-height:25px;overflow: hidden;font-size:14px;}
+.order-detail .money-content{padding:0 15px 15px 15px;}
+.order-detail .money-content .name{float:left;}
+.order-detail .money-content .price{float:right;}
+.order-detail .totle-money-row {line-height:30px;overflow: hidden;font-size:18px;}
+.order-detail .totle-money-row .price{color:#f37872;}
+ .list-myorder{margin:0 0 10px 0;padding-top:10px;border-bottom:1px solid #eee;font-size:14px;background:#fff;}
+.list-myorder .ordernumber{height:35px;line-height:35px;margin:0 15px;border-bottom:1px solid #e5e5e5;}
+.list-myorder .order-num{float:left;font-size:16px;}
+.list-myorder .order-date{float:right;color:#999;}
+.list-myorder .ul-product{margin:5px 15px;line-height:1.2;}
+.list-myorder  li{padding:10px 0;list-style:none;border-bottom:1px dotted #ccc;overflow:hidden;}
+.list-myorder .pic{float:left;width:70px;height:70px;margin-right:10px;padding:1px;}
+.list-myorder .pic img{width:100%;height:100%;}
+.list-myorder .text{overflow:hidden;font-size:14px;}
+.list-myorder .pro-name{font-size:14px;}
+.list-myorder .pro-pric{margin-top:5px;font-size:16px;}
+.list-myorder .pro-pric span{font-size:14px;color:#999;}
+.list-myorder .pro-pec{color:#999;}
+.list-myorder .pro-pec .color{margin-right:5px;}
+.list-myorder .pro-return{margin-top:5px;}
+.list-myorder .div-return{padding-left:80px;padding-top:10px;font-size:14px;}
+.list-myorder .a-return{display:block;border:0px solid #e3e3e3;background:#fff;color:#45a5cf;}
+.list-myorder .status-ing{color:#ff9000;}
+.list-myorder .status-over{color:#ccc}
+.list-myorder .totle{height:40px;line-height:40px;padding:0 15px;overflow:hidden;}
+.list-myorder .totle .status{float:left;color:#999;}
+.list-myorder .totle .prc-num{float:right;margin-right:5px;}
+.list-myorder .totle .pric-lable{float:right;color:#999;}
+.list-myorder .totle .price{float:right;font-size:20px;color:#f37872;}
+.list-myorder .div-button{padding:10px 0;margin:0 15px;border-top:1px solid rgba(0,0,0,.1);}
+.list-myorder .div-button:before,
+.list-myorder .div-button:after{content:".";display:block;height:0;clear:both; visibility:hidden;}
+.list-myorder .div-button a.button{float: right;margin-left:10px;font-size: 14px; height: 35px;line-height: 35px; width: 80px;}
+.list-myorder button,.list-myorder .button{margin:0;}
+.list-myorder.orderend .totle .price{float:right;font-size:20px;color:#999;}
+.order-tablink{
+	border-top: 1px solid #e3e3e3;
+	border-bottom: 1px solid #e3e3e3;
+	background: #fff;
+	margin: 10px 0 0 0;
+	padding-bottom: 30px;
+}
+.order-tablink .tablink-box{
+	display: -webkit-box;
+	padding: 10px 15px;
+}
+.order-tablink .tablink-box .tablink{
+	-webkit-box-flex:1;
+}
+.order-tablink .tablink-box .tablink a{
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    height: 35px;
+    border: 1px solid #e7e7e7;
+    text-align: center;
+    line-height: 35px;
+    font-size: 14px;
+    border-radius: 2px;
+}
+.order-opcation{
+	width: 100%;
+	height:45px;
+	background:#fff;
+	position: fixed;
+	bottom: 0;
+	line-height: 45px;
+	box-shadow: 0px 1px 3px;
+}
+.order-opcation .content{
+	padding: 0 10px;
+}
+.order-opcation a
+{
+   	float: right;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    width: 80px;
+    border-radius: 3px;
+    text-align: center;
+    border:1px solid #fff;
+    color: #fff;
+    margin: 5px 0 5px 10px;
+}
+.virtual_code ul li h5{float: left;}
+.virtual_code .btn_show{
+	float: right;
+	color: #ffffff;
+	background: #03A9f4;
+	font-size: 12px;
+	padding: 2px;
+	line-height: 16px;
+	margin: 7px;
+	border-radius: 2px;
+}
+.virtual_code ul li span.code{color: #666666;}
+
+.order-detail-wating-share{padding:10px 15px;background: #ffffff;}
+.order-detail-wating-share label{font-size:14px;}
+.order-detail-wating-share .user-list{padding:20px 0 20px 20px;margin:0;}
+.order-detail-wating-share .user-list li{position: relative;margin:0 5px 10px 0;display:inline-block;}
+.order-detail-wating-share .user-list li .boss{position:absolute;left:-6px;top:-6px;background: #FFAB33;border-radius:10px;font-size:12px;padding:0 5px;}
+.order-detail-wating-share .user-list li img{width:40px;max-width: 100%;max-height: 100%;vertical-align: middle;border-radius:50%;}
+.order-detail-wating-share button{background: #f44;color: #ffffff;border: 0;padding: 8px;border-radius: 3px;margin:8px auto;display:block;width:90%;height: initial;line-height: initial;font-size: 14px;}
+.order-detail-wating-share button:active{background: #e04141;}
+.spelling-success{text-align: center;margin: 10px 0 0;font-size: 12px;}
+.spelling-success em{font-style: normal;}
+.gift-mark{
+	font-size:12px;
+	padding:1px 4px;
+	border-radius:3px;
+	display:inline-block;
+	color:#FFF;
+	height:16px;
+	line-height: 16px;
+	overflow:hidden;
+	font-style:normal;
+	margin-left:5px;
+	position:relative;
+	top:3px;
+}
+.logistics-yellow {
+	color: rgb(245, 183, 8)!important;
+}
+.logistics-icon {
+	float:right;width:7px;
+}
+.order-tablink .tablink-box .tablink a span.call {
+    background: url(../img/order/call.png) no-repeat left;
+    background-size: 18px 18px;
+    padding-left: 20px;
+}
+
+.order-tablink .tablink-box .tablink a span.kefu{
+	background: url(../img/order/order_kefu.png) no-repeat left;	
+	background-size: 18px 18px;
+	padding-left: 20px;
+}
+.icon-order-detail {
+    width: 18px;
+}

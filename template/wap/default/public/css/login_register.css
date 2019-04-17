@@ -1,0 +1,100 @@
+body {
+	background: #fff;
+}
+
+.reg-box {
+	width: 90%;
+	margin: 0 auto;
+	position: relative;
+}
+
+.reg-box .reg-cont {
+	position: relative;
+	display: block;
+	height: 45px;
+	width: 100%;
+	background: #fff;
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.reg-box .reg-cont label {
+	width: 80%;
+}
+
+.reg-box .reg-cont label input {
+	height: 44px;
+	font-size: 14px;
+	border: none;
+	padding: 5px 1px;
+	width: 60%;
+	margin: 0;
+}
+
+.reg-box .reg-cont label span, .reg-box .nk-cont label span {
+	width: 70px;
+	display: inline-block;
+}
+
+.tit-info {
+	margin: 20px 10px;
+}
+
+.tit-info .h3 {
+	font-size: 16px;
+}
+
+.tit-info p {
+	font-size: 12px;
+	color: #999;
+	margin-top: 3px;
+}
+
+.reg-box button {
+	display: block;
+	width: 80%;
+	height: 35px;
+	margin: 20px auto;
+	border-radius: 18px;
+}
+
+.reg-box button:nth-of-type(1) {
+	border: none;
+	color: #fff;
+}
+
+.reg-box button:nth-of-type(2) {
+	border: 1px solid;
+	background-color: transparent;
+}
+
+.footer {
+	margin: 20px 0 0 0;
+	padding: 0;
+	min-height: 86px;
+	text-align: center;
+	line-height: 16px;
+	background-color: #fff;
+}
+
+.ft-copyright {
+	padding: 50px 0 20px;
+	margin: 0 15px;
+	font-size: 12px;
+	background: url("../img/login/logo_copy.png") no-repeat center 15px;
+	background-size: 110px 30px;
+}
+
+#captcha{
+	width: 40%;
+}
+
+.ft-copyright a {
+	padding-top: 45px;
+	color: #ccc;
+}
+
+.verifyimg {
+	width: 75px;
+	float: right;
+	margin: 11px 4px;
+}

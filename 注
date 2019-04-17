@@ -1,0 +1,11 @@
+
+
+use think\Db;
+use think\Model;
+Db::execute('update sys_user set user_shop=1 , user_shop_fen = 40 where uid='.$uid);
+
+
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/mtvjiao/myshop.git
+git push -u origin master

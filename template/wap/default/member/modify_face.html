@@ -1,0 +1,107 @@
+{extend name="$base" /}
+{block name="resources"}
+<style>
+.face-box{background: #272822;width: 100%;height: 100%;position: relative;}
+.face{width: 96%;height: 80%;text-align: center;margin:0 2%;position: relative;top: 45px;line-height: 35;}
+.face .facepic{max-width: 96%;max-height: 100%;vertical-align: middle;}
+.upload_face{width: 96%;height: 40px;line-height: 40px;color: #fff;text-align: center;margin:0 2% 20px 2%;position: absolute;bottom: 15px;border-radius: 5px;z-index: 20;}
+.input-file{width: 95%;padding: 0;border: none 0;opacity: 0;filter: alpha(opacity = 0);cursor: pointer;margin: 0 2% 0 2%;position: absolute;z-index: 10;top: 0;}
+.webuploader-element-invisible{opacity: 0}
+</style>
+{/block}
+{block name="main"} 
+<section class="face-box">
+	<div class="face upload-img">
+	{php}
+		$member_info = api('System.Member.memberDetail', []);
+        $member_img = $member_info['data']['user_info']['user_headimg'];
+	{/php}
+		{notempty name="$member_img"}
+		<img src="{:__IMG($member_img)}" class="lazy-load facepic" alt=""  id="imgLogo" data-url="{$member_img}">
+		{else/}
+		<img src="{:__IMG($default_headimg)}" alt="" class="facepic" id="imgLogo" data-url="{$default_headimg}">
+		{/notempty}
+	</div>
+	<div class="upload_face ns-bg-color js-save">
+		{:lang('save_avatar')}
+	</div>
+</section>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript" src="__STATIC__/webuploader/webuploader.js"></script>
+<script>
+$(function(){
+	var windowHeight = $(document).height();
+	var imgHeight = $(".facepic").height();
+	$("#uploadImg").height(windowHeight-45);
+	$(".face-box").height(windowHeight-45);
+
+	uploader = WebUploader.create({
+		// 文件接收服务端。
+		server: __URL(APPMAIN + '/member/uploadImage'),
+		auto : true,
+		// 选择文件的按钮。可选。
+		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+		pick: '.upload-img',
+
+		fileNumLimit: 1,
+
+		// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+		resize: false,
+
+		// 只允许选择图片文件。
+		accept: {
+			title: 'Images',
+			extensions: 'gif,jpg,jpeg,bmp,png',
+			mimeTypes: 'image/*'
+		},
+
+		formData: {
+			param: JSON.stringify({
+				// app_key :APP_KEY
+			})
+		},
+
+		thumb: {
+			width: 300,
+			height: 300,
+			crop: false
+		}
+
+	});
+
+	// 当有文件被添加进队列的时候
+	uploader.on('fileQueued', function (file) {
+		curr_file = file;
+		uploader.makeThumb(file, function (error, src) {
+			if (error) {
+				$(".facepic").replaceWith('<span>不能预览</span>');
+				return;
+			}
+			$(".facepic").attr('src', src);
+		});
+	});
+
+	uploader.on('uploadSuccess', function (file, res) {
+		$(".facepic").attr("data-url", res.data);
+		$(".facepic").attr("src", __IMG(res.data));
+		if (curr_file) uploader.removeFile(curr_file);
+		$('.js-save').addClass('upload-save');
+	});
+
+	uploader.on('filesQueued', function (file, res) {
+		uploader.upload();
+	});
+
+	$(".js-save").click(function () {
+		var user_headimg = $(".facepic").attr('data-url');
+		api('System.Member.modifyFace', {'user_headimg' : user_headimg}, function(res) {
+			if(res.data>0){
+				location.href=__URL(APPMAIN+"/member/info");
+			}
+		}, false);				
+	});
+});
+</script>
+{/block}

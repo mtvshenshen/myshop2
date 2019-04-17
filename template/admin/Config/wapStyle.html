@@ -1,0 +1,90 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/wap_style.css">
+
+{/block}
+{block name="main"}
+<div class="ns-main">
+	<article class="custom-template">
+		<header data-custom-flag="CustomTemplateName">
+			<img src="__STATIC__/wapCustomTemplate/images/titlebar.png">
+		</header>
+		<div class="custom-main" style="min-height:100px;padding-bottom: 468px;    background-position: center;">
+		</div>
+	</article>
+	<article class="pt-left" style=" ">
+		<div class="cont categoty" style="">
+			
+			<div class="control-footer-list">
+				<div class="control-edit text-color is-img">
+					<label>风格设置：</label>
+					<div class="wappicture">
+						{foreach $style_arr as $k => $v}
+						<div for="" data-img="{$v['img']}" data-main-color="{$v['main_color']}" data-secondary-color="{$v['secondary_color']}" class="wapstyleselect select-wap-{$k} select-wap is-img" data-val="{$k}">
+							<div style="background:{$v['main_color']}"></div>
+							<div style="background:{$v['secondary_color']}"></div>
+						</div>
+						{/foreach}
+					</div>
+				
+				</div>
+			</div>
+			
+			<div style="text-align:center;padding:10px;">
+				<button class="btn-common btn-big js-save" onclick="save()">保存</button>
+				<button class="btn-common-cancle btn-big" onclick="javascript:history.back(-1);">返回</button>
+			</div>
+					
+	</article>
+	
+</div>
+<script>
+var data = {
+	'id' : 0,		
+	'main_color' : '#e23435',
+    'secondary_color' : '#333',
+    'img' : 'style-img-e23435.png',
+};
+var new_data = {$info['template_data'] ? $info['template_data'] : '""'};
+console.log(new_data);
+init();
+function init() {
+	if(new_data != '') {
+		$('.custom-main').css("background-image","url(ADMIN_IMG/goods/"+new_data.img+")");
+		$('.select-wap-'+new_data.id).addClass('selectwap');
+	}else {
+		$('.custom-main').css("background-image","url(ADMIN_IMG/goods/"+data.img+")");
+		$('.select-wap-'+data.id).addClass('selectwap');
+	}
+}
+
+$('.select-wap').click(function(){
+	$(this).addClass('selectwap');
+	$(this).siblings().removeClass('selectwap');
+	data.id = $(this).attr('data-val');
+	data.img = $(this).attr('data-img');
+	data.secondary_color = $(this).attr('data-secondary-color');
+	data.main_color = $(this).attr('data-main-color');
+	$('.custom-main').css("background-image","url(ADMIN_IMG/goods/"+data.img+")");
+})
+
+function save() {
+	$.ajax({
+		url : 'ADMIN_MAIN/Config/wapStyle',
+		type : 'post',
+		data : {'data' : JSON.stringify(data)},
+		dataType : 'JSON',
+		success: function(res) {
+			if(res.code > 0) {
+				showTip(res.message,"success");
+			}else {
+				showTip(res.message,"error");
+			}
+		}
+	})
+}
+
+</script>
+
+
+{/block}

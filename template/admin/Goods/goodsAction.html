@@ -1,0 +1,323 @@
+{if addon_is_exit('Nsfx')}
+<style>
+.set-style dl dt{
+	width:200px !important;
+}
+.set-style dl dd{
+	width:auto !important;
+}
+#queryGoodsCommissionRate .set-style dl dd{    line-height: 34px;}
+</style>
+
+<!-- 商品分销设置（Modal）开始 -->
+<div class="modal fade hide" id="editGoodsCommissionRate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:500px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">商品分销设定</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="set-style">
+            		<input type="hidden" id="distribution_type" value=""/>
+            		<input type="hidden"  id="distribution_condition"  value=''/>
+            		<dl>
+						<dt>是否开启：</dt>
+						<dd>
+							<p id="is_open">
+								<input  type="checkbox"  class="checkbox"/>
+							</p>	
+							<p class="error">请输入分销佣金比率</p>
+						</dd>
+					</dl>
+            		<dl>
+						<dt>分销佣金比率：</dt>
+						<dd>
+							<p><input name="" id="distribution_commission_rate" type="number"  class="input-common harf" value="" /><em class="unit">%</em></p>	
+							<p class="error">请输入分销佣金比率</p>
+						</dd>
+					</dl>
+						
+					<dl >
+						<dt>区域分销佣金比率：</dt>
+						<dd>
+							<p><input name="" id="regionagent_commission_rate" type="number" class="input-common harf"  value="" onkeyup="javascript:CheckInputIntFloat(this);"/><em class="unit">%</em></p>	
+							<p class="error">请输入区域分销佣金比率</p>
+						</dd>
+					</dl>
+					
+					<dl>
+						<dt>股东分红佣金比率：</dt>
+						<dd>
+							<p><input name="" id="partner_commission_rate" type="number" value="" class="input-common harf" /><em class="unit">%</em></p>	
+							<p class="error">请输入股东分红佣金比率</p>
+						</dd>
+					</dl>
+					<dl style="display:none;">
+						<dt>分销团队分红佣金比率：</dt>
+						<dd>
+							<p><input name="" id="distribution_team_commission_rate" type="text" class="input-common harf"  value="" /><em class="unit">%</em></p>	
+							<p class="error">请输入分销团队分红佣金比率</p>
+						</dd>
+					</dl>
+					<dl style="display:none;">
+						<dt>股东团队分红佣金比率：</dt>
+						<dd>
+							<p><input name="" id="partner_team_commission_rate" type="number" class="input-common harf"  value="" onkeyup="javascript:CheckInputIntFloat(this);"/><em class="unit">%</em></p>	
+							<p class="error">股东团队分红佣金比率</p>
+						</dd>
+					</dl>
+				
+					<dl style="display:none;">
+						<dt>渠道代理分红佣金比率：</dt>
+						<dd>
+							<p><input name="" id="channelagent_commission_rate" type="number" class="input-common harf"  value="" onkeyup="javascript:CheckInputIntFloat(this);"/><em class="unit">%</em></p>	
+							<p class="error">请输入渠道代理分红佣金比率</p>
+						</dd>
+					</dl>        		            		
+            	</div>
+            </div>
+            <div class="modal-footer">
+            	<button type="button" class="btn-common btn-big" onclick="updateGoodsCommissionRate();">修改</button>
+                <button type="button" class="btn-common-cancle btn-big" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 商品分销设置（Modal）结束 -->
+
+
+<!-- 商品分销（Modal）开始 -->
+<div class="modal fade hide" id="queryGoodsCommissionRate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:500px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">商品分销</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="set-style">
+            		<dl>
+						<dt>是否开启分销：</dt>
+						<dd>
+							<p>
+								<span class="is_open"></span>
+							</p>
+						</dd>
+					</dl>
+            		<dl>
+						<dt>分销佣金比率：</dt>
+						<dd>
+							<p>
+								<span class="distribution_commission_rate"></span>
+							</p>
+						</dd>
+					</dl>
+					<dl >
+						<dt>区域分销佣金比率：</dt>
+						<dd>
+							<p>
+								<span class="regionagent_commission_rate"></span>
+							</p>
+						</dd>
+					</dl>
+					<dl>
+						<dt>股东分红佣金比率：</dt>
+						<dd>
+							<p>
+								<span class="partner_commission_rate"></span>
+							</p>
+						</dd>
+					</dl>
+					
+            	</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-common-cancle btn-big" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 商品分销设置（Modal）结束 -->
+<script>
+/***********************************************分销操作 start **************************************************************************/
+
+
+//显示商品分销设定 type 1单独设置 2总设置 3分组设置
+function setGoodsDistribution(condition, type){
+	$("#distribution_type").val(type);
+	$("#distribution_condition").val(condition);
+	if(type == 1){
+		$.ajax({
+			type : "post",
+			url : "{:__URL('__URL__/nsfx/ADMIN_MODULE/Distribution/getGoodsCommissionRateDetail')}",
+			data : {
+				"goods_id" : condition
+			},
+			success : function(data) {
+				if(data.is_open == 1){
+					var html = '<input  type="checkbox"  class="checkbox" checked/>';
+				}else{
+					var html = '<input  type="checkbox"  class="checkbox" />';
+				}
+				$("#is_open").html(html);
+				$(".checkbox").simpleSwitch({
+					"theme": "FlatRadius"
+				});
+				$("#distribution_commission_rate").val(data.distribution_commission_rate);
+				$("#partner_commission_rate").val(data.partner_commission_rate);
+				$("#distribution_team_commission_rate").val(data.distribution_team_commission_rate);
+				$("#partner_team_commission_rate").val(data.partner_team_commission_rate);
+				$("#regionagent_commission_rate").val(data.regionagent_commission_rate);
+				$("#channelagent_commission_rate").val(data.channelagent_commission_rate);
+			}
+		})	
+	}else if(type == 2){
+		
+		var goods_type = "";
+		$("#distributionGoodsChecked input[type='checkbox']:checked").each(function(){
+			if (!isNaN($(this).val())) {
+				goods_type = $(this).val() + "," + goods_type;
+			}
+		});
+
+		goods_type = goods_type.substring(0, goods_type.length - 1);
+		$("#distribution_condition").val(goods_type);
+		hideGoodsGoodsDistributionGroupCount();
+	}
+	$("#editGoodsCommissionRate").modal("show");
+}
+/**
+ * 查看分销设置
+ */
+function queryGoodsDistribution(goods_id){
+
+	$.ajax({
+		type : "post",
+		url : "{:__URL('__URL__/nsfx/ADMIN_MODULE/Distribution/getGoodsCommissionRateDetail')}",
+		data : {
+			"goods_id" : goods_id
+		},
+		success : function(data) {
+			$(".distribution_commission_rate").text(data.distribution_commission_rate+"%");
+			$(".partner_commission_rate").text(data.partner_commission_rate+"%");
+			$(".distribution_team_commission_rate").text(data.distribution_team_commission_rate+"%");
+			$(".partner_team_commission_rate").text(data.partner_team_commission_rate+"%");
+			$(".regionagent_commission_rate").text(data.regionagent_commission_rate+"%");
+			$(".channelagent_commission_rate").text(data.channelagent_commission_rate+"%");
+			if(data.is_open == 1){
+				$(".is_open").text("已开启");
+			}else{
+				$(".is_open").text("已关闭");
+			}
+		}
+	})	
+	
+	$("#queryGoodsCommissionRate").modal("show");
+}
+//修改商品分销设定
+function updateGoodsCommissionRate(){
+	
+	
+	var condition = $("#distribution_condition").val();
+	var condition_type = $("#distribution_type").val();
+	var distribution_commission_rate = $("#distribution_commission_rate").val();
+	var partner_commission_rate = $("#partner_commission_rate").val();
+	var distribution_team_commission_rate = $("#distribution_team_commission_rate").val();
+	var partner_team_commission_rate = $("#partner_team_commission_rate").val();		
+	var regionagent_commission_rate = $("#regionagent_commission_rate").val();
+	var channelagent_commission_rate = $("#channelagent_commission_rate").val();
+	var is_open = $("#is_open input").prop('checked') ? 1 : 0 ;
+	var all = parseFloat(distribution_commission_rate) + parseFloat(partner_commission_rate) + parseFloat(distribution_team_commission_rate) + parseFloat(partner_team_commission_rate) + parseFloat(regionagent_commission_rate) + parseFloat(channelagent_commission_rate);
+	if(all > 100){
+		showMessage('error', "总和不能大于100%");
+		return false;
+	}
+	$.ajax({
+		type:"post",
+		url:"{:__URL('__URL__/nsfx/ADMIN_MODULE/Distribution/updateGoodsCommissionRate')}",
+		data:{
+			'distribution_commission_rate':distribution_commission_rate,
+			'partner_commission_rate':partner_commission_rate,
+						'global_commission_rate':0,
+			'distribution_team_commission_rate':distribution_team_commission_rate,
+			'partner_team_commission_rate':partner_team_commission_rate,
+			'regionagent_commission_rate':regionagent_commission_rate,
+			'channelagent_commission_rate':channelagent_commission_rate,
+			'condition':condition,
+			'condition_type':condition_type,
+			'is_open' : is_open
+		},
+		success:function (data) {
+			$("#editGoodsCommissionRate").modal("hide");
+			if (data["code"] > 0) {
+				showMessage('success', data["message"]);
+				LoadingInfo(1);
+			}else{
+				showMessage('error', data["message"]);
+				LoadingInfo(1);
+			}	
+		}
+	});
+}
+
+//商品修改分组id合计
+function showGoodsGoodsDistributionGroupCount(){
+	$("#goodsDistributionGroup").popover("show");
+	$(".popover").css("max-width",'1000px');
+}
+
+/**
+ * 隐藏商品分组
+ */
+function hideGoodsGoodsDistributionGroupCount(){
+	$("#goodsDistributionGroup").popover("hide");
+}
+
+
+
+//商品上架id合计
+function goodsIdDistribution(line){
+	var goods_ids= "";
+	$("#productTbody input[type='checkbox']:checked").each(function() {
+		if (!isNaN($(this).val())) {
+			goods_ids = $(this).val() + "," + goods_ids;
+		}
+	});
+	goods_ids = goods_ids.substring(0, goods_ids.length - 1);
+	if(goods_ids == ""){
+		showTip("请选择需要操作的记录","warning");
+		return false;
+	}
+	modifyGoodsDistribution(goods_ids,line);
+}
+//商品是否开启分销
+function modifyGoodsDistribution(goods_ids,line){
+	if(line == "open"){
+		var is_open = 1;
+		var lingStr = "开启分销";
+	}else{
+		var is_open = 0;
+		var lingStr = "关闭分销";
+	}
+	$.ajax({
+		type : "post",
+		url : "{:__URL('__URL__/nsfx/ADMIN_MODULE/Distribution/modifyGoodsDistribution')}",
+		data : {
+			"goods_ids" : goods_ids,
+			"is_open":is_open
+			
+		},
+		success : function(data) {
+			if(data["code"] > 0 ){
+				LoadingInfo(1);
+				showTip(data['message'],"success");
+			}
+		}
+	})
+}
+
+
+/***********************************************分销操作 end **************************************************************************/
+</script>
+{/if}

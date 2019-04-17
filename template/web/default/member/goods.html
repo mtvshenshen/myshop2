@@ -1,0 +1,66 @@
+{extend name="$member_base" /}
+{block name="right_main"}
+<link rel="stylesheet" href="WEB_CSS/member_goods.css">
+{php}
+$virtual_goods_data = api('System.Member.virtualGoodsList', ['page_index' => $page_index]);
+$virtual_list = $virtual_goods_data['data']['data'];
+$page_count = $virtual_goods_data['data']['page_count'];
+$total_count = $virtual_goods_data['data']['total_count'];
+{/php}
+<div class="member-main">
+	<div class="main-top">
+		<div class="title">我的虚拟码</div>
+	</div>
+	<table class="table table-borderless">
+		<colgroup>
+            <col width="30%">
+            <col width="20%">
+            <col width="10%">
+         	<col width="20%">
+            <col width="10%">
+            <col width="10%">
+        </colgroup>
+		<thead>
+			<tr>
+	      		<th class="align-center">商品名称</th>
+	      		<th class="align-center">虚拟码</th>
+	      		<th class="align-right">金额</th>
+	      		<th class="align-center">时间</th>
+	      		<th class="align-center">过期时间</th>
+		    </tr>
+	  	</thead>
+		<tbody>
+			{notempty name="$virtual_list"}
+				{foreach $virtual_list as $vo}
+					<tr class="mouseover-picture">
+						<td class="align-center">{$vo.virtual_goods_name}</td>
+						<td class="align-center">{$vo.virtual_code}</td>
+						<td class="align-right">{$vo.money}</td>
+						<td class="align-center">{$vo.create_time | getTimeStampTurnTime}</td>
+						<td class="align-center">{if condition="$vo.end_time != 0"}{$vo.end_time | getTimeStampTurnTime}{else/}不限制{/if}</td>
+
+					</tr>
+				{/foreach}
+			{else/}
+				<tr>
+					<td class="align-center" colspan="6">暂无相关数据！</td>
+				</tr>
+			{/notempty}
+		</tbody>
+	</table>
+
+</div>
+{/block}
+
+<!-- 分页 -->
+<ul class="pager" data-ride="pager" data-elements="prev,nav,next,total_page_text,goto" data-rec-per-page="{$page_size}" data-page="{$page_index}" data-rec-total="{$total_count}" id="myPager"></ul>
+{block name="script"}
+<script>
+$('#myPager').pager({
+	linkCreator: function(page, pager) {
+		return __URL("SHOP_MAIN/member/goods?page_index="+page);
+	}
+});
+
+</script>
+{/block}

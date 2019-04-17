@@ -1,0 +1,30 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_account.css">
+{/block}
+{block name="main"}
+
+<img src="WAP_IMG/login/member_none_account.png" style="margin: 10px auto 0; display: block;">
+<div class="addr-box">
+	<span class="iconfont address-icon"></span>
+	<p class="addr-tip">您还没有店铺!</p>
+</div>
+
+<button class="btn-save ns-bg-color" onclick="shenqing()">我要开店</button>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script>
+function shenqing(){
+alert(1);
+	api('System.Member.kaidianshenqing', function(res){
+
+	})
+		var data = '申请成功，等待审核';
+		alert(data);
+		window.history.go(-1);	
+}
+
+</script>
+
+{/block}

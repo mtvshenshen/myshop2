@@ -1,0 +1,122 @@
+{extend name="$base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="WEB_CSS/goods_brand.css">
+{/block}
+{block name="lunbo"}
+{php}
+	//轮播
+	$banner_list = api('System.Shop.advDetail', ['ap_keyword' => 'PC_BRAND_SWIPER', 'export_type' => 'data']);
+{/php}
+<!-- 轮播 -->
+<div class="banner-wrap">
+	{notempty name='$banner_list'}
+	<div id="banner" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			{foreach name="$banner_list['data']['advs']" item="vo" key="k"}
+			<li data-target="#banner" data-slide-to="{$k}" {if condition="$k==0"}class="active"{/if}></li>
+			{/foreach}
+		</ol>
+
+		<div class="carousel-inner">
+			{foreach name="$banner_list['data']['advs']" item="vo" key="k"}
+			<div class="item {if condition='$k==0'}active{/if}" style="background-color:{$vo['background']}">
+				{if $vo['adv_image'] == ''}
+				<a href="javascript:;"><img alt="轮播图" src="WEB_IMG/index/default_banner.png"></a>
+				{else/}
+				<a href="{:__URL($vo['adv_url'])}" target="_blank" style="width: {$banner_list['data']['ap_width']}px;height: {$banner_list['data']['ap_height']}px;line-height: {$banner_list['data']['ap_height']}px;"><img alt="轮播图" src="{:__IMG($vo['adv_image'])}" onerror="this.src='WEB_IMG/index/default_banner.png'"></a>
+				{/if}
+			</div>
+			{/foreach}
+		</div>
+
+		<a class="left carousel-control" href="#banner" data-slide="prev">
+			<span class="icon icon-chevron-left"></span>
+		</a>
+		<a class="right carousel-control" href="#banner" data-slide="next">
+			<span class="icon icon-chevron-right"></span>
+		</a>
+	</div>
+	{/notempty}
+</div>
+
+{/block}
+{block name="main"}
+{php}
+	$condition = [];
+	if(!empty($category_id)){
+		$condition['category_id_1'] = $category_id;
+	}
+	$info = api('System.Goods.goodsBrandList', ['page_index' => $page_index, 'condition' => $condition]);
+	$info = $info['data'];
+	$total_count = $info['total_count'];
+	$list = $info['data'];
+	
+	$brand_adv = api('System.Shop.advDetail', ['ap_keyword' => 'BRANDSWIPER', 'export_type' => 'data']);
+	$brand_adv = $brand_adv['data'];
+
+{/php}
+
+{notempty name="$brand_adv"}
+<div class="advert">
+	<a href="{:__URL($brand_adv['advs'][0]['adv_url'])}">
+		<img src="{:__IMG($brand_adv['advs'][0]['adv_image'])}" width="100%" alt="广告位"/>
+	</a>
+</div>
+{/notempty}
+
+<div class="box-main w1200" >
+	<div class="box-main-title">
+		<div class="box-main-title-word">
+			<span class="words">品牌专区</span>
+		</div>
+	</div>
+	<div class="box-main-cate ">
+		<a href="{:__URL('SHOP_MAIN/goods/lists','brand_id='.$new['brand_id'])}" target="_blank" class="ns-text-color">全部品牌</a>
+		{if condition="($k+1) < count($list)"}<i class="point">.</i>{/if}
+		{foreach name="$list" item="new" key="k"}
+		{if condition="($k+1) < count($list) && $k>0"}<i class="point">.</i>{/if}
+		<a href="{:__URL('SHOP_MAIN/goods/lists','brand_id='.$new['brand_id'])}" target="_blank">{$new.brand_name}</a>
+		{/foreach}
+	</div>
+	<div class="box-nav-box clearfix">
+		<ul class="items">
+			{foreach name="$list" item="item" key="k"}
+				<li>
+					<a	href="{:__URL('SHOP_MAIN/goods/lists','brand_id='.$item['brand_id'])}" class="img">
+						{if condition="$new.brand_ads eq ''"}
+							<div class="box-img"><img src="WEB_IMG/goods/default_pic.png" alt=""></div>
+						{else/}
+							<div class="box-img"><img src="{:__IMG($item.brand_ads)}" /></div>
+						{/if}
+						<div class="box-show-dese brand_desc_notic">
+							<div class="tit">品牌描述</div>
+							<div class="info">
+								<p>{$brand_adv['advs'][0]['adv_title']}</p>
+							</div>
+						</div>
+						<div class="mask"></div>
+					</a>
+					<div class="b-logo">
+						{if condition="$item.brand_pic eq ''"}
+						<img src="WEB_IMG/goods/default_pic.png" alt="" class="logo-img" >
+						{else/}
+						<img src="{:__IMG($item.brand_pic)}" />
+						{/if}
+					</div>
+					<a href="{:__URL('SHOP_MAIN/goods/lists','brand_id='.$item['brand_id'])}" target="_blank" class="slogan" title="{$item.brand_name}">{$item.brand_name}</a>
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+	<ul class="pager boc" data-ride="pager" data-elements="prev,nav,next,total_page_text,goto" data-rec-per-page="{$page_size}" data-page="{$page_index}" data-rec-total="{$total_count}" id="myPager"></ul>
+</div>
+{/block}
+{block name="script"}
+	<script>
+		$('#myPager').pager({
+			linkCreator: function(page, pager) {
+				return __URL("SHOP_MAIN/goods/brand.html?page="+ page);
+			}
+		});
+	</script>
+{/block}

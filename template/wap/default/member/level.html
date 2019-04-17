@@ -1,0 +1,24 @@
+{extend name="$base" /}
+{block name="resources"}
+
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_level.css">
+{/block}
+{block name="main"}
+{php}
+$list = api('System.Member.memberLevelQuery',[]);
+$list = $list['data'];
+{/php}
+<div id="main" class="detail-main">
+	{foreach $list as $k => $v}
+	<div class="level-item">
+		 <div class="level-name ns-text-color-black">{$v['level_name']}</div>
+		 <div class="level-upgrade">累计积分满{$v['min_integral']}分</div>
+		 <div class="level-upgrade">消费额满{$v['quota']}</div>
+		 <div class="level-upgrade">购买量满{$v['min_integral']}笔</div>
+		 <div class="level-upgrade">购买折扣{$v['goods_discount'] * 100}%</div>
+		 <div class="clear"></div>
+	</div>
+	{/foreach}
+</div>
+{/block}
+{block name="footer"}{/block}

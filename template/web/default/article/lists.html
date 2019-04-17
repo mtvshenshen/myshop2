@@ -1,0 +1,66 @@
+{extend name="$base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="WEB_CSS/article_type.css">
+{/block}
+{block name="main"}
+{php}
+	//文章分类列表
+	$class_list = api("System.Article.articleClassList");
+	$class_list = $class_list['data']['data'];
+
+	//当前分类下的文章
+	$result = api("System.Article.articleList", ["page_index"=>$page_index, "condition"=>$condition, "order" => "article_id desc"]);
+	$result = $result['data'];
+	$total_count = $result['total_count'];
+	$result = $result['data'];
+{/php}
+<div class="help">
+	<ol class="breadcrumb">
+	  <li><a href="{:__URL('SHOP_MAIN')}">{:lang('home_page')}</a></li>
+	  <li class="active">{:lang('article_center')}</li>
+	</ol>
+	<div class="category">
+		<h3 class="ns-bg-color">{:lang('article_center')}</h3>
+		<ul>
+			{foreach name="$class_list" id="cms"}
+			{if condition="$cms['pid'] eq '0'"}
+			<li>
+				<div class="ns-bg-color-gray">
+					<a href="javascript:;" title="{$cms.name}">{$cms.name}</a>
+					<i class="{if condition="$cms['class_id'] eq $pid"}icon-sort-up{else/}icon-sort-down{/if}"></i>
+				</div>
+				<ul {if condition="$cms['class_id'] neq $pid"}class="dis-no"{/if}>
+				{foreach name="$class_list" id="cms_item"}
+					{if condition="$cms_item['pid'] eq $cms['class_id']"}
+					<li>
+						<a href="{:__URL('SHOP_MAIN/article/lists','class_id='.$cms_item['class_id'].'&pid='.$cms_item['pid'])}" target="_self" title="{$cms_item.name}" {if condition="$cms_item['class_id'] eq $class_id"}class="ns-text-color"{/if}>{$cms_item.name}</a>
+					</li>
+					{/if}
+				{/foreach}
+				</ul>
+			</li>
+			{/if}
+			{/foreach}
+		</ul>
+	</div>
+	<div class="detail">
+		{if !empty($result)}
+		<ul>
+			{volist name="result" id="news"}
+			<li>
+				<a href="{:__URL('SHOP_MAIN/article/detail', 'article_id='.$news.article_id.'&class_id='.$news.class_id.'&pid='.$pid)}" target="_self" title="{$news.title}">{$news.title}</a>
+				<span class="pull-right">{$news.create_time | getTimeStampTurnTime}</span>
+			</li>
+			{/volist}
+		</ul>
+		<ul class="pager" data-ride="pager" data-elements="prev,nav,next,total_page_text,goto" data-rec-per-page="{$page_size}" data-page="{$page_index}" data-rec-total="{$total_count}" id="myPager"></ul>
+		{else/}
+		<div>{:lang('no_article')}</div>
+		{/if}
+	</div>
+</div>
+<input type="hidden" value="{$pid}" id="hidden_id" />
+{/block}
+{block name="script"}
+<script type="text/javascript" src="WEB_JS/article_type.js"></script>
+{/block}

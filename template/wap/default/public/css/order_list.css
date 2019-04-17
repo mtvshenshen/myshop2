@@ -1,0 +1,459 @@
+.myorder-none>.icon-none {
+	margin: auto;
+}
+
+.myorder-none>span {
+	display: block;
+	text-align: center;
+	line-height: 30px;
+}
+
+.myorder .tabs-content>.content {
+	padding: 0;
+	overflow: hidden;
+	min-height: 500px;
+}
+
+.myorder .tabs-content>.content .myorder-none {
+	margin-top: 24%;
+}
+
+.myorder-none>span.none_01 {
+	color: #939393;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.myorder-none>span.none_02 {
+	color: #CACACA;
+	font-size: 12px;
+	margin-bottom: 11px;
+}
+
+.myorder-none>span.none_03 a {
+	color: #5A5A5A;
+	display: block;
+	border: 1px solid #DBDBDB;
+	width: 97px;
+	margin: auto;
+	border-radius: 5px;
+	padding: 3px 0;
+}
+
+.myorder-none .icon-none {
+	display: block;
+	width: 70px;
+	height: 80px;
+	background: url(../images/distribution2.png) no-repeat;
+	background-size: 100%;
+	margin-top: 20%;
+}
+
+.list-myorder:last-child {
+	/*margin-bottom: 50px;*/
+	
+}
+
+.tabs-content {
+	margin-top: 55px;
+}
+
+.list-myorder li {
+	border-bottom: 1px solid #ccc;
+}
+
+.list-myorder .div-button {
+	border-top: 0;
+}
+
+.cf-container {
+	height: 42px;
+	top: 0;
+	width: 100%;
+	z-index: 6;
+	background: #fff;
+	overflow: hidden;
+	font-size: 14px;
+	border-bottom: 1px solid #E2E2E2;
+	/*全屏显示更改样式*/
+}
+
+.cf-container .cf-content {
+	position: relative;
+	text-align: center;
+	top: 0;
+	white-space: nowrap;
+	z-index: 5;
+	-webkit-overflow-scrolling: touch;
+	margin-left: 10px;
+	margin-right: 10px;
+	overflow-y: auto;
+	height: 3.5rem;
+}
+
+.cf-container .cf-tab-item {
+	display: inline-block;
+	padding: 0;
+	line-height: 39px;
+	text-align: center;
+	width: 17%;
+}
+
+.cf-container .cf-tab-item.selected {
+	border-bottom: 2px solid;
+	padding-bottom: 0px;
+}
+
+.cf-container .cur-cf-tab {
+	border-bottom: 2px solid #ff2741;
+	color: #ff2741;
+	height: .21rem;
+	display: inline-block;
+	position: relative
+}
+
+.cf-tab-item a {
+	padding-right: 3px;
+	padding-left: 3px;
+	color: inherit;
+	font-size: 14px;
+	display: block;
+}
+
+.myorder-none>.icon-none {
+	margin: auto;
+}
+
+.myorder-none>span {
+	display: block;
+	text-align: center;
+	line-height: 30px;
+}
+
+.myorder .tabs-content>.content {
+	padding: 0;
+	overflow: hidden;
+	min-height: 500px;
+}
+
+.myorder .tabs-content>.content .myorder-none {
+	margin-top: 24%;
+}
+
+.myorder-none>span.none_01 {
+	color: #939393;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.myorder-none>span.none_02 {
+	color: #CACACA;
+	font-size: 12px;
+	margin-bottom: 11px;
+}
+
+.myorder-none>span.none_03 a {
+	color: #5A5A5A;
+	display: block;
+	border: 1px solid #DBDBDB;
+	width: 97px;
+	margin: auto;
+	border-radius: 5px;
+	padding: 3px 0;
+}
+
+.myorder-none .icon-none {
+	display: block;
+	width: 70px;
+	height: 80px;
+	background: url(../images/distribution2.png) no-repeat;
+	background-size: 100%;
+	margin-top: 20%;
+}
+
+.tabs-content {
+	margin-top: 55px;
+}
+
+.myorder .tabs-content>.content {
+	padding: 0;
+}
+
+.myorder-none .icon-none {
+	display: block;
+	width: 70px;
+	height: 120px;
+	margin: 80px auto 0 auto;
+	background: url("../images/distribution2.png") no-repeat -229px -160px;
+	background-size: 300px 1000px;
+}
+
+.myorder-none .nonetext {
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: #999;
+}
+
+.myorder-none .nonelink {
+	display: block;
+	margin-top: 20px;
+	text-align: center;
+	text-decoration: underline;
+}
+
+.list-myorder {
+	margin: 0 0 10px 0;
+	padding-top: 10px;
+	border-bottom: 1px solid #eee;
+	font-size: 14px;
+	background: #fff;
+}
+
+.list-myorder .ordernumber {
+	margin: 0 15px;
+	border-bottom: 1px solid #e5e5e5;
+	height: auto;
+	overflow: hidden;
+	line-height: 22px;
+}
+
+.list-myorder .order-num {
+	float: left;
+	font-size: 16px;
+}
+
+.list-myorder .order-date {
+	float: right;
+	color: #999;
+}
+
+.list-myorder .ul-product {
+	margin: 5px 15px;
+	line-height: 1.2;
+}
+
+.list-myorder  li {
+	padding: 10px 0;
+	list-style: none;
+	border-bottom: 1px dotted #ccc;
+	overflow: hidden;
+}
+
+.list-myorder .pic {
+	float: left;
+	width: 70px;
+	height: 70px;
+	margin-right: 10px;
+	padding: 1px;
+}
+
+.list-myorder .pic img {
+	width: 100%;
+	height: 100%;
+}
+
+.list-myorder .text {
+	overflow: hidden;
+	font-size: 14px;
+}
+
+.list-myorder .pro-name {
+	font-size: 14px;
+}
+
+.list-myorder .pro-pric {
+	margin-top: 5px;
+	font-size: 16px;
+}
+
+.list-myorder .pro-pric span {
+	font-size: 14px;
+	color: #999;
+}
+
+.list-myorder .pro-pec {
+	color: #999;
+}
+
+.list-myorder .pro-pec .color {
+	margin-right: 5px;
+}
+
+.list-myorder .pro-return {
+	margin-top: 5px;
+}
+
+.list-myorder .div-return {
+	padding-left: 80px;
+	padding-top: 10px;
+	font-size: 14px;
+}
+
+.list-myorder .a-return {
+	display: block;
+	border: 0px solid #e3e3e3;
+	background: #fff;
+	color: #45a5cf;
+}
+
+.list-myorder .status-ing {
+	color: #ff9000;
+}
+
+.list-myorder .status-over {
+	color: #ccc
+}
+
+.list-myorder .totle {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 15px;
+	overflow: hidden;
+}
+
+.list-myorder .totle .status {
+	float: left;
+	color: #999;
+}
+
+.list-myorder .totle .prc-num {
+	float: right;
+	margin-right: 5px;
+}
+
+.list-myorder .totle .pric-lable {
+	float: right;
+	color: #999;
+}
+
+.list-myorder .totle .price {
+	float: right;
+	font-size: 20px;
+}
+
+.list-myorder .div-button {
+	padding: 10px 0;
+	margin: 0 15px;
+	border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.list-myorder .div-button:before, .list-myorder .div-button:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.list-myorder .div-button a.button {
+    float: right;
+    margin-left: 10px;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    width: 80px;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+}
+
+.list-myorder button, .list-myorder .button {
+	margin: 0;
+}
+
+.list-myorder.orderend .totle .price {
+	float: right;
+	font-size: 20px;
+	color: #999;
+}
+
+.tabs-content {
+	margin-top: 0;
+}
+
+.f12 {
+	font-size: 12px !important;
+}
+
+.pro-pric.margin0 {
+	margin-top: 0px;
+}
+
+.f-no {
+	font-weight: normal;
+}
+
+.order-operating {
+	width: 100%;
+	float: left;
+	color: #999999;
+	margin-top: 5px;
+	font-size: 12px;
+	padding-top: 5px;
+}
+
+.order-operating-item {
+	padding: 5px;
+	color: #333;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.order-operating-name {
+	-webkit-appearance: none;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	background-color: white;
+	font-size: 12px;
+	padding: 5px 10px 5px 10px;
+}
+
+.order-operating-left {
+	width: 15%;
+	float: left;
+}
+
+.order-operating-right {
+	width:85%;
+	float:right;
+	text-align:right;
+}
+
+.gift-mark {
+	font-size: 12px;
+	padding: 1px 4px;
+	border-radius: 3px;
+	display: inline-block;
+	color: #FFF;
+	height: 16px;
+	line-height: 16px;
+	overflow: hidden;
+	font-style: normal;
+	margin-left: 5px;
+	position: relative;
+	top: 3px;
+}
+
+/*订单类型*/
+.order-type-box {
+    position: fixed;
+    top: 44px;
+    background: #fff;
+    width: 100%;
+    z-index: 100;
+    padding: 10px 20px;
+	display: none;
+}
+.order-type-box h5 {
+    line-height: 30px;
+    margin-bottom: 0;
+}
+
+.order-type-item {
+    line-height: 30px;
+    border-bottom: 1px solid #f2f2f2;
+}

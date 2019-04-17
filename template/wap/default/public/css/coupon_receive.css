@@ -1,0 +1,66 @@
+.container {
+	background: #fff;
+}
+
+.content {
+	background: url("../img/coupon_receive/getcouponbk.png") no-repeat;
+	background-size: 100% auto;
+}
+
+.wx-code {
+	position: relative;
+	margin: 0 auto;
+	top: 34%;
+	width: 137px;
+	height: 132px;
+	background: #fff;
+	text-align: center;
+	box-shadow: 0 0 20px -1px;
+}
+
+.wx-code img {
+	width: 85%;
+	padding: 7px;
+}
+
+.get-coupon {
+	position: relative;
+	margin: 0 auto;
+	width: 226px;
+	top: 37%;
+	text-align: center;
+}
+
+.get-span {
+	text-align: center;
+	display: block;
+	border-radius: 3px;
+	margin-top: 29px;
+	height: 35px;
+	line-height: 35px;
+	color: #fff;
+}
+
+.get-coupon i {
+	position: absolute;
+	left: 0;
+	bottom: -25px;
+	color: #a2a2a2;
+	font-size: 12px;
+}
+
+.get-coupon span:nth-child(1){
+	font-size: 18px;
+}
+
+.coupon-price{
+	font-size: 26px;
+}
+
+.coupon-name{
+	color: #999;
+}
+
+.nogetcoupon {
+	background-color: #ccc !important;
+}

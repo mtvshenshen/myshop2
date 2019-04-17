@@ -1,0 +1,58 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/goods_brand.css">
+<link rel="stylesheet" href="WAP_PLUGIN/swiper/css/swiper.min.css"/>
+<script src="WAP_PLUGIN//swiper/js/swiper.min.js"></script>
+{/block}
+{block name="main"}
+{php}
+   $plat_adv_list = api("System.Shop.advDetail",['ap_keyword' => 'WAP_BRAND_SWIPER', 'export_type' => 'data']);
+{/php}
+{notempty name="$plat_adv_list['data']"}
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+        {foreach name="$plat_adv_list['data']['advs']" item="vo"}
+            <div class="swiper-slide">
+                <a href="{:__URL('APP_MAIN' . $vo['adv_url'])}" style="height:{$plat_adv_list['data']['ap_height']}px;line-height:{$plat_adv_list['data']['ap_height']}px;">
+                    <img src="{:__IMG($vo.adv_image)}" alt="{:lang('carousel_figure')}" class="w100">
+                </a>
+            </div>
+        {/foreach}
+        </div>
+    </div>
+{/notempty}
+{php}
+	$goods_brand_list = api('System.Goods.goodsBrandList',['page_size' => 0]);
+{/php}
+{if $goods_brand_list['code'] == 0}
+	{assign name="goods_brand_list" value="$goods_brand_list['data']['data']"}
+	{notempty name="$goods_brand_list"}
+	<div class="sliding">
+		<ul id="slider">
+			{foreach name="goods_brand_list" item = "goods_brand" key = "k"}
+			<li {if condition="$k ==0"}class = "ns-text-color" {/if}onclick="showCategorySecond({$goods_brand.brand_id},this,1)">{$goods_brand.brand_name}</li>
+			{/foreach}
+		</ul>
+	</div>
+	{/notempty}
+	<div class="goods-list-grid">
+		<div id="goods_list">
+			<div class="tablelist-append"></div>
+		</div>
+	</div>
+{else/}
+<script type="text/javascript">
+	window.onload = function(){
+		toast('{$goods_brand_list.message}', __URL(APPMAIN+"/index/index"));
+	}
+</script>
+{/if}
+<input type="hidden" id="page_count"><!-- 总页数 -->
+<input type="hidden" id="page" value="1"><!-- 当前页数 -->
+<input type="hidden" id="brand_id" >
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script src="WAP_JS/goods_brand.js"></script>
+<script src="WAP_JS/public_assembly.js"></script>
+{/block}

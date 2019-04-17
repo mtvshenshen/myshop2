@@ -1,0 +1,85 @@
+.cf-container {
+    margin-top: 0px;
+    max-width: 640px;
+    height: 2.26rem;
+    top: 0;
+    width: 100%;
+    z-index: 6;
+    background: #fff;
+    overflow: hidden;
+    border-bottom: 1px solid #dddddd;
+    margin-bottom: 8px
+}
+.cf-container .cf-tab-item {
+    display: block;
+    padding: 0px;
+    line-height: 2.1rem;
+    text-align: center;
+    width: 33%;
+    float: left;
+}
+.cf-tab-item.selected a {
+    padding-right: 3px;
+    padding-left: 3px;
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 2px solid;
+}
+.coupon-contianer{
+    padding:10px;
+    background: #fff;
+}
+.coupon-contianer .coupon-item{
+    padding-left: 95px;
+    height: 80px;
+    position: relative;
+    color: #fff;
+    background-size: 100% 80px;
+    background: #bbbbbb;
+}
+.coupon-contianer .coupon-item .coupon-type{
+    width: 95px;
+    height: 80px;
+    line-height: 80px;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    text-align: left;
+    background: url(../img/member/coupon_type_item.png) no-repeat 0;
+    background-size: 95px 80px;
+    padding-left: 10px;
+}
+
+.coupon-contianer .coupon-item section .coupon-title{
+    padding: 20px 0 0 10px;
+}
+
+.coupon-contianer .coupon-item section .coupon-title i{
+    font-weight: normal;
+    vertical-align: super;
+    font-size: 12px;
+}
+.coupon-contianer .coupon-item section .coupon-title em{
+    font-size: 16px;
+    font-weight: bold;
+}
+.coupon-contianer .coupon-item section .coupon-time{
+    padding: 0 0 0 10px;
+    font-size: 12px;
+    opacity: .6;
+}
+.coupon-contianer .coupon-desc{
+    padding: 5px 10px;
+    background: #fff;
+    border: 1px solid #dfdfdf;
+    font-size: 12px;
+    border-top: none;
+    margin-bottom: 10px;
+    color: #bbb;
+}
+
+.text-center{
+	text-align:center;
+	line-height:40px;
+}

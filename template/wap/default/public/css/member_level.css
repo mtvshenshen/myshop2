@@ -1,0 +1,25 @@
+.detail-main {
+    padding: 12px;
+    background: #fff;
+}
+.level-name {
+    font-size: 16px;
+    line-height: 15px;
+    border-left: 4px solid #333;
+    padding-left: 6px;
+    margin-bottom: 10px;
+}
+.level-upgrade {
+    color: #999;
+    width: 50%;
+    float: left;
+	margin-bottom: 5px;
+}
+.clear {
+    clear: both;
+}
+.level-item {
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border-bottom: 1px solid #f2f2f2;
+}

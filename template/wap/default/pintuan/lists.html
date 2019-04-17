@@ -1,0 +1,20 @@
+{extend name="$base" /}
+{block name="resources"}
+	<link rel="stylesheet" type="text/css" href="WAP_CSS/pintuan_lists.css">
+{/block}
+{block name="head_href"}{:__URL('APP_MAIN/member/index')}{/block}
+{block name="main"}
+<div class="user-info ns-bg-color">
+	<div><img></div>
+	<h4></h4>
+</div>
+<div class="spelling-order-list"></div>
+<input type="hidden" id="ms_time" value="{niu:currenttime/}"/>
+<input type="hidden" id="page_count"><!-- 总页数 -->
+<input type="hidden" id="page"><!-- 当前页数 -->
+<input type="hidden" id="status" value="all">
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script src="WAP_JS/pintuan_lists.js"></script>
+{/block}

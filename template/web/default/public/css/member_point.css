@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+.member-main {
+    background: #fff;
+    overflow: hidden;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.point-info {
+    padding: 20px 0 20px 30px;
+}
+
+.point-info .title {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.point-info .price {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.point-info .price em {
+    font-style: normal;
+    font-size: 50px;
+}
+
+.point-info .price .recharge {
+    font-weight: normal;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.table {
+    margin-top: 10px;
+}

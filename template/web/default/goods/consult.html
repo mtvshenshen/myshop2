@@ -1,0 +1,205 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" href="WEB_CSS/goods_consult.css">
+{/block}
+{block name="main"}
+{php}
+	$page_size = 10;
+	$data = api('System.Goods.goodsConsultList', ['goods_id' => $goods_id, 'page_index' => $page_index, 'page_size' => $page_size, 'ct_id' => $ct_id]);
+	$data = $data['data'];
+	$goods_info = api('System.Goods.goodsInfo', ['goods_id' => $goods_id]);
+	$goods_info = $goods_info['data'];
+	$total_count = $data['total_count'];
+	$consult_list = $data['data'];
+{/php}
+{if condition="$goods_info"}
+<div class="breadcrumb">
+	<a href="{:__URL('SHOP_MAIN')}">{:lang('home_page')}&nbsp;&gt;&nbsp;</a>
+	<span>{$goods_info.category_name}{$goods_info.goods_name}</span>
+</div>
+<div class="wrapper">
+	<div class="ncs-goods-main">
+		<div class="ncs-goods-title-bar ns-border-color">
+			<h4 class="text14">{:lang('goods_purchase_consultation')}</h4>
+		</div>
+		<div id="ncGoodsRate">
+			<div class="top">
+				<div class="ncs-cosult-tips">
+					<i></i>
+					<p class="text12">{:lang('goods_text')}！</p>
+				</div>
+				<div class="ncs-cosult-askbtn">
+					<a href="#askQuestion" class="btn"><i class="fa f1" ></i>{:lang('goods_need_consult')}</a>
+				</div>
+			</div>
+			<div class="ncs-goods-title-nav ">
+				<ul id="consult_tab" class="ns-border-color">
+					{if condition="$ct_id eq ''"}
+						<li id="classTab0" class="current ns-text-color">
+					{else /}
+						<li id="classTab0">
+					{/if}
+					<a href="{:__URL('SHOP_MAIN/goods/consult','goods_id='.$goods_info['goods_id'].'&ct_id=')}" class="text16 ">{:lang('whole')}</a></li>
+
+					{if condition="$ct_id eq 1"}
+						<li id="classTab1" class="current ns-text-color">
+					{else /}
+						<li id="classTab1">
+					{/if}
+					<a href="{:__URL('SHOP_MAIN/goods/consult','goods_id='.$goods_info['goods_id'].'&ct_id=1')}" class="text14">{:lang('goods_commodity_consultation')}</a></li>
+
+					{if condition="$ct_id eq 2"}
+						<li id="classTab2" class="current ns-text-color">
+					{else /}
+						<li id="classTab2">
+					{/if}
+					<a href="{:__URL('SHOP_MAIN/goods/consult','goods_id='.$goods_info['goods_id'].'&ct_id=2')}" class="text14">{:lang('goods_payment_problem')}</a></li>
+
+					{if condition="$ct_id eq 3"}
+						<li id="classTab3" class="current ns-text-color">
+					{else /}
+						<li id="classTab3">
+					{/if}
+					<a href="{:__URL('SHOP_MAIN/goods/consult','goods_id='.$goods_info['goods_id'].'&ct_id=3')}" class="text14">{:lang('goods_invoice_and_warranty')}</a></li>
+				</ul>
+			</div>
+			{if condition="$total_count eq 0"}
+			<div class="ncs-cosult-main" >
+				<div class="ncs-norecord">{:lang('goods_no_consultation_yet')}</div>
+			</div>
+			{else /}
+			<div class="ncs-commend-main">
+				<!-- 咨询列表s -->
+				{volist name="consult_list" id="vo"}
+					<div class="ncs-cosult-list">
+						<dl class="asker">
+							<dt class="text12">{:lang('goods_consulting_user')}：</dt>
+							<dd class="text12">
+								{if condition="$vo.member_name eq ''"}
+								{:lang('goods_tourist')}
+								{else /}
+								{$vo.member_name}
+								{/if}
+								<span>{:lang('goods_consulting_type')}：
+								{if condition="$vo.ct_id eq 1"}
+									{:lang('goods_commodity_consultation')}
+								{elseif condition="$vo.ct_id eq 2"/}
+									{:lang('goods_payment_problem')}
+								{else/}
+								    {:lang('goods_invoice_and_warranty')}
+								{/if}
+								</span>
+								<time pubdate="pubdate">[{$vo.consult_addtime | getTimeStampTurnTime}]</time>
+							</dd>
+						</dl>
+						<dl>
+							<dt class="text12">{:lang('goods_consultation_content')}：</dt>
+							<dd class="text12">
+								<p>{$vo.consult_content}</p>
+							</dd>
+						</dl>
+						{if condition="$vo.consult_reply neq ''"}
+							<!-- 回复内容s -->
+						<dl>
+							<dt class="text12">{:lang('goods_merchant_reply')}：</dt>
+							<dd class="text12">
+								<p>{$vo.consult_reply}</p>
+								<time pubdate="pubdate">[{$vo.consult_reply_time | getTimeStampTurnTime}]</time>
+							</dd>
+						</dl>
+						<!-- 回复内容e -->
+						{/if}
+					</div>
+				{/volist}
+				<!-- 咨询列表e -->
+				<!-- 咨询分页s -->
+
+			</div>
+			{if condition="$total_count neq 0"}
+			<ul class="pager" data-ride="pager" data-elements="prev,nav,next,total_page_text,goto" data-rec-per-page="{$page_size}" data-page="{$page_index}" data-rec-total="{$total_count}" id="myPager"></ul>
+			{/if}
+			{/if}
+
+		</div>
+
+		<!-- S 咨询表单部分 -->
+		<div class="ncs-goods-title-bar ns-border-color consultation-title" id="askQuestion">
+			<h4>{:lang('goods_publish_consultation')}</h4>
+		</div>
+
+
+			<div class="ncs-consult-form">
+				<dl>
+					<dt class="text14">{:lang('goods_consulting_type')}：</dt>
+					<dd class="text14">
+						<label class="text12"><input type="radio" checked="checked" nc_type="consultClassRadio" name="classId" class="radio" value="1"> {:lang('goods_commodity_consultation')}</label>
+						<label class="text12"><input type="radio" nc_type="consultClassRadio" name="classId" class="radio" value="2"> {:lang('goods_payment_problem')}</label>
+						<label class="text12"><input type="radio" nc_type="consultClassRadio" name="classId" class="radio" value="3"> {:lang('goods_invoice_and_warranty')}</label>
+					</dd>
+				</dl>
+				<div class="ncs-consult-type-intro dis-bl" id="consultClassIntroduce1" nc_type="consultClassIntroduce"></div>
+				<div class="ncs-consult-type-intro dis-no" id="consultClassIntroduce2" nc_type="consultClassIntroduce"></div>
+				<div class="ncs-consult-type-intro dis-no" id="consultClassIntroduce3" nc_type="consultClassIntroduce"></div>
+
+				<dl>
+					<dt class="text14">{:lang('goods_consultation_content')}：</dt>
+					<dd class="text14">
+						<textarea name="consultContent" id="consultContent" class="textarea w700"></textarea>
+						<span id="consultCharCount"></span>
+						<div nc_type="error_msg"></div>
+					</dd>
+				</dl>
+				<dl>
+					<dt class="text14">&nbsp;</dt>
+					<dd class="text14">
+						<input id="consultCaptcha" name="consultCaptcha" class="captcha text w100" placeholder="{:lang('please_enter_verification_code')}" type="text" size="4" autocomplete="off" maxlength="4">
+						<div class="code">
+							<div class="arrow"></div>
+							<div class="code-img">
+								<a nc_type="consultCaptchaChange" href="javascript:void(0)">
+									<img id="verify_img" src="{:__URL('SHOP_MAIN/captcha')}" alt="captcha" onclick="this.src='{:__URL('SHOP_MAIN/captcha?tag=1')}'+'&send='+Math.random()" />
+								</a>
+							</div>
+							<a href="JavaScript:void(0);" id="consultCaptchaHide" class="close" title="{:lang('goods_close')}"><i></i></a>
+						</div>
+						<a href="JavaScript:void(0);" id="consultSubmit" title="{:lang('goods_publish_consultation')}" class="btn btn-primary">{:lang('goods_publish_consultation')}</a>
+						<div nc_type="error_msg"></div>
+					</dd>
+				</dl>
+			</div>
+
+		<!-- E 咨询表单部分 -->
+	</div>
+	<div class="ncs-sidebar">
+		<div class="title">{:lang('goods_commodity_information')}</div>
+		<div class="content">
+			<dl class="ncs-comment-goods">
+				<dt class="goods-name">
+					<a href="SHOP_MAIN/goods/detail?goods_id={$goods_info.goods_id}">{$goods_info.goods_name}</a>
+				</dt>
+				<dd class="goods-pic">
+					<a href="{:__URL('SHOP_MAIN/goods/detail','goods_id='.$goods_info['goods_id'])}">
+						<img src=http://nsqjb.niuteam.cn/upload/goods/149933368711.jpg />
+					</a>
+				</dd>
+				<dd class="goods-foot">
+					<span>{:lang('goods_sale_price')}：</span>
+					<span class="saleP">￥{$goods_info.promotion_price}</span>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<input type="hidden" id="is_sub" value="true">
+	<input type="hidden" id="goods_id" name="goods_id" value="{$goods_info.goods_id}"/>
+	<input type="hidden" id="goods_name" name="goods_name" value="{$goods_info.goods_name}"/>
+</div>
+{else/}
+<script>
+	location.href = __URL(SHOPMAIN);
+</script>
+{/if}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="WEB_JS/jquery.validation.min.js"></script>
+<script type="text/javascript" src="WEB_JS/goods_consult.js"></script>
+{/block}

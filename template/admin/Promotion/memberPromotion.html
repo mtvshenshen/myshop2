@@ -1,0 +1,66 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/promotion_block.css">
+{/block}
+{block name="main"}
+<div class="set-style">
+	<h4 class="first"><span></span>会员营销</h4>
+	<div class="flex-wrap">
+		<a class="block-diy" title="注册" href = '{:__URL('ADMIN_MAIN/promotion/integral?type=1')}'>
+			<div class="diy-content">
+				<div class="diy-icon">
+					<img src="ADMIN_IMG/icon-promotion-registered.png" alt="" />
+				</div>
+				<div class="diy-info">
+					<p class="diy-title">注册</p>
+					<p class="diy-desc">设置注册奖励规则</p>
+				</div>
+			</div>
+		</a>
+		<a class="block-diy" title="签到" href = '{:__URL('ADMIN_MAIN/promotion/integral?type=2')}'>
+			<div class="diy-content">
+				<div class="diy-icon">
+					<img src="ADMIN_IMG/icon-promotion-sign-in.png" alt="" />
+				</div>
+				<div class="diy-info">
+					<p class="diy-title">签到</p>
+					<p class="diy-desc">设置签到奖励规则</p>
+				</div>
+			</div>
+		</a>
+		<a class="block-diy" title="分享" href = '{:__URL('ADMIN_MAIN/promotion/integral?type=3')}'>
+			<div class="diy-content">
+				<div class="diy-icon">
+					<img src="ADMIN_IMG/icon-promotion-share.png" alt="" />
+				</div>
+				<div class="diy-info">
+					<p class="diy-title">分享</p>
+					<p class="diy-desc">设置分享奖励规则</p>
+				</div>
+			</div>
+		</a>
+		<a class="block-diy" title="点赞" href = '{:__URL('ADMIN_MAIN/promotion/integral?type=4')}'>
+			<div class="diy-content">
+				<div class="diy-icon">
+					<img src="ADMIN_IMG/icon-promotion-zan.png" alt="" />
+				</div>
+				<div class="diy-info">
+					<p class="diy-title">点赞</p>
+					<p class="diy-desc">设置点赞奖励规则</p>
+				</div>
+			</div>
+		</a>
+		<a class="block-diy" title="评论" href = '{:__URL('ADMIN_MAIN/promotion/integral?type=5')}'>
+			<div class="diy-content">
+				<div class="diy-icon">
+					<img src="ADMIN_IMG/icon-promotion-comment.png" alt="" />
+				</div>
+				<div class="diy-info">
+					<p class="diy-title">评论</p>
+					<p class="diy-desc">设置评论奖励规则</p>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+{/block}

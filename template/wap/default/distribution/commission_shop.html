@@ -1,0 +1,85 @@
+{extend name="$base" /} 
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/distribution_commission_shop.css">
+{/block}
+{block name="head_operation"}<a class="ns-operation" href="{:__URL('APP_MAIN/Distribution/account','shop_id='.$shop_id)}">明细</a>{/block}
+{block name="main"}
+{php}
+	$user_account = api("System.Distribution.myCommission");
+	$user_account = $user_account['data'];
+	
+	$shopConfig = api('System.Distribution.shopConfig');
+	$shopConfig = $shopConfig['data'];
+{/php}
+<div class="bro-spare">
+	<div class="tip_head">
+		<p class="tip-txt"><i class="icon-money"></i>可提现佣金余额</p>
+		<span class="number-big">¥{$user_account.commission_cash}</span>
+	</div>
+	<div class="tip_bottom">
+		<p class="field-2 lf">累计佣金<br/><big>￥{$user_account.commission}</big></p>
+		<p class="field-2 lf">待审核金额<br/><big>￥{$user_account.commission_locked}</big></p>
+		<p class="field-2 rg">已提现<br/><big>￥{$user_account.commission_withdraw}</big></p>
+	</div>
+</div>
+<!--推广员--> 
+<div class="xiajip-main">
+<p class="xiajip"><span class="xiajispanleft ns-text-color-black"><i class=" module-icon extension"></i>推广员</span><span class="xiajispanright"></span></p>
+<ul class="maneylist">
+	<li class="maneylist-li">
+		<a  class="a-personal" href="{:__URL('APP_MAIN/distribution/accountDetail','shop_id='.$shop_id.'&type_id=1')}">
+		 	 <span class="text ns-text-color-black">分销佣金</span> <span class="money-number ns-text-color">¥{$user_account.commission_promoter}<i class="arrow"></i></span>
+		</a> 
+	</li>
+	{if condition ="$shopConfig['is_regional_agent'] > 0"}
+		<li class="maneylist-li">
+			<a  class="a-personal" href="{:__URL('APP_MAIN/distribution/accountDetail','shop_id='.$shop_id.'&type_id=2')}"> 
+			     <span class="text ns-text-color-black">区域代理佣金</span> <span class="money-number ns-text-color">¥{$user_account.commission_region_agent}<i class="arrow"></i></span>
+			</a> 
+		</li>
+	{/if}
+<!-- 	<li class="maneylist-li">
+	     <a  class="a-personal" href="">
+	         <span class="text">推广员团队分红</span> <span class="money-number">¥{$user_account.commission_promoter_team}<i class="arrow"></i></span>
+	     </a> 
+	</li>
+	<li class="maneylist-li">
+	    <a  class="a-personal" href="{:__URL('APP_MAIN/distribution/accountDetail','shop_id='.$shop_id.'&type_id=3')}">
+	        <span class="text">渠道代理分红</span> <span class="money-number">¥{$user_account.commission_channelagent}<i class="arrow"></i></span>
+	    </a>
+	</li>
+ -->
+</ul>
+</div>
+{if condition ="$shopConfig['is_partner_enable'] > 0"}
+<div class="blank"></div>
+<!--股东--> 
+<div class="nav_two">
+<p class="xiajip"><span class="xiajispanleft gd ns-text-color-black"><i class="shareholder "></i>股东</span><span class="xiajispanright"></span></p>
+<ul class="maneylist">
+	<li class="maneylist-li">
+		<a  class="a-personal" href="{:__URL('APP_MAIN/distribution/accountDetail','shop_id='.$shop_id.'&type_id=4')}"> 
+			 <span class="text ns-text-color-black">股东分红</span> <span class="money-number ns-text-color">¥{$user_account.commission_partner}<i class="arrow"></i></span>
+		</a>
+	</li>
+	{if condition ="$shopConfig['is_global_enable'] > 0"}
+		<li class="maneylist-li">
+		    <a class="a-personal" href="{:__URL('APP_MAIN/distribution/accountDetail','shop_id='.$shop_id.'&type_id=5')}">
+			    <span class="text ns-text-color-black">全球分红</span> <span class="money-number ns-text-color">¥{$user_account.commission_partner_global}<i class="arrow"></i></span>
+		    </a>
+		</li>
+	{/if}
+<!-- 	<li class="maneylist-li">
+		<a  class="a-personal" href="">
+		   <span class="text">股东团队分红</span> <span class="money-number">¥{$user_account.commission_partner_team}<i class="arrow"></i></span>
+		</a> 
+	</li> -->
+</ul>
+</div>
+{/if}
+<div class="bro-extract-btn">
+	<a href="{:__URL('APP_MAIN/distribution/toWithdraw','shop_id='.$shop_id)}" class="button [radius round] red primary">申请提现</a>
+</div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}{/block}

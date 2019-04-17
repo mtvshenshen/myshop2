@@ -1,0 +1,129 @@
+.cf-container {
+    max-width: 640px;
+    height: 2.26rem;
+    top: 0;
+    width: 100%;
+    z-index: 6;
+    background: #fff;
+    overflow: hidden;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 8px;
+}
+
+.cf-container .cf-content {
+    position: relative;
+    height: 3.35rem;
+    color: #333;
+    text-align: center;
+    top: 0;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    z-index: 5;
+    -webkit-overflow-scrolling: touch;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+}
+
+.cf-container .cf-tab-item {
+    display: block;
+    padding: 0px;
+    line-height: 2.1rem;
+    text-align: center;
+    width: 33%;
+    float: left;
+	border-bottom:2px solid #fff;
+}
+
+.cf-tab-item a {
+    padding-right: 3px;
+    padding-left: 3px;
+    color: #707070;
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+}
+
+.com-content li {
+    width: 100%;
+    position: relative;
+    float: left;
+    margin-top: 10px;
+    background: #fff;
+    padding: 5px;
+    list-style: none;
+}
+
+.com-content li a{
+	position: static;
+}
+
+.coupon-price {
+    position: absolute;
+    width: 65vw;
+    height: 13vw;
+    top: 4vw;
+    left: 5vw;
+    font-size: 4vw;
+    color: #fff;
+    padding-left: 15vw;
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+.coupon-price i {
+    width: 12vw;
+    height: 12vw;
+    display: block;
+    border-radius: 50%;
+    background: #ffffff;
+    position: absolute;
+    left: 0;
+}
+
+.coupon-lose {
+    position: absolute;
+    top: 67%;
+    left: 10%;
+    font-size: 3.5vw;
+    color: #fff;
+}
+
+.coupon-price-right {
+    position: absolute;
+    color: #fff;
+    top: 7vw;
+    right: 5vw;
+    width: 20vw;
+    padding-left: 0;
+    text-align: center;
+    font-size: 4vw;
+}
+
+.coupon-price-right p:last-child {
+    margin-top: 2vw;
+    font-size: 6vw;
+}
+
+.null-default>.icon-nocontent-youhuiquan {
+    display: block;
+    background-position: -325px -180px;
+    margin-top: 30px;
+    width: 100px;
+    height: 120px;
+}
+
+.null-default>span.nulltext {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+}
+
+.null-default>i {
+    display: block;
+    margin: 0 auto;
+    background: url(../img/verification/icon_addition.png) no-repeat;
+    background-size: 500px;
+}

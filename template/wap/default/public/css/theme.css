@@ -1,0 +1,56 @@
+body {
+  color: #333;
+}
+.ns-bg-color {
+  background-color: #e23435 !important;
+}
+.ns-bg-color:hover,
+.ns-bg-color:focus,
+.ns-bg-color:active,
+.ns-bg-color:hover,
+.ns-bg-color:focus,
+.ns-bg-color-hover:hover,
+.ns-bg-color-hover.selected {
+  background-color: #cb2f30 !important;
+}
+.ns-bg-color-hover:hover > a:hover {
+  color: #fff !important;
+}
+.ns-text-color {
+  color: #e23435 !important;
+}
+.ns-text-color-black {
+  color: #333 !important;
+}
+.ns-text-color-hover.selected,
+.ns-text-color-hover:hover {
+  color: #e23435 !important;
+}
+.ns-border-color,
+.ns-border-color-hover:hover,
+.ns-border-color-hover.selected {
+  border-color: #e23435 !important;
+}
+.primary {
+  background-color: #e23435 !important;
+  border-color: #e23435 !important;
+}
+.primary:hover,
+.primary:focus,
+.primary:active,
+.primary.active {
+  background-color: #cb2f30 !important;
+  border-color: #cb2f30 !important;
+  color: #fff !important;
+}
+.checkbox > input:checked + label:before,
+.checkbox > input:checked + label:after {
+  background-color: #e23435 !important;
+}
+.radio > input:checked + label:before {
+  border-color: #e23435 !important;
+}
+.radio > input:checked + label:after {
+  background-color: #e23435 !important;
+}
+/*# sourceMappingURL=theme.css.map */

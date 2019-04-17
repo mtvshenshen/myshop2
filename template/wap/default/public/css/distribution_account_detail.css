@@ -1,0 +1,83 @@
+@charset "utf-8";
+tr {
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    width: 100%;
+    background: #FFFFFF;
+}
+tr td:last-child {
+    width: 100%;
+}
+tr td {
+    padding: 0.5625rem 0.625rem ;
+    font-size: 0.875rem;
+    color: #222222;
+	  float: left;
+}
+tr td:last-child p {
+    line-height: 22px;
+    margin-bottom: 0px;
+    width: 100%;
+    font-size: 16px;
+}
+tr td:last-child p:last-child {
+    float: left;
+    color: #666666;
+    font-size: 12px;
+}
+tr td:last-child .text-name {
+    float: left;
+    font-size: 14px;
+}
+tr td:last-child .text-money {
+    float: right;
+    font-size: 14px;
+}
+tr td:last-child .text-2{
+    color: #909090;
+    font-size: 12px;
+}
+
+.tabs-content {
+    margin-top: 0px;
+	margin-bottom: 10px;
+}
+table tr:nth-of-type(even) {
+    background: #FFFFFF;
+}
+tr {
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    width: 100%;
+    background: #FFFFFF;
+}
+tr td:last-child {
+    width: 100%;
+}
+tr td {
+    padding: 0.5625rem 0.625rem ;
+    font-size: 0.875rem;
+    color: #222222;
+	  float: left;
+}
+tr td:last-child p {
+    line-height: 22px;
+    margin-bottom: 0px;
+    width: 100%;
+    font-size: 16px;
+}
+tr td:last-child p:last-child {
+    float: left;
+    color: #666666;
+    font-size: 12px;
+}
+tr td:last-child .text-2{
+    color: #909090;
+    font-size: 12px;
+}
+.nothing-data {
+    margin-top: 150px;
+    color: #999;
+}

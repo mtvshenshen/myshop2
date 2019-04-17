@@ -1,0 +1,213 @@
+@CHARSET "UTF-8";
+
+.arrow {
+	position: absolute;
+	right: 30px;
+	top: 48%;
+}
+
+.extract {
+	margin: 0;
+	background: #FFF;
+	padding: 20px 15px;
+}
+
+input {
+	width: 100%;
+	height: 23px;
+}
+
+.extract-monynumber .columns {
+	padding: 10px;
+	background: #fff;
+}
+
+.button.red {
+	padding: 8px 0;
+	line-height: 1.33;
+	border-radius: 3px;
+	margin: auto;
+	width: 95%;
+}
+
+.btn_all {
+	width: 100%;
+	text-align: center;
+}
+
+.horn-text {
+	background: none;
+	border: none;
+}
+
+.extract-number .number {
+	font-size: 16px;
+}
+
+.side-nav li {
+	position: relative;
+}
+
+.extract {
+	margin: 0 0px 0px 0px;
+	background: #FFF;
+	padding: 20px 15px;
+}
+
+.extract-number {
+	margin-top: 15px;
+	overflow: hidden;
+}
+
+.panel>:last-child {
+	margin-bottom: 0;
+}
+
+.panel>:first-child {
+	margin-top: 0;
+}
+
+.commision-total .number {
+	font-size: 18px;
+}
+
+.extract-account .side-nav {
+	padding: 0;
+}
+
+.extract-account .side-nav li {
+	margin: 0;
+}
+
+.extract-account .side-nav li a:not (.button ){
+	padding: 10px 15px;
+	color: #333;
+	font-size: 16px;
+	overflow: hidden;
+}
+
+.extract-account .side-nav li span {
+	float: left;
+}
+
+.side-nav li a:not (.button ) {
+	display: block;
+	color: #45a5cf;
+}
+
+.extract-account .side-nav li a:not (.button ) {
+	padding: 10px 15px;
+	color: #333;
+	font-size: 16px;
+	overflow: hidden;
+}
+
+.extract-account .side-nav li span {
+	float: left;
+}
+
+.arrow {
+	display: inline-block;
+	background: url(../img/icon-ps.png) -55px 0;
+	width: 6px;
+	height: 11px;
+}
+
+.arrow {
+	position: absolute;
+	right: 30px;
+	top: 48%;
+}
+
+button, .button {
+	border-style: solid;
+	border-width: 0px;
+	cursor: pointer;
+	font-weight: normal;
+	line-height: normal;
+	margin: 0 0 1.25rem;
+	position: relative;
+	text-decoration: none;
+	text-align: center;
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+	display: inline-block;
+	padding-top: 1rem;
+	padding-right: 2rem;
+	padding-bottom: 1.0625rem;
+	padding-left: 2rem;
+	font-size: 1rem;
+	color: white;
+	transition: background-color 300ms ease-out;
+}
+
+button, .button {
+	width: 100%;
+	padding: 0;
+	border: 1px solid;
+	border-radius: 3px;
+	font-size: 20px;
+		sans-serif;
+}
+
+.extract-account {
+	margin: 11px 0;
+	padding: 0;
+	background: #fff;
+	overflow: hidden;
+}
+
+.row {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0;
+	margin-bottom: 0;
+	max-width: 62.5em;
+	*zoom: 1;
+}
+
+.row {
+	max-width: none;
+}
+
+.extract-monynumber {
+	margin-bottom: 20px;
+}
+
+.extract-monynumber, .extract-monynumber .column, .extract-monynumber .columns
+	{
+	padding: 0;
+}
+
+.column, .columns {
+	position: relative;
+	padding-left: 0.9375em;
+	padding-right: 0.9375em;
+	float: left;
+	width: 100%;
+}
+
+.extract-monynumber, .extract-monynumber .column, .extract-monynumber .columns
+	{
+	padding: 0;
+}
+
+.extract-monynumber .columns {
+	padding: 10px;
+	background: #fff;
+}
+
+.tip-text {
+	margin-top: 0px;
+	padding: 10px;
+	margin-bottom: 0;
+	font-size: 14px;
+	width: 100%;
+}
+.extract-account .side-nav li a:not(.button) {
+    padding: 10px 15px;
+    display: block;
+    font-size: 16px;
+    overflow: hidden;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>{:lang('pay')}</title>
+<link type="text/css" rel="stylesheet" href="WAP_CSS/pay/success.css">
+<script src="WAP_PLUGIN/mzui/lib/jquery/jquery-3.2.1.min.js"></script>
+<link type="text/css" rel="stylesheet" href="WAP_CSS/theme.css">
+</head>
+<body>
+{if condition="$status==-1"}
+<div class="other-view-box">
+<img src="WAP_IMG/pay/other_view.png" class="other-view "/>
+</div>
+{else/}
+<article>
+{if condition="$status==1"}
+	<div class="pay-block">
+		<img src="WAP_IMG/pay/pay_success.png"/>
+	</div>
+	<h3>{:lang('the_payment_successful')}</h3>
+	<p>{:lang('order_number')}{$out_trade_no}{:lang('the_payment_successful')}！</p>
+	{else/}
+	<div class="pay-block">
+		<img src="WAP_IMG/pay/pay_error.png"/>
+	</div>
+	<h3>{:lang('payment_failed')}</h3>
+	<p class="ns-text-color-black">{:lang('order_number')}{$out_trade_no}{:lang('payment_failed')}！</p>
+	{/if}
+	<button class="primary" onclick="enterOrderList()">{:lang('access_member_center')}</button>
+{/if}
+</article>
+<script>
+function enterOrderList(){
+	if($(window).width()<768){
+		//手机端
+		location.href = __URL(APPMAIN+'/member');
+	}else{
+		//PC端
+		location.href = __URL(SHOPMAIN+'/member');
+	}
+}
+</script>
+</body>
+</html>

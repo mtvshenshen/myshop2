@@ -1,0 +1,346 @@
+.box-0 {
+    padding: 20px 0;
+}
+
+.ns-user {
+    float: left;
+    margin-bottom: 0;
+    width: 250px;
+    height: 243px;
+    -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
+}
+
+.ns-user .avatar {
+    display: block;
+    margin: 0 auto 15px;
+    border-radius: 100%;
+    width: 64px;
+    height: 64px;
+    border: 4px solid #fff;
+    box-shadow: 3px 2px 10px 0 rgba(79, 5, 1, .84);
+    overflow: hidden;
+    background: #f2f2f2;
+    line-height: 64px;
+    text-align: center;
+}
+
+.ns-user .avatar img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ns-user .nick-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: block;
+    padding: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ns-user .level-name {
+    margin-bottom: 10px;
+}
+
+.ns-user .level-name span {
+    background: #fff;
+    padding: 5px 10px;
+}
+
+.ns-user > div:first-child {
+    padding-top: 20px;
+    position: relative;
+    height: 187px;
+    text-align: center;
+}
+
+.ns-user > div:last-child {
+    padding: 10px 20px;
+    height: 56px;
+    background-color: #232331;
+}
+
+.box-0 .m-wallet {
+    margin: 9px 0 9px 250px;
+    overflow: visible;
+    background-color: #fff;
+}
+
+.m-wallet ul {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
+    padding: 20px;
+    height: 169px;
+}
+
+.m-wallet .num {
+    padding-top: 10px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.m-wallet .name {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+.m-wallet .operate {
+    line-height: 80px;
+    height: 60px;
+}
+
+.m-wallet .num {
+    margin-bottom: 10px;
+}
+
+.mt {
+    padding: 0 20px;
+    height: 55px;
+    line-height: 55px;
+    border-bottom: 1px solid #f0f3ef;
+}
+
+.mt h3 {
+    font-size: 16px;
+    float: left;
+    font-weight: normal;
+    line-height: 55px;
+}
+
+.mt .more {
+    position: relative;
+    float: right;
+    color: #666;
+    font-size: 12px;
+}
+
+.box-1 {
+    float: left;
+    width: 694px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.box-1 .nav {
+    padding: 15px 20px;
+}
+
+.box-1 .empty {
+    padding: 40px 0 90px;
+    color: #999;
+    text-align: center;
+    background-color: #fff;
+}
+
+.box-1 .nav .item {
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 13px 0 0;
+    margin: 0 20px;
+    height: 90px;
+    text-align: center;
+    -webkit-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    transition: all .4s ease;
+    width: 90px;
+    position: relative;
+}
+
+.box-1 .nav .item:hover {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 16px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, .1);
+}
+
+.box-2, .box-3 {
+    margin-left: 714px;
+    width: 247px;
+}
+
+.m-follow {
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.m-follow ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100px;
+}
+
+.m-follow ul li {
+    height: 50px;
+    line-height: 30px;
+    font-size: 16px;
+    width: 50%;
+    text-align: center;
+}
+
+.m-follow .text {
+    color: #666;
+    font-size: 12px;
+}
+
+.icon-sprite {
+    background: url(../img/member/sprite.png) no-repeat;
+    display: block !important;
+}
+
+.pending-payment {
+    margin: 3px auto;
+    width: 44px;
+    height: 41px;
+    background-position: 0 -200px;
+}
+
+.pending-payment:hover {
+    background-position: 0 -250px;
+}
+
+.pending-receipt {
+    margin: 1px auto 2px;
+    width: 40px;
+    height: 44px;
+    background-position: -80px -200px;
+}
+
+.pending-receipt:hover {
+    background-position: -80px -250px;
+}
+
+.pending-comment {
+    margin: 1px auto 2px;
+    width: 41px;
+    height: 44px;
+    background-position: -160px -200px;
+}
+
+.pending-comment:hover {
+    background-position: -160px -250px;
+}
+
+.refund {
+    margin: 0 auto 1px;
+    width: 39px;
+    height: 47px;
+    background-position: -240px -200px;
+}
+
+.refund:hover {
+    background-position: -240px -250px;
+}
+
+.all-order {
+    margin: 0 auto;
+    width: 41px;
+    height: 47px;
+    background-position: -320px -200px;
+}
+
+.all-order:hover {
+    background-position: -320px -250px;
+}
+
+.cart-icon {
+    width: 70px;
+    height: 70px;
+    background-position: -430px -95px;
+    display: inline-block !important;
+    margin-right: 15px;
+    margin-bottom: -25px;
+}
+
+.order-num {
+    position: absolute;
+    display: inline-block;
+    height: 15px;
+    line-height: 15px;
+    top: 11px;
+    padding: 0 4px;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 10px;
+    margin: 0 0 0 2px;
+    right: 18px;
+}
+
+.order-item .order-img {
+    width: 60px;
+    height: 60px;
+}
+
+.order-item {
+    padding: 10px 20px;
+    height: 80px;
+    border-top: 1px solid #f0f3ef;
+}
+
+.order-item .col-lg-6 {
+    padding: 10px 0;
+}
+
+.order-item .col-lg-4 {
+    padding: 20px 0 14px;
+    height: 26px;
+    text-align: right;
+}
+
+.product-item {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background: #fff;
+    display: inline-block;
+    text-align: center;
+}
+
+.product-item:last-child {
+    margin-right: 0;
+}
+
+.product-item img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+
+.user-notice {
+    padding: 10px 20px;
+    background: #fff;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.user-notice h3 {
+    font-size: 16px;
+    font-weight: normal;
+    float: left;
+}
+
+.user-notice p {
+    margin-left: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.box-3 .carousel {
+    padding: 15px;
+}
+
+.box-3 .empty {
+    padding: 15px;
+    text-align: center;
+}

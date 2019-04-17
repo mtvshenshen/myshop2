@@ -1,0 +1,156 @@
+@CHARSET "UTF-8";
+.main-content{
+	width: 100%;
+	overflow: hidden;
+}
+.main-content .title-img img{
+	width: 100%;
+	height: auto;
+}
+.apply-content{
+    margin: 44px 0px;
+    background-color: #fff;
+    overflow: hidden;
+    padding: 10px 0px;
+}
+.a-button{
+	display: block;
+    margin: 10px auto;
+    width: 80%;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    border-radius: 5px;
+	    font-weight: bold;
+}
+.apply-content .apply_title_one{
+    font-size: 15px;
+    border-left: 2px solid;
+    padding: -1px 0px;
+    height: 20px;
+    margin: 5px 0px;
+    padding-left: 7px;
+}
+.apply-content .apply_title_one .title_two{
+	    font-size: 12px;
+    color: #ccc;
+    margin-left: 6px;
+}
+.apply-content .content_i
+{
+	padding:5px 0px;
+/* 	max-height: 75px; */
+	overflow: auto;
+	border-top: 1px solid #ddd;
+}
+.apply-content .content_i a{
+    display: inline-block;
+    width: 92%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #ddd;
+    margin: 0px 4%;
+    font-size: 12px;
+	color: #666;
+}
+.apply-content .content_i a.no_i{
+	color: #ccc;
+}
+.apply-content .content_i a>.weui_icon_curr{
+	float: right;
+    margin-right: 11px;
+}
+.weui_cell{padding: 4px 15px 0px;}
+.apply-content .apply-title-item{
+	    width: 97%;
+    display: inline-block;
+    overflow: hidden;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0px 5px 7px;
+}
+.apply-content .apply-title-item i{
+	margin-right: 10px;
+    display: inline-block;
+    width: 26px;
+    height: 28px;
+    background: url(../img/distribution/member_index_ico.png) no-repeat;
+    float: left;
+    margin-top: 9px;
+}
+.apply-content .apply-title-item i.apply-add{
+	background-position: -51px 1px;
+}
+.apply-content .apply-title-item i.extension{
+	background-position: -51px -27px;
+}
+.apply-content .apply-title-item i.team{
+	background-position: -51px -55px;
+}
+.apply-content .apply-title-item .item-row{
+	overflow: hidden;
+	float: left;
+}
+.item-row .item-title{
+	    color: #333;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.item-row .item-content{
+	color: #999;
+    font-size: 13px;
+}
+.weui_btn_primary {
+    background-color: #f72020;
+}
+.weui_cell {
+    padding: 10px 15px;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.weui_label {
+    display: block;
+    width: 105px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.weui_cell_primary {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.weui_input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font-size: inherit;
+    color: inherit;
+    height: 1.41176471em;
+    line-height: 1.41176471;
+}
+.apply-content .content_i a>.weui_icon_curr img {
+    width: 18px;
+    height: 18px;
+}
+.w107 {
+	width: 107px;
+}
+.no-apply {
+    text-align: center;
+    margin-top: 40px;
+}
+.apply-content-desc {
+    padding: 10px 15px;
+    color: #999;
+	font-size:12px;
+}

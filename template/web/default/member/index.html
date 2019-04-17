@@ -1,0 +1,197 @@
+{extend name="$member_base" /}
+{block name="right_main"}
+<link rel="stylesheet" href="WEB_CSS/member_index.css">
+{php}
+// 订单状态数量
+$order_status_num = api("System.Order.orderCount",[]);
+$order_status_num = $order_status_num['data'];
+
+// 浏览记录
+$footprint = api('System.Member.footprint', ['page_index' => 1, 'page_size' => 10]);
+$footprint = $footprint['data'];
+
+// 订单列表
+$order_list = api("System.Order.order",['page'=>1,'page_size'=>4,'status'=>0]);
+$order_list = $order_list['data'];
+
+// 商品收藏数量
+$collection_num = api("System.Member.collectionNum");
+$collection_num = $collection_num['data'];
+
+$coupon_count = api("System.Member.couponNum");
+$coupon_count = $coupon_count['data'];
+
+//用户公告
+$user_notice = api("System.Config.notice");
+$user_notice = $user_notice['data'];
+{/php}
+<div class="member-main">
+	<div class="box-0">
+        <div class="ns-user">
+            <div class="ns-bg-color">
+                <a class="avatar" href="{:__URL('SHOP_MAIN/member/info')}">
+	                {if condition="$member_detail['user_info']['user_headimg'] neq '' and $member_detail['user_info']['user_headimg'] neq '0'"}
+                    <img src="{:__IMG($member_detail['user_info']['user_headimg'])}" >
+	                {else/}
+	                <img src="{:__IMG($default_headimg)}" />
+	                {/if}
+                </a>
+                <span onclick="location.href='{:__URL('SHOP_MAIN/member/info')}'" class="nick-name">{$member_detail.user_info.nick_name}</span>
+	            {notempty name="$member_detail.level_name"}
+	            <div class="level-name">
+	                <span class="ns-text-color">{$member_detail.level_name}</span>
+	            </div>
+	            {/notempty}
+            </div>
+            <div></div>
+        </div>
+	    <div class="m-wallet">
+	        <div class="mt"><h3>我的钱包</h3></div>
+	        <ul>
+				<li>
+                    <p class="num"><a href="{:__URL('SHOP_MAIN/member/coupon')}">{$coupon_count}</a></p>
+                    <p class="name">{:lang('member_coupons')}</p>
+					<p class="operate"><a href="{:__URL('SHOP_MAIN/goods/coupon')}">领券</a></p>
+	            </li>
+	            <li>
+	                <a href="{:__URL('SHOP_MAIN/member/point')}">
+	                    <p class="num">{$member_detail.point}</p>
+	                    <p class="name">积分</p>
+	                </a>
+	                <p class="operate"><a href="{:__URL('SHOP_MAIN/goods/point')}" target="_blank">兑换</a></p>
+	            </li>
+	            <li>
+                    <p class="num"><a href="{:__URL('SHOP_MAIN/member/balance')}">{$member_detail.balance}</a></p>
+                    <p class="name">余额</p>
+	                <p class="operate"><a href="{:__URL('SHOP_MAIN/member/balance')}">充值</a></p>
+				</li>
+	       </ul>
+	    </div>
+  	</div>
+	
+	<div class="user-notice">
+		<h3>{:lang('member_user_center_bulletin')}</h3>
+		<p>{$user_notice}</p>
+	</div>
+
+    <div class="box-1">
+        <div class="mt"><h3>我的订单</h3></div>
+        <div class="mc">
+	        <div class="nav">
+		        <a href="{:__URL('SHOP_MAIN/member/order?status=0')}" target="_blank" class="item">
+			        <div class="lrc-badge icon-sprite pending-payment"></div>
+			        <span class="name">待付款</span>
+			        {if $order_status_num.wait_pay > 0}
+		                <div class="order-num ns-bg-color">{$order_status_num.wait_pay}</div>
+			        {elseif $order_status_num.wait_pay > 99}
+		                <div class="order-num ns-bg-color">99+</div>
+			        {/if}
+		        </a>
+		        <a href="{:__URL('SHOP_MAIN/member/order?status=2')}" target="_blank" class="item">
+			        <div class="lrc-badge icon-sprite pending-receipt"></div>
+			        <span class="name">待收货</span>
+			        {if $order_status_num.wait_recieved > 0}
+		                <div class="order-num ns-bg-color">{$order_status_num.wait_recieved}</div>
+			        {elseif $order_status_num.wait_recieved > 99}
+		                <div class="order-num ns-bg-color">99+</div>
+			        {/if}
+		        </a>
+		        <a href="{:__URL('SHOP_MAIN/member/order?status=5')}" target="_blank" class="item">
+			        <div class="lrc-badge icon-sprite pending-comment"></div>
+			        <span class="name">待评价</span>
+			        {if $order_status_num.wait_evaluate > 0}
+		                <div class="order-num ns-bg-color">{$order_status_num.wait_evaluate}</div>
+			        {elseif $order_status_num.wait_evaluate > 99}
+		                <div class="order-num ns-bg-color">99+</div>
+			        {/if}
+		        </a>
+		        <a href="{:__URL('SHOP_MAIN/member/refund')}" target="_blank" class="item">
+			        <div class="lrc-badge icon-sprite refund"></div>
+			        <span class="name">退换/售后</span>
+		            {if $order_status_num.refunding > 0}
+		                <div class="order-num ns-bg-color">{$order_status_num.refunding}</div>
+			        {elseif $order_status_num.refunding > 99}
+		                <div class="order-num ns-bg-color">99+</div>
+			        {/if}
+			     </a>
+		        <a href="{:__URL('SHOP_MAIN/member/order')}" target="_blank" class="item">
+			        <div class="icon-sprite all-order"></div>
+			        <span class="name">全部订单</span>
+			    </a>
+	        </div>
+
+			{notempty name="$order_list"}
+            <div class="empty"><div class="icon-sprite cart-icon"></div><span>您买的东西太少了，这里都空空的，快去挑选合适的商品吧！</span></div>
+            {else/}
+            {foreach $order_list as $k => $v}
+            <div class="order-item">
+                <div class="col-lg-2">
+                    <img class="order-img" src="">
+                </div>
+                <div class="col-lg-6">
+                    <div class="order-desc">您提交了订单，等待付款</div>
+                    <div class="order-price common-text-color">￥153.99</div>
+                </div>
+                <div class="col-lg-4">
+                    <a href="{:__URL('SHOP_MAIN/member/order?id=')}">查看详情</a>
+                </div>
+            </div>
+            {/foreach}
+            {/notempty}
+        </div>
+    </div>
+
+    <div class="box-2">
+        <div class="m-follow">
+            <div class="mt">
+                <h3>我的关注</h3>
+            </div>
+            <ul>
+	            <li>
+		            <a href="{:__URL('SHOP_MAIN/member/collection')}" target="_blank">
+		                <div class="number">{$collection_num}</div>
+		                <div class="text">我的收藏</div>
+		            </a>
+	            </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="box-3">
+        <div class="m-follow">
+            <div class="mt">
+                <h3>浏览记录</h3>
+                <a class="more" href="{:__URL('SHOP_MAIN/member/footprint')}" target="_blank">更多<i class="icon icon-angle-right"></i></a>
+            </div>
+            {notempty name="$footprint['data']"}
+            <div id="myNiceCarousel" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner">
+					{foreach name="$footprint['data']" item="vo" key="k"}
+						{if condition="$k % 4 == 0 && $k == 0"}
+							<div class="item {if $k == 0}active{/if} ">
+						{/if}
+							<div class="product-item">
+								<a href="{:__URL('SHOP_MAIN/goods/detail', 'goods_id='.$vo['goods_id'])}" target="_blank">
+									<img src="{:__IMG($vo['goods_info']['picture_info']['pic_cover'])}">
+								</a>
+							</div>
+						{if condition="$k % 4 == 3 && $k != 0"}
+							</div>
+							{if condition="$k != count($footprint['data']) -1 "}
+							<div class="item">
+							{/if}
+						{/if}
+						
+						{if condition="$k == count($footprint['data']) -1 "}
+							</div>
+						{/if}
+					{/foreach}
+				</div>
+			</div>
+			{else/}
+			<div class="empty">暂无记录</div>
+            {/notempty}
+        </div>
+    </div>
+</div>
+{/block}

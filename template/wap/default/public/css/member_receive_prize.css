@@ -1,0 +1,189 @@
+body {
+    margin: 0 auto;
+    height: 100%;
+    background: #f8f8f8;
+}
+#leavemessage:hover{
+    height: 100px;
+}
+.item-options {
+    border-bottom: 1px solid #F2F2F2;
+    overflow: hidden;
+    line-height: 45px;
+    padding: 0 10px;
+}
+.item-options:active {
+    background: #FBFBFB;
+}
+.item-options>label {
+    float: left;
+    color: #333333;
+}
+.item-options[data-flag="shipping_time"]>label {
+    margin-bottom: -16px;
+}
+.item-options>span {
+    float: right;
+    font-size: 14px;
+}
+
+#leavemessage,#invoice-title,#taxpayer-identification-number {
+    color: #666;
+    height: 50px;
+    padding: 13px 10px;
+    border: 0;
+    float: right;
+    width: 72%;
+    text-align: right;
+    resize: none;
+    outline: none;
+    background: transparent;
+    transition: height 0.5s;
+    font-size: 14px;
+    margin-top: -12px;
+}
+.order {
+    background: #ffffff;
+}
+.order-goods-item {
+    height: 86px;
+    padding: 0 10px 10px;
+    background-color: #fafafa;
+}
+.name-card .thumb img {
+    position: absolute;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+.order-goods-item .name-card .detail {
+    margin-left: 80px;
+    min-height: 38px;
+    width: auto;
+    position: relative;
+}
+.order-goods-item .name-card .detail-row {
+    overflow: hidden;
+    min-height: 20px;
+    margin-bottom: 3px;
+}
+.order-goods-item .name-card .right-col {
+    float: right;
+}
+.order-goods-item .name-card .left-col {
+    padding-right: 50px;
+}
+.bottom-fix {
+    border: 0;
+    display: block;
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+    background-color: #fff;
+    user-select: none;
+    box-sizing: border-box;
+    font-size: 0;
+    border-top-width: 1px;
+}
+.c-gray-darker {
+    color: #666 !important;
+}
+.commit-bill-btn {
+    color: #ffffff;
+    position: relative;
+    margin: 0;
+    border: 0;
+    margin-left: 10px;
+    width: 35%;
+    height: 50px;
+    border-radius: 0;
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.5;
+}
+.express-panel {
+    padding: 15px 10px;
+    background-color: #fff;
+    line-height: 22px;
+    min-height: 22px;
+    position: relative;
+    margin-top: 45px;
+}
+.express-panel .name {
+    float: left;
+    width: 160px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.express-panel .tel {
+    float: right;
+}
+.express-panel .name,.express-panel .tel {
+    font-size: 14px;
+    color: #333;
+}
+.clearfix:after {
+    display: table;
+    clear: both;
+}
+.express-panel .address-detail {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #666;
+}
+.footer {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    min-height: 86px;
+}
+.copyright {
+    background-color: #f8f8f8;
+    line-height: 16px;
+    text-align: center;
+}
+.copyright .ft-copyright {
+    padding: 20px 0 20px;
+    margin: 0 15px;
+    font-size: 12px;
+}
+.ft-copyright img {
+    width: 110px;
+    display: block;
+    margin: 0 auto;
+}
+.copyright .ft-copyright>a {
+    padding-top: 45px;
+    color: #ccc;
+}
+#noaddress a {
+    display: block;
+    width: 100%
+}
+.express{
+    height: 2px;
+    background-size:34px 2px ;
+    display: block;
+    background: url("../img/member/border_order_top.png");
+    padding: 0;
+}
+.gift{
+    position: absolute;
+    z-index: 2;
+    width: 16px;
+    margin-top: 5px;
+}
+.divs{
+    height: 50px;
+}

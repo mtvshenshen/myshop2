@@ -1,0 +1,20 @@
+﻿@charset "utf-8";
+.f-hd {
+    height: 50px;
+}
+.f-bd {
+    height: 660px;
+
+}
+.f-ft {
+    height: 70px;
+}
+.clear {
+	clear: both;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}

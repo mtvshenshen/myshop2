@@ -1,0 +1,108 @@
+body{background: #fff;}
+.wrap{
+	width:100%;
+	position:relative;
+}
+
+.signin-top{
+	width:100%;
+	background: url("../img/member/signin_bg.png") no-repeat;
+	height:300px;
+	background-size: 100% 100%;
+	text-align:center;
+	padding-top:20px;
+}
+
+.signin_statu{
+	width:100px;
+	height:100px;
+	margin:0 auto;
+	border-radius:50px;
+	background: url("../img/member/signin_ing.png") no-repeat;
+	background-size: 100% 100%;
+	font-size:16px;
+	color:#FC4D3B;
+	font-weight:600;
+	line-height:100px;
+	letter-spacing: 1px;
+}
+
+.signined_statu{
+	width:100px;
+	height:100px;
+	margin:0 auto;
+	border-radius:50px;
+	background: url("../img/member/signin_ed.png") no-repeat;
+	background-size: 100% 100%;
+	font-size:16px;
+	color:#999999;
+	font-weight:600;
+	line-height:100px;
+	letter-spacing: 1px;
+}
+
+.signin-top .first_p{height:30px;line-height:30px;font-size:16px;color:#fff;margin:5px 0;}
+.signin-top .second_p{height:30px;line-height:15px;font-size:14px;color:#ffffffc4;}
+.signin-top span{color:#fcab7c;}
+
+.signin-content{width:92%;margin:0 auto;background:#fff;border-radius:5px;padding:15px 0;margin-top:-100px;text-align:center;box-shadow: 0 0px 10px rgba(0,0,0,.3);}
+.kalenda-title{height:30px;line-height:30px;color:#333;font-size:16px;}
+.kalenda-tips{height:20px;color:#999999;margin:10px 0;}
+.kalenda-tips span{color:#FC4D3B;}
+.signin-content  .week{width:92%;margin:0 auto;background:#F9F9F9;overflow:hidden;height:30px;line-height:30px;display:flex;margin-top:15px;}
+.signin-content  .week li{width:14.25%;color:#999999;font-size:14px;}
+.signin-content  .day{width:92%;margin:0 auto;display:flex;flex-wrap: wrap;}
+.signin-content  .day li{width:14.25%;color:#999999;font-size:14px;height:50px;line-height:50px;}
+.active-rule{
+position:absolute;
+top:20px;right:0;
+background:#BA583D;
+width:80px;height:28px;
+line-height:28px;
+color:#fff;
+text-align:center;
+border-top-left-radius:50px;
+border-bottom-left-radius:50px;
+display:none;
+}
+.signin-content  .day li .already{width:20px;margin:0 auto;height:20px;line-height:35px;}
+.signin-content  .day li p{font-size:10px;height:20px;line-height:35px;}
+.signin-content  .day li div img{width:100%;}
+.prev-month{
+	display:inline-block;
+	width:13px;height:13px;
+	border-left:2px solid #999;
+	border-bottom:2px solid #999;
+	transform:rotate(45deg);
+-ms-transform:rotate(45deg);
+-moz-transform:rotate(45deg); 
+-webkit-transform:rotate(45deg);
+-o-transform:rotate(45deg); 
+	margin-right:15px;
+	display:none;
+}
+
+.next-month{
+	display:inline-block;
+	width:13px;height:13px;
+	border-right:2px solid #999;
+	border-bottom:2px solid #999;
+	transform:rotate(-45deg);
+-ms-transform:rotate(-45deg);
+-moz-transform:rotate(-45deg); 
+-webkit-transform:rotate(-45deg);
+-o-transform:rotate(-45deg); 
+	margin-left:15px;
+	display:none;
+}
+.curr_day .curr_tips{
+	width:20px;
+	height:20px;
+	background:#F7837C;
+	border-radius:50px;
+	line-height:20px;
+	margin:0 auto;
+	margin-top:15px;
+	color:#fff;
+}
+

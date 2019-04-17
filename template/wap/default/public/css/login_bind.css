@@ -1,0 +1,90 @@
+.reg-box {
+	width: 90%;
+	margin: 0 auto;
+	position: relative;
+}
+
+.reg-box .reg-cont {
+	position: relative;
+	display: block;
+	height: 45px;
+	width: 100%;
+	background: #fff;
+	border-bottom: 1px solid #E6E6E6;
+}
+
+.reg-box .reg-cont label {
+	width: 80%;
+}
+
+.reg-box .reg-cont label input {
+	height: 44px;
+	font-size: 14px;
+	border: none;
+	padding: 5px 1px;
+	width: 60%;
+	margin: 0;
+}
+
+.reg-box .reg-cont label span {
+	width: 70px;
+	display: inline-block;
+}
+
+.tit-info {
+	margin: 20px 10px;
+}
+
+.tit-info .h3 {
+	font-size: 16px;
+}
+
+.tit-info p {
+	font-size: 12px;
+	color: #999;
+	margin-top: 3px;
+}
+
+.btn {
+	display: block;
+	width: 100%;
+	height: 35px;
+	border-radius: 18px;
+	margin: 20px auto 0;
+}
+
+.no-account {
+	background-color: #fff !important;
+}
+
+.footer {
+	margin: 20px 0 0 0;
+	padding: 0;
+	min-height: 86px;
+	text-align: center;
+	line-height: 16px;
+	background-color: #fff;
+}
+
+.ft-copyright {
+	padding: 50px 0 20px;
+	margin: 0 15px;
+	font-size: 12px;
+	background: url("../images/logo_copy.png") no-repeat center 15px;
+	background-size: 110px 30px;
+}
+
+.ft-copyright a {
+	padding-top: 45px;
+	color: #ccc;
+}
+
+.verifyimg {
+	width: 75px;
+	float: right;
+	margin: 11px 4px;
+}
+
+.reg-box .reg-cont .validate {
+	width: 40%;
+}

@@ -1,0 +1,177 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/distribution_commission_recording.css">
+{/block}
+{block name="head_operation"}{/block}
+{block name="main"}
+<div id="index_content">
+<!--列表页内容start-->
+<section class="category-content-section">
+	<!-- 商品列表 -->
+	<div class="cf-container">
+		<ul class="cf-content">
+            <li class="cf-tab-item selected ns-text-color-hover" data-type="promoter_commission"><a href="javascript:;" >推广员佣金</a></li>
+            <li class="cf-tab-item ns-text-color-hover" data-type="region_agent_commission"><a href="javascript:;" >区域代理佣金</a></li>
+			<li class="cf-tab-item ns-text-color-hover" data-type="partner_commission"><a href="javascript:;" >股东分红</a></li>
+        </ul>
+	</div>
+
+	<div class="goods-list-grid openList">
+		<div class="blank-div"></div>
+		<div id="goods_list">
+			<div class="tablelist-append clearfix">
+			</div>
+		</div>
+	</div>
+	 
+</section>
+</div>
+<div class="mask-div"></div>
+<!-- 总页数 -->
+<input type="hidden" id="page_count">
+<!-- 当前页数 -->
+<input type="hidden" id="page" value="1">
+<input type="hidden" id='order' name="order"/>
+<input type="hidden" id='sort' name="sort"/>
+<input type="hidden" id='category_id' name='category_id' value="{$category_id}" />
+<input type="hidden" id="type" value="promoter_commission">
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+var page_size = 10;
+$(function(){
+	getgoodlist(1);
+	$('.cf-content .cf-tab-item').click(function() {
+		$(this).addClass('selected').siblings('li').removeClass('selected');
+		$('#type').val($(this).attr('data-type'));
+		getgoodlist(1);
+	});
+})
+var is_load = true;//防止重复加载
+function getgoodlist(page){
+	var params = {
+		page : page,
+		page_size : page_size,
+		type : $('#type').val()
+	};	
+	$(".data-display-mode").find("i").attr("class","fa fa-list-ul fa-lg");
+	$("#page").val(page);
+	if(is_load){
+		is_load = false;
+		api("System.Distribution.commissionDistributionList",params,function(data){
+				if(data.code != 0) toast(data.message);
+				if(data['data']['page_nex']){
+					var data_page = parseInt(data['data']['page_nex']);
+					$("#page").val(data_page);
+				}
+				$("#page_count").val(data['data']['page_count']);//总页数
+				if(page == 1){
+					var list_html = "";
+				}else if(page > 1){
+					var list_html = $('.tablelist-append').html();
+				}
+				if(data['data']['data'].length >0){
+					for(var i=0;i<data['data']['data'].length;i++){
+						var item=data['data']['data'][i];
+						list_html += `<div class="water-item ">
+										<div class="water-top">
+											<div class="water-id fl ns-text-color-black">订单号：`+ item.order_info.order_no +`</div>
+											<div class="water-time fr ns-text-color-black">`+ timeStampTurnTime(item.order_info.create_time) +`</div>
+											<div class="clear"></div>
+										</div>
+										<div class="water-bottom">
+											<div class="water-info">
+												<div class="water-name fl ns-text-color-black">`+ item.nick_name +`</div>
+												<div class="water-status fr ns-text-color-black">`+ item.order_info.status_name +`</div>
+												<div class="clear"></div>
+											</div>
+											<div class="water-info">
+												<div class="water-name fl ns-text-color-black">订单金额</div>
+												<div class="water-price fr ns-text-color">￥`+ item.order_info.order_money +`</div>
+												<div class="clear"></div>
+											</div>
+											<div class="water-info">
+												<div class="water-name fl ns-text-color-black">佣金金额</div>
+												<div class="water-price fr ns-text-color">￥`+ item.commission_money +`</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>`;
+					}
+				}else if(data['data']['data'].length == 0 && page == 1){
+					list_html+= '<p class="empty-data "><img src="'+WAPIMG+'/distribution/wap_nodata.png" height="60"><br>Sorry！没有找到相关的数据…</p>';
+				}
+				is_load = true;
+				$('.tablelist-append').html(list_html);
+// 				img_lazyload();	
+				var	goods_img_height = parseInt($('.goods_img').height());
+				$(".data_info").height(goods_img_height);
+			    if(data['page_nex']){
+			    	$(window).scrollTop(scrollTop);
+			    	delCookie("scrollTop");
+				}
+		});	
+	}
+}
+window.onresize = function(){
+	var	goods_img_height = parseInt($('.goods_img').height());
+	$(".data_info").height(goods_img_height);
+}
+
+function timeStampTurnTime(timeStamp){
+	if(timeStamp > 0){
+		var date = new Date();  
+		date.setTime(timeStamp * 1000);  
+		var y = date.getFullYear();      
+		var m = date.getMonth() + 1;      
+		m = m < 10 ? ('0' + m) : m;      
+		var d = date.getDate();      
+		d = d < 10 ? ('0' + d) : d;      
+		var h = date.getHours();    
+		h = h < 10 ? ('0' + h) : h;    
+		var minute = date.getMinutes();    
+		var second = date.getSeconds();    
+		minute = minute < 10 ? ('0' + minute) : minute;      
+		second = second < 10 ? ('0' + second) : second;     
+		return y + '-' + m + '-' + d;  		
+	}else{
+		return "";
+	}
+	    
+	//return new Date(parseInt(time_stamp) * 1000).toLocaleString().replace(/年|月/g, "/").replace(/日/g, " ");
+}
+
+//滑动到底部加载
+$(window).scroll(function(){
+	var top = $(document).scrollTop();
+	var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+	var content_box_height = parseFloat($(".tablelist-append").height()); 
+	if(totalheight+80 - content_box_height >= 100 && content_box_height > 0){
+		if(is_load){
+			var page = parseInt($("#page").val()) + 1;//页数
+			var total_page_count = $("#page_count").val(); // 总页数
+			if(page > total_page_count){
+				return false;
+			}else{
+					getgoodlist(page);
+			}
+		}
+	}
+});
+
+function lishi(scrollTop){
+	 var str = window.location.href;
+	 str = str.substring(str.lastIndexOf("/") + 1);
+	 if (scrollTop) {
+	     $("html,body").animate({ scrollTop: scrollTop }, 1000);
+	 }else {
+	
+	 }
+}
+function jumpdetail(goodsid,event){
+	location.href = __URL(APPMAIN+'/goods/detail?goods_id='+goodsid+'&liebiao=1');
+}
+
+</script>
+{/block}

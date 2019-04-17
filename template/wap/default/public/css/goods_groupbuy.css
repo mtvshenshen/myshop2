@@ -1,0 +1,131 @@
+#index_content .category-content-section {
+	margin-top: 5px;
+	z-index: 1;
+}
+
+.goods-list-grid {
+	width: 100%;
+	overflow: hidden;
+	background: #f3f5f7;
+}
+
+.clearfix::after {
+	clear: both;
+	content: " ";
+	display: block;
+	font-size: 0;
+	height: 0;
+	visibility: hidden;
+}
+
+.openList li {
+	width: 50%;
+	overflow: hidden;
+	float: left;
+	padding: 0px;
+	position: relative;
+	list-style: none;
+}
+
+.openList li .item {
+	display: block;
+	width: 98%;
+	overflow: hidden;
+	margin: auto;
+	background: #fff;
+	position: relative;
+}
+
+.goods-list-grid li .item-tag-box {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0;
+	left: 0px;
+	z-index: 2;
+}
+
+.openList li .item-pic {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+}
+
+.goods-list-grid li .item-pic a {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding-top: 100%;
+}
+
+.item-pic a img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.openList li dl {
+	width: 96%;
+	margin: auto;
+	margin-top: 8px;
+	overflow: hidden;
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+.openList li dl dt {
+	width: 100%;
+	height: 40px;
+	overflow: hidden;
+}
+
+.openList li dl dt a {
+	font-size: 14px;
+	line-height: 20px;
+	word-break: break-all;
+}
+
+.openList li dd {
+	width: 100%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.openList li dd i {
+	display: block;
+	float: left;
+	line-height: 30px;
+	font-weight: bold;
+}
+
+.openList li dd i:nth-child(2) {
+	border: 1px solid;
+	line-height: initial;
+	margin-top: 5px;
+	margin-left: 7px;
+	font-size: 12px;
+}
+
+.no-commodtiy {
+	color: #939393;
+	text-align: center;
+	margin-top: 100px;
+}
+
+.no-commodtiy img {
+	margin-bottom: 20px;
+}
+
+.lazy-load {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.w100{
+	width:100%;
+	height:200px;
+}

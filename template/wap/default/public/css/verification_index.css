@@ -1,0 +1,97 @@
+@charset "utf-8";
+
+* {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+}
+
+a, img, button, input, select {
+    -webkit-tap-highlight-color: transparent;
+    outline: 0;
+}
+
+ img{
+ 	max-height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+ 	width:100%;
+ 	height:100%;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.com-content {
+}
+
+.com-content .verifcationtop-box{
+    overflow:hidden;
+}
+
+.com-content li{
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    background: #fff;
+    padding: 10px 5vw;
+}
+
+.com-content ul li .goods-pic{
+    width: 18vw;
+    height: 18vw;
+    position: absolute;
+    left: 3vw;
+    float:left;
+}
+
+.com-content ul li p{
+    float:left;
+    margin-left:23vw;
+    width: 85vw;
+    height: 9vw;
+    line-height: 9vw;
+}
+
+.com-content ul li p:last-child{
+    color: #ccc;
+    font-size:3.5vw;
+}
+
+.com-content ul li h4{
+    font-size: 4vw;
+    line-height:10vw;
+    border-bottom: 1px solid #eee;
+}
+
+.com-content ul li .from{
+    line-height: 10vw;
+    height: 10vw;
+}
+
+.com-content ul li  .from input{
+    border: 0;
+    height:7vw; 
+    font-size: 12px;
+}
+
+.com-content ul li  .from button{
+    vertical-align:middle;
+    float:right;
+    margin:2vw 0 0 0;
+    border: 1px solid;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 3.8vw;
+    padding: 3px 10px;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0;
+}
+
+.com-content ul .prompt{    
+    background: transparent; 
+    color: #999;
+	font-size: 3.5vw;
+}

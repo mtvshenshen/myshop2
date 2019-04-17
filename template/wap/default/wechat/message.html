@@ -1,0 +1,110 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="dns-prefetch" href="http://res.wx.qq.com/">
+<link rel="dns-prefetch" href="http://mmbiz.qpic.cn/">
+<title>{$info["media_item"]["title"]}</title>
+<link rel="stylesheet" type="text/css" href="WAP_CSS/wechat_message.css">
+{/block}
+{block name="head"}{/block}
+{block name="main"}
+<div id="activity-detail" class="mm-appmsg " ontouchstart="">
+	<div id="js_cmt_mine" class="discuss-container editing access dis-none">
+		<div class="discuss-container-inner">
+			<h2 class="rich-media-title">sdfs</h2>
+			<div class="frm-textarea-box-wrp">
+				<span class="frm-textarea-box">
+					<textarea id="js_cmt_input" class="frm-textarea" placeholder="{:lang('the_comments_will_be_displayed_after_screening_by_the_public_account_visible_to_all')}。"></textarea>
+				</span>
+			</div>
+			<div class="discuss-btn-wrp">
+				<a id="js_cmt_submit" class="btn btn-primary btn-discuss btn-disabled" href="javascript:;">{:lang('member_submit')}</a>
+			</div>
+			<div class="dis-none">
+				<div class="rich-tips with-line title-tips discuss-title-line">
+					<span class="tips">{:lang('my_comments')}</span>
+				</div>
+				<ul class="discuss-list" id="js_cmt_mylist"></ul>
+			</div>
+			<div class="rich-tips tips-global loading-tips" id="js_mycmt_loading">
+				<span class="tips">{:lang('in_load')}</span>
+			</div>
+			<div class="wx-poptips" id="js_cmt_toast">
+				<img alt="" class="icon-toast"
+					src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGoAAABqCAYAAABUIcSXAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3NpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMTUxMzkxZS1jYWVhLTRmZTMtYTY2NS0xNTRkNDJiOGQyMWIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTA3QzM2RTg3N0UwMTFFNEIzQURGMTQzNzQzMDAxQTUiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTA3QzM2RTc3N0UwMTFFNEIzQURGMTQzNzQzMDAxQTUiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NWMyOGVjZTMtNzllZS00ODlhLWIxZTYtYzNmM2RjNzg2YjI2IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjIxNTEzOTFlLWNhZWEtNGZlMy1hNjY1LTE1NGQ0MmI4ZDIxYiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pmvxj1gAAAVrSURBVHja7J15rF1TFMbXk74q1ZKHGlMkJVIhIgg1FH+YEpEQJCKmGBpThRoSs5jVVNrSQUvEEENIhGiiNf9BiERICCFIRbUiDa2qvudbOetF3Tzv7XWGffa55/uS7593977n3vO7e5+199p7v56BgQGh0tcmvAUERREUQVEERREUQVEERREUQVEERREUQVEERREUQVEERREUQVEERVAUQVEERVAUQbVYk+HdvZVG8b5F0xj4RvhouB+eCy8KrdzDJc1RtAX8ILxvx98V1GyCSkN98Cx4z/95/Wn4fj6j6tUEeN4wkFSnw1MJqj5NhBfAuwaUHREUg4lqNMmePVsHll/HFhVfe1t3FwpJI8DXCCquDrCWNN4B6Tb4M3Z98aTPmTvh0YHl18PXw29yZiKejoPvcUD6E74yFBJbVDk6Bb7K8aP/Hb4c/tRzEYIqprPhSxzlf4Uvhb/0Xoig8qnHAJ3lqPMzfDH8XZ4LEpRf2sVdA5/sqPO9Qfop70UJyn+/boaPddT5yrq7VUUvTIVJI7q74MMddXR8NB1eXcYvhBpZm0s2w72/o86HFoKvLau/pYaXzjLMdUJ6y0LwtWV9CIIaXtvA8+G9HHV03u5q+K+yH47U0NoRngPv7KjzHDwTLj0bS1BDazfJJlcnOOostC6ysnCT+q80G/sIvFVgeW09D8FPVT0uoP7VfvAD8NjA8pqmuAN+OcYAjso0RbIZ8DGB5TVNcRO8JMaHY9SXSdfa3eeANJimWBLrA7JFiZwIXye+NMUV8CcxP2SRFjXefok7NRjSGZJlWUPvw2/wtNiQirSoXWyMsR28wR7AzzYM0oXw+Y7yK+CLJGeaoqjyrJSdZJD6Ov4+z5y6NJc0Az7NUecHydIUy+v60KNyQHoM3nKI1y7YCFiq0i7uBvgER52vDdKqWn9djhY1Dn4G3n6Ecqm2rF74dvgoR53S0hQxW9RJAZAGW5bSn58QJA27dQ7uIEedjywEX5NKVxCqsY6y+qA+LxFI4+yZ6oH0trWkNan80jygtIUsc5SflgAsDXgehfdx1KkkTRE76tN+Xue2jnTU0Ru1oIbvpt30bBtKhOp5yaaRkts0lic8V1i6dPcIRx2d/l8Y8XtNNEg7OOo8bl1kmmOKnDsO88CaYzejau0hWZqiL7C83oCH4SeTHvwV2BqqsHRVztSEYOmWF80NeXZT6Hd4KflResE9vCnBOlCyGfDNAstHTVPUDWoQ1t3iW+9WNizvlhfd4aerXd+ThqiMfNR6+9LvOOro5OY5JX2H4+F7HZD+kGzlamMgldWiirQsjcwWFbjmqZJteekJLK9pisvgL6RhKvuciZiwzrWWGapfrPy30kBVcSBIrw0aD3PU0XB6cehntq7rTMf7/2iQlktDVdXJLXlg6VjmiYBn6rWSTRCH6hvJ0hQrpcGq8oidsmHpTP8t8DGO9/vcWt9qabiqPgup1yKyQwvC2tSefZ73SSpNkUJ4PlLorlHZ+446nc8f3fIyywlJhwrTuwVSjBa1ccvSxN0hjjoK5xVrYZMd9V6XbFfgBukixTwGLg8sDam3dZR/wZ6L/dJlin1en8LS+bgpFbz3Ygvzu1J1HKxYNqxGpCmaCEo12rrBorD6LRp8UbpcdR5VWhTW35KlKd6QFqjuM2XzwlpnMxTvSkuUwuG/Xlg6NtPjbT6WFimF/VG6LEvXgn8QGDjMbBukVECFwhpoS+CQatfX2Q1q6H7wENHdrfCr0lKleEB9JyxNneus+VJpsVL9TwI6W65LovWIGl3KtVJaLv7LBwYTFEERFEVQFEERFEVQFEERFEVQFEERFEVQFEERFEVQFEERFFWq/hFgADUMN4RzT6/OAAAAAElFTkSuQmCC">
+				<p class="toast-content">{:lang('have_reviewed')}</p>
+			</div>
+		</div>
+	</div>
+	<div id="js_article" class="rich-media">
+		<div id="js_top_ad_area" class="top-banner"></div>
+		<div class="rich-media-inner">
+			<div id="page-content">
+				<div id="img-content" class="rich-media-area-primary">
+					<h2 class="rich-media-title" id="activity-name">{$info["media_item"]["title"]}</h2>
+					<div class="rich-media-meta-list">
+						<em id="post-date" class="rich-media-meta rich-media-meta-text">{$info["media_parent"]["create_time"] | getTimeStampTurnTime}</em>
+						<a class="rich-media-meta rich-media-meta-link rich-media-meta-nickname" href="javascript:void(0);" id="post-user">{$info["weixin_auth"]["nick_name"]}</a>
+						<span class="rich-media-meta rich-media-meta-text rich-media-meta-nickname">{$info["weixin_auth"]["nick_name"]}</span>
+						<div id="js_profile_qrcode" class="profile-container">
+							<div class="profile-inner">
+								<strong class="profile-nickname">{:lang('province')}</strong>
+								<img class="profile-avatar" id="js_profile_qrcode_img" src="" alt="">
+								<p class="profile-meta">
+									<label class="profile-meta-label">{:lang('wechat')}</label>
+									<span class="profile-meta-value">qq6394788</span>
+								</p>
+								<p class="profile-meta">
+									<label class="profile-meta-label">{:lang('functions')}</label>
+									<span class="profile-meta-value">{:lang('personal_platform')}</span>
+								</p>
+							</div>
+							<span class="profile-arrow-wrp" id="js_profile_arrow_wrp">
+								<i class="profile-arrow arrow-out"></i>
+								<i class="profile-arrow arrow-in"></i>
+							</span>
+						</div>
+					</div>
+					<div class="rich-media-thumb-wrp" id="media">
+						<script>
+						</script>
+						<img class="rich-media-thumb" id="js_cover" onerror="this.parentNode.removeChild(this)" data-s="300,640" src="">
+					</div>
+					<div class="rich-media-content" id="js_content">
+						<p>{$info["media_item"]["content"]}</p>
+					</div>
+					<script type="text/javascript">
+						var first_sceen__time = (+new Date());
+					</script>
+					<div class="rich-media-tool" id="js_toobar">
+	
+						{if condition="$info['media_item']['content_source_url'] !=''"} <a class="media-tool-meta meta-primary" style="color: #8c8c8c;"id="js_view_source" href="{$info['media_item']['content_source_url']}">{:lang('read_the_text')}</a>
+						{/if}
+						<div id="js_read_area" class="media-tool-meta tips-global meta-primary">
+							{:lang('read')} <span id="readNum">{$info["media_item"]["hits"]}</span>
+						</div>
+						<span class="media-tool-meta meta-primary tips-global meta-praise dis-none" id="like"> <i class="icon-praise-gray"></i>
+						<span class="praise-num" id="likeNum"></span>
+						</span> <a id="js_report_article" class="media-tool-meta tips-global meta-extra" href="javascript:void(0);">{:lang('report')}</a>
+					</div>
+				</div>
+				<div class="rich-media-area-extra">
+					<div class="mpda-bottom-container" id="js_bottom_ad_area"></div>
+					<div id="js_iframetest" class="dis-none"></div>
+				</div>
+			</div>
+			<div id="js_pc_qr_code" class="qr-code-pc-outer">
+				<div class="qr-code-pc-inner">
+					<div class="qr-code-pc">
+						<img id="js_pc_qr_code_img" class="qr-code-pc-img" src="{:__IMG($website_info.web_qrcode)}">
+						<p>{:lang('wechat_sweep')}<br>{:lang('pay_attention_to_the_public_number')}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script src="WAP_JS/wechat_message.js"></script>
+{/block}

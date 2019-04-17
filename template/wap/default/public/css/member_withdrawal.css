@@ -1,0 +1,22 @@
+.empty-frame{
+    width:  100%;
+    margin: 60px auto 0;
+}
+.empty-frame span {
+    width:  100%;
+    text-align: center;
+    font-size: 12px;
+    float: left;
+    display: inline-block;
+    margin-top: 20px;
+    color: #cccccc;
+}
+.empty-frame .user-money {
+    background: url(../img/member/balance.png) no-repeat;
+    width: 110px;
+    height: 68px;
+    background-size: 100%;
+    display: inline-block;
+    margin-left: 34%;
+}
+

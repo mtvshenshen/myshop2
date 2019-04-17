@@ -1,0 +1,160 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" href="WAP_CSS/article_detail.css" />
+{/block}
+{block name="main"}
+{php}
+	$article_id = request()->get('article_id', '');
+	$article_info = api("System.Article.articleInfo",["article_id"=>$article_id]);
+	$article_info = $article_info["data"];
+	$condition = [];
+	$condition['article_id'] = ['lt',$article_id];
+	$condition['nca.class_id'] = $info["class_id"];
+	$condition['status'] = 2;
+
+	//上一篇
+	$prev_info = api("System.Article.articleList", ["page_index"=>1, "page_size"=>1, "condition"=>$condition, "order"=>"article_id desc"]);
+	$prev_info = $prev_info['data']['data'][0];
+
+	//下一篇
+	$condition['article_id'] = ['gt',$article_id];
+	$next_info = api("System.Article.articleList", ["page_index"=>1, "page_size"=>1, "condition"=>$condition, "order"=>"article_id desc"]);
+	$next_info = $next_info['data']['data'][0];
+
+	$signPackage = api('System.Wchat.getShareTicket');
+	$signPackage = $signPackage['data'];
+
+{/php}
+<script language="javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"> </script>
+<input type="hidden" id="appId" value="{$signPackage['appId']}">
+<input type="hidden" id="jsTimesTamp" value="{$signPackage['jsTimesTamp']}">
+<input type="hidden" id="jsNonceStr"  value="{$signPackage['jsNonceStr']}">
+<input type="hidden" id="jsSignature" value="{$signPackage['jsSignature']}">
+<div class="main-content">
+	<h3>{$article_info['title']}</h3>
+	{if $article_info['author']}
+	<p class="fu-title">{:lang('author')}：{$article_info['author']}</p>
+	{/if}
+	<p class="fu-title">{:lang('position_posted_on')}：{$article_info['public_time']|getTimeStampTurnTime}</p>
+	<div id="html_content">	{$article_info['content']}</div>
+	<div class="location-other-article">
+		{notempty name="$prev_info"}
+		<a href="{:__URL('APP_MAIN/articlecenter/articlecontent', 'article_id='.$prev_info.article_id)}" class="prev">上一篇：{$prev_info['title']}</a>
+		{/notempty}
+		{notempty name="$next_info"}
+		<a href="{:__URL('APP_MAIN/articlecenter/articlecontent', 'article_id='.$next_info.article_id)}" class="next">下一篇：{$next_info['title']}</a>
+		{/notempty}
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	//分享
+	$.ajax({
+		type:"post",
+		data : {"shop_id" : "{$shop_id}" , "flag" : "cms" , "article_id" : "{$article_info.article_id}"},
+		url : "{:__URL('APP_MAIN/goods/getShareContents')}",
+		success : function(data){
+			wx.config({
+				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+				appId: $("#appId").val(), // 必填，公众号的唯一标识
+				timestamp: $("#jsTimesTamp").val(), // 必填，生成签名的时间戳
+				nonceStr:  $("#jsNonceStr").val(), // 必填，生成签名的随机串
+				signature: $("#jsSignature").val(),// 必填，签名，见附录1
+				jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+			});
+			wx.ready(function() {
+					var title = data['share_title'];
+					var share_contents = data['share_contents']+'\r\n';
+					var share_nick_name = data['share_nick_name']+'\r\n';
+					var desc2 = share_contents+ share_nick_name + "收藏热度：★★★★★";
+					var share_url = data['share_url'];
+					var img_url = data['share_img'];
+					wx.onMenuShareAppMessage({
+						title: title,
+						desc: desc2,
+						link: share_url,
+						imgUrl: img_url,
+						trigger: function (res) {
+						},
+						success: function (res) {
+							api('System.Member.shareReward', {"share" : true,"share_url":share_url}, function() {});
+						},
+						cancel: function (res) {
+							//alert('已取消');
+						},
+						fail: function (res) {
+							//alert(JSON.stringify(res));
+						}
+					});
+				// 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+				wx.onMenuShareTimeline({
+					title: title,
+					link: share_url,
+					imgUrl: img_url,
+					trigger: function (res) {
+						// alert('用户点击分享到朋友圈');
+					},
+					success: function (res) {
+						api('System.Member.shareReward', {"share" : true,"share_url":share_url}, function() {});
+					},
+					cancel: function (res) {
+						//alert('已取消');
+					},
+					fail: function (res) {
+						// alert(JSON.stringify(res));
+					}
+				});
+				// 2.3 监听“分享到QQ”按钮点击、自定义分享内容及分享结果接口
+				wx.onMenuShareQQ({
+					title: title,
+					desc: desc2,
+					link: share_url,
+					imgUrl: img_url,
+					trigger: function (res) {
+						//alert('用户点击分享到QQ');
+					},
+					complete: function (res) {
+						//alert(JSON.stringify(res));
+					},
+					success: function (res) {
+						//alert('已分享');
+						api('System.Member.shareReward', {"share" : true,"share_url":share_url}, function() {});
+					},
+					cancel: function (res) {
+						//alert('已取消');
+					},
+					fail: function (res) {
+						//alert(JSON.stringify(res));
+					}
+				});
+				// 2.4 监听“分享到微博”按钮点击、自定义分享内容及分享结果接口
+				wx.onMenuShareWeibo({
+					title: title,
+					desc: desc2,
+					link: share_url,
+					imgUrl: img_url,
+					trigger: function (res) {
+						//alert('用户点击分享到微博');
+					},
+					complete: function (res) {
+						//alert(JSON.stringify(res));
+					},
+					success: function (res) {
+						//alert('已分享');
+
+						api('System.Member.shareReward', {"share" : true,"share_url":share_url}, function() {});
+					},
+					cancel: function (res) {
+						//alert('已取消');
+					},
+					fail: function (res) {
+						//alert(JSON.stringify(res));
+					}
+				});
+			});
+		}
+	});
+})
+</script>
+{/block}
+{block name="footer"}{/block}

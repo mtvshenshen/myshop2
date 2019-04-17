@@ -1,0 +1,98 @@
+body,
+.form-control {
+  color: #333;
+}
+a:hover,
+a:focus {
+  color: #e23435 !important;
+}
+.ns-bg-color {
+  background-color: #e23435 !important;
+}
+.ns-bg-color:hover,
+.ns-bg-color:focus,
+.ns-bg-color:active {
+  background-color: #cb2f30 !important;
+}
+.ns-bg-color-gray,
+.ns-bg-color-gray-hover:hover {
+  background-color: #e5e5e5 !important;
+}
+.ns-bg-color:hover,
+.ns-bg-color:focus,
+.ns-bg-color-hover:hover,
+.ns-bg-color-hover.selected {
+  background-color: #cb2f30 !important;
+}
+.ns-bg-color-hover:hover > a:hover {
+  color: #fff !important;
+}
+.ns-text-color {
+  color: #e23435 !important;
+}
+.ns-text-color-black {
+  color: #333 !important;
+}
+.ns-text-color-gray {
+  color: #e5e5e5 !important;
+}
+.ns-text-color-hover.selected,
+.ns-text-color-hover:hover {
+  color: #e23435 !important;
+}
+.ns-border-color,
+.ns-border-color-hover:hover,
+.ns-border-color-hover.selected {
+  border-color: #e23435 !important;
+}
+.ns-border-color-gray {
+  border-color: #e5e5e5 !important;
+}
+.btn-primary {
+  background-color: #e23435 !important;
+  border-color: #e23435 !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: #cb2f30 !important;
+  border-color: #cb2f30 !important;
+  color: #fff !important;
+}
+.pager > li.active > a,
+.pager > li.active > span,
+.pager > li.active > a:hover,
+.pager > li.active > span:hover {
+  color: #fff !important;
+  background-color: #e23435;
+  border-color: #e23435;
+}
+.pager > li > a,
+.pager > li > span {
+  border: 1px solid #e5e5e5;
+}
+.pager > li > a:hover,
+.pager > li > span:hover,
+.pager > li > a:focus,
+.pager > li > span:focus {
+  background-color: #e5e5e5;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: #e23435 !important;
+}
+.nav-tabs > li.active.ns-bg-color-hover > a {
+  background-color: #e23435 !important;
+  color: #fff !important;
+}
+.nav-tabs > li.active.ns-border-color-hover > a {
+  border-color: #e23435 !important;
+}
+.ns-bg-color-goods,
+.ns-bg-color-goods:hover {
+  background-color: #f9d6d7 !important;
+  color: #e23435 !important;
+}
+/*# sourceMappingURL=theme.css.map */

@@ -1,0 +1,136 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_receive_prize.css">
+{/block}
+{block name="main"}
+{php}
+	$address_default = api('System.Member.defaultAddress', []);
+	$address_default = $address_default['data'];
+	$winning['gift_id'] = request()->get("gift_id", ""); // 赠品id
+	$winning['record_id'] = request()->get("record_id", ""); // 中奖记录id
+	
+	if (!empty($winning['gift_id'])) {
+		$_SESSION["winning"]["gift_id"] = $winning['gift_id'];
+		$_SESSION["winning"]["record_id"] = $winning['record_id'];
+	}
+	
+	if (empty($winning['gift_id']) && isset($_SESSION["winning"])) {
+		$winning['gift_id'] = $_SESSION["winning"]["gift_id"];
+		$winning['record_id'] = $_SESSION["winning"]["record_id"];
+	}
+	$giftDetail = api('System.Promotion.promotionGiftDetail', ['id' => $winning['gift_id']]);
+	$giftDetail = $giftDetail['data'];
+{/php}
+{if condition="$address_default.id neq ''"}
+<div id="addressok" style="margin-top: -44px;">
+	<input type="hidden" id="addressid" value="{$address_default.id}" />
+	<div class="js-order-address express-panel js-edit-address express-panel-edit">
+		<ul class="express-detail">
+			<a href="{:__URL('APP_MAIN/member/account?url=cart&flag=2')}">
+				<li class="clearfix">
+					<span class="name">{:lang('member_consignee')}：{$address_default.consigner}</span>
+					<span class="tel">{$address_default.mobile}</span>
+				</li>
+				<li class="address-detail">{:lang('member_delivery_address')}：{$address_default.address_info}-{$address_default.address}</li>
+			</a>
+		</ul>
+	</div>
+</div>
+{else /}
+<div class="empty-address-tip">
+	<div id="noaddress"><a href="{:__URL('APP_MAIN/member/memberaddress')}">{:lang('member_new_delivery_address')}</a></div>
+</div>
+{/if}
+<div class="block-item express"></div>
+<section class="order">	
+	<!-- 赠品 -->
+	{if count($giftDetail["gift_goods"]) > 0}
+		<div class="order-goods-item clearfix">
+			<div class="name-card block-item">
+				<img src="WAP_IMG/member/gift.png" alt="" class="gift">
+				<a href="{:__URL('APP_MAIN/goods/detail?goods_id='.$giftDetail['gift_goods']['goods_id'])}" class="thumb">
+					<img src="{:__IMG($giftDetail['gift_goods']['picture_info']['pic_cover_small'])}" alt="{$giftDetail.gift_goods.goods_name}" />
+				</a>
+				<div class="detail">
+					<div class="clearfix detail-row">
+						<div class="right-col">
+							<input type="hidden" name="goods_point_exchange"/>
+							￥<s>{$giftDetail.gift_goods.price}</s>
+						</div>
+						<div class="left-col">
+							<h3 style="font-weight: normal;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">
+								<a href="javascript:;">{$giftDetail.gift_goods.goods_name}</a>
+							</h3>
+						</div>
+					</div>
+					<div class="clearfix detail-row">
+						<div class="right-col">
+							<div class=" c-gray-darker">
+								×<span>1</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/if}
+		<div class="item-options">
+			<label>{:lang('member_buyer_message')}</label>
+			<textarea id="leavemessage" placeholder="{:lang('leave_a_message_for_the_seller')}" maxlength="100"></textarea>
+		</div>
+</section>
+<div class="footer" id="bottom_copyright">
+	<div class="copyright">
+		<div class="ft-copyright">
+			<img src="WAP_IMG/logo_copy.png" id="copyright_logo_wap">
+			<a href="{:__URL('APP_MAIN')}" target="_blank" id="copyright_companyname"></a>
+		</div>
+	</div>
+</div>
+<div class="divs"></div>
+<input type="hidden" id="hidden_record_id" value="{$winning['record_id']}">
+<div class="order-total-pay bottom-fix">
+	<div class="pay-container clearfix">
+		<button class="commit-bill-btn ns-bg-color" onclick="immediateReveive();">{:lang('immediately_receive')}</button>
+	</div>
+</div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script>
+//解决 在IOS手机中，点击左上角返回按钮不会刷新当前页面的问题 2018年1月27日17:45:40
+var isPageHide = false;
+window.addEventListener('pageshow', function () {
+	if (isPageHide) location.href= __URL(APPMAIN+"/member/receive_prize");
+});
+
+window.addEventListener('pagehide', function () {
+	isPageHide = true;
+});
+
+var is_sub = false;
+function immediateReveive(){
+	if ($("#addressid").val() == undefined ||$("#addressid").val() == '' ) {
+		toast("请先选择收货地址");
+		return false;
+	}
+	if(is_sub) return;
+	is_sub = true;
+	var data = {
+			"record_id" : $("#hidden_record_id").val(),
+			"buyer_message" : $("#leavemessage").val()
+		};
+	api('System.Member.achieveGift', data, function(res){
+		var data = res.data;
+		if(data["code"] == 1){
+			toast(data["message"]);
+			window.location.href = __URL(APPMAIN+"/member/index");
+		}else{
+			toast(data["message"]);
+			window.location.href = __URL(APPMAIN+"/order/list");
+			is_sub = false;
+		}
+	})
+}
+</script>
+{/block}

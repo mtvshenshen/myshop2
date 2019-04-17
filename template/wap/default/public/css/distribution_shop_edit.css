@@ -1,0 +1,82 @@
+@CHARSET "UTF-8";
+.upload-img .input-file {
+	width: 100%;
+	height: 100%!important;
+	padding: 0;
+	border: none 0;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	cursor: pointer;
+	margin: 0 2% 0 2%;
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	max-width:100%!important;
+}
+.mt-55.mlr-15>div {
+    line-height: 50px;
+    padding: 0 15px;
+    overflow: hidden;
+    background: #fff;
+}
+.mt-55.mlr-15>div:first-child {
+    margin-top: 0;
+}
+.mt-55.mlr-15>div>span {
+    width: 28%;
+    font-size: 14px;
+    display: block;
+    float: left;
+}
+.mt-55.mlr-15 input {
+    box-shadow: none;
+    margin: 0;
+    height: 35px;
+    border: none;
+    max-width: 72%;
+    min-width: 60%;
+    display: inline-block;
+    font-size: 14px;
+}
+.webuploader-element-invisible {
+	width: unset;
+	height: 100px!important;
+	opacity: 0;
+	max-width: unset!important;
+}
+.button-submit {
+    width: 90%;
+    margin: 50px auto 0;
+}
+.button-submit button {
+    font-size: 15px;
+    line-height: 40px;
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+	border:0;
+}
+
+.upload-img {
+	position: relative;
+    border: 1px dashed #999;
+	    height: 100px;
+}
+.upload-text{
+    position: absolute;
+    width: 100%;
+    top: 23%;
+    text-align: center;
+    color: #999;
+    z-index: 0;
+}
+.webuploader-pick {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+#background_img {
+    max-width: 100%;
+    max-height: 100%;
+	
+}

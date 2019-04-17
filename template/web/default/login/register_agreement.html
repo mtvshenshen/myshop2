@@ -1,0 +1,23 @@
+{extend name="$base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="WEB_CSS/help.css" />
+{/block}
+{block name="main"}
+{php}
+	$info = api('System.Login.registerAgreement', []);
+	$info = $info['data'];
+{/php}
+<div class="help">
+	<ol class="breadcrumb">
+		<li><a href="{:__URL('SHOP_MAIN')}">{:lang('home_page')}</a></li>
+		<li class="active">注册协议</li>
+	</ol>
+	<div class="detail register-agreement">
+		<h3 class="ns-border-color-gray">{$info['title']}</h3>
+		<div class="content">{$info['content']}</div>
+	</div>
+</div>
+<input type="hidden" value="{$id}" id="hidden_id" />
+{/block}
+{block name="script"}
+{/block}

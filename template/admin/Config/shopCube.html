@@ -1,0 +1,242 @@
+{extend name="$base" /}
+{block name="resources"}
+<style  type="text/css">
+.align-center{text-align: center;}
+.align-left{text-align: left;}
+.clear:after,.clear:before{content: '';clear: both;display: block;}
+.cube-list{user-select: none;position: relative;}
+.cube-list tr{background: #fff}
+.cube-list .input-common{background-color:#fff;}
+.cube-list .upload-btn-common em{line-height: 30px;}
+.cube-list .cube-url{position: relative;}
+.cube-list .cube-url .input-common{width: 300px!important;}
+.cube-list .cube-url em{font-style: normal;position: absolute;padding: 0 10px;z-index: 1;left: 306px;background-color: #f5f7fa;color: #5e6166;line-height: 30px;height: 30px;}
+.cube-type ul li{float: left;width: 200px;height: 132px;background: #f5f5f5;margin: 0 10px 10px 0;border:2px solid #fff;cursor: pointer;}
+.cube-type ul li.selected{border:2px solid #00A0DE;}
+.cube-type ul li:nth-child(1){background: url(ADMIN_IMG/cube_one.png) no-repeat center;background-size: 100% }
+.cube-type ul li:nth-child(2){background: url(ADMIN_IMG/cube_two.png) no-repeat center;background-size: 100% }
+.cube-type ul li:nth-child(3){background: url(ADMIN_IMG/cube_three.png) no-repeat center;background-size: 100% }
+.cube-type ul li:nth-child(4){background: url(ADMIN_IMG/cube_four.png) no-repeat center;background-size: 100% }
+</style>
+{/block}
+{block name="main"}
+<div class="space-10"></div>
+
+<div class="cube-type">
+	{notempty name="$info"}
+	<ul class="clear">
+		<li {if count($info) == 1}class="selected"{/if} data-num="1"></li>
+		<li {if count($info) == 2}class="selected"{/if} data-num="2"></li>
+		<li {if count($info) == 3}class="selected"{/if} data-num="3"></li>
+		<li {if count($info) == 4}class="selected"{/if} data-num="4"></li>
+	</ul>
+	{else/}
+	<ul class="clear">
+		<li class="selected" data-num="1"></li>
+		<li data-num="2"></li>
+		<li data-num="3"></li>
+		<li data-num="4"></li>
+	</ul>
+	{/notempty}
+</div>
+
+<table class="table-class">
+	<colgroup>
+		<col style="width: 5%;">
+		<col style="width: 45%;">
+		<col style="width: 50%;">
+	</colgroup>
+	<thead>
+		<tr>
+			<th></th>
+			<th class="align-left">图片</th>
+			<th class="align-left">链接</th>
+		</tr>
+	</thead>
+	<tbody class="cube-list">
+		{notempty name="$info"}
+			{for start="0" end="count($info)"}
+				<tr>
+					<td class="align-center draggable-element" style="width: 5%;">
+						<button href="javascript:;" class="btn-common-white"><i class="fa fa-arrows"></i></button>	
+					</td>
+					<td style="width: 45%;">
+						<div class="upload-btn-common">
+							<div>
+								<input class="input-file" name="file_upload" id="uploadImg1" type="file" onchange="imgUpload(this);" title="上传">
+								<input type="hidden" id="cube_img{$i}" value="{$info[$i]['imgPath']}"/>
+							</div>
+							<input type="text" id="text_cube_img{$i}" class="input-common" readonly="readonly" value="{$info[$i]['imgPath']}" name="img_path"/>
+							<em>上传</em>
+							<img id="preview_cube_img{$i}" src="__STATIC__/blue/img/upload-common-select.png" data-html="true" data-container="body" data-placement="top" data-trigger="manual" data-src="{:__IMG($info[$i]['imgPath'])}"/>
+						</div>
+					</td>
+					<td class="cube-url" style="width: 50%;">
+						<input type="text" class="input-common" value="{$info[$i]['url']}" name="url"/><em onclick="showUrlPopup(this)">选择链接</em>
+					</td>
+				</tr>	
+			{/for}
+		{else/}
+		<tr>
+			<td class="align-center draggable-element" style="width: 5%;">
+				<button href="javascript:;" class="btn-common-white"><i class="fa fa-arrows"></i></button>	
+			</td>
+			<td style="width: 45%;">
+				<div class="upload-btn-common">
+					<div>
+						<input class="input-file" name="file_upload" id="uploadImg1" type="file" onchange="imgUpload(this);" title="上传">
+						<input type="hidden" id="cube_img1" value=""/>
+					</div>
+					<input type="text" id="text_cube_img1" class="input-common" readonly="readonly" value="" name="img_path"/>
+					<em>上传</em>
+					<img id="preview_cube_img1" src="__STATIC__/blue/img/upload-common-select.png" data-html="true" data-container="body" data-placement="top" data-trigger="manual"/>
+				</div>
+			</td>
+			<td class="cube-url" style="width: 50%;">
+				<input type="text" class="input-common" value="" name="url"/><em onclick="showUrlPopup(this)">选择链接</em>
+			</td>
+		</tr>
+		{/notempty}
+	</tbody>
+	<tfoot>
+		<td colspan="4">
+			<a class="btn-common" onclick="save();">保存</a>
+		</td>
+	</tfoot>	
+</table>
+
+{include file="admin/Config/selectUrl" /}
+
+<script src="__STATIC__/js/ajax_file_upload.js" type="text/javascript"></script>
+<script src="__STATIC__/js/file_upload.js" type="text/javascript"></script>
+<script src="ADMIN_JS/drag-arrange.js"></script>
+<script>  
+$(function(){
+	// 选择魔方展示类型
+	$('.cube-type ul li').click(function(){
+		$(this).addClass('selected').siblings('li').removeClass('selected');
+		var num = $(this).attr('data-num'),
+			html = '',
+			old_data = getFields();
+		for (var i = 0; i< num; i ++) {
+			var data_item = old_data[i] != undefined ? old_data[i] : {imgPath : '', url : ''};
+			html += `<tr>
+				<td class="align-center draggable-element" style="width: 5%;">
+					<button href="javascript:;" class="btn-common-white"><i class="fa fa-arrows"></i></button>	
+				</td>
+				<td style="width: 45%;">
+					<div class="upload-btn-common">
+						<div>
+							<input class="input-file" name="file_upload" id="uploadImg`+ i +`" type="file" onchange="imgUpload(this);" title="上传">
+							<input type="hidden" id="cube_img`+ i +`" value="`+ data_item.imgPath +`"/>
+						</div>
+						<input type="text" id="text_cube_img`+ i +`" class="input-common" readonly="readonly" name="img_path" value="`+ data_item.imgPath +`" />
+						<em>上传</em>
+						<img id="preview_cube_img`+ i +`" src="__STATIC__/blue/img/upload-common-select.png" data-html="true" data-container="body" data-placement="top" data-trigger="manual" data-src="`+ __IMG(data_item.imgPath) +`"/>
+					</div>
+				</td>
+				<td class="cube-url" style="width: 50%;">
+					<input type="text" class="input-common" value="`+ data_item.url +`" name="url"/><em onclick="showUrlPopup(this)">选择链接</em>
+				</td>
+			</tr>`;
+		}
+		$('.cube-list').html(html);
+		$('.cube-list tr').arrangeable({dragSelector: '.draggable-element'});
+	})
+
+	// 拖拽
+	$('.cube-list tr').arrangeable({dragSelector: '.draggable-element'});
+})
+
+// 图片上传
+function imgUpload(event) {
+	var fileid = $(event).attr("id");
+	var id = $(event).next().attr("id");
+	var data = { 'file_path' : "config" };
+	uploadFile({
+		url: __URL(ADMINMAIN + '/config/uploadimage'),
+		fileId: fileid,
+		data : data,
+		callBack: function (res) {
+			if(res.code){
+				$("#" + id).val(res.data.path);
+				$("#text_" + id).val(res.data.path);
+				$("#preview_"+ id).attr("data-src",__IMG(res.data.path));
+				showTip(res.message,"success");
+			}else{
+				showTip(res.message,"error");
+			}
+		}
+	});
+}
+
+// 链接选择
+var curlEl;
+function showUrlPopup(event){
+	curlEl = event;
+	layer.open({
+		type: 1,
+		title: '链接选择',
+		shadeClose: true,
+		shade: 0.8,
+		area: ['860px', '500px'],
+		content: $('#url-container')
+	});
+}
+
+// 获取字段
+function getFields(){
+	var fields = [];
+	$('.cube-list tr').each(function(index, el) {
+		fields.push({
+			imgPath : $(el).find('[name="img_path"]').val(),
+			url : $(el).find('[name="url"]').val()
+		})
+	});
+	return fields;
+}
+
+// 保存
+var is_sub = false;
+function save(){
+	if(verfify()){
+		var fields = getFields();
+		if(is_sub) return;
+		is_sub = true;
+		$.ajax({
+			url: "{:__URL('ADMIN_MAIN/config/shopCube')}",
+			type: 'post',
+			data: {value: JSON.stringify(fields)},
+			async : false,
+			success : function(res){
+				if(res.code > 0){
+					showMessage('success', res["message"]);
+				}else{
+					showMessage('error', res["message"]);
+				}
+				is_sub = false;
+			}
+		})		
+	}
+}
+
+// 验证
+function verfify(){
+	$('.cube-list tr').each(function(index, el) {
+		var imgPathEl = $(el).find('[name="img_path"]');
+		var urlEl = $(el).find('[name="url"]');
+		if(imgPathEl.val() == ''){
+			showTip('请上传魔方图片', 'error');
+			$(imgPathEl).focus();
+			return false;
+		}
+		if(urlEl.val() == ''){
+			showTip('请选择魔方链接', 'error');
+			urlEl.focus();
+			return false;
+		}
+	});
+	return true;
+}
+</script>
+{/block}

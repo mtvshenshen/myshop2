@@ -1,0 +1,425 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_index.css">
+{/block}
+{block name="head" }{/block}
+{block name="main" }
+{php}
+	$member_detail 	   = api('System.Member.memberDetail');
+	$member_info  	   = $member_detail['data'];
+var_dump($member_info);
+    $promoter_info = [];
+    if(addon_is_exit('Nsfx')){
+		$promoter_info = api('Nsfx.Distribution.promoterDetail');
+		$promoter_info = $promoter_info['data'];
+	}
+
+	$integralconfig    = api("System.Config.pointReward", []);
+	$integralconfig    = $integralconfig['data'];
+	$isSign 	 	   = api("System.Member.isSignin", []);
+	$isSign 		   = $isSign['data'];
+	$defaultImages 	   = api("System.Config.defaultImages");
+	$defaultImages     = $defaultImages['data'];
+	$default_headimg   = $defaultImages["value"]["default_headimg"];//默认用户头像
+	$default_goods_img = $defaultImages["value"]["default_goods_img"];//默认商品图片
+	$coupon_count = api("System.Member.couponNum");
+	$coupon_count = $coupon_count['data'];
+{/php}
+<div class="panel memberhead ">
+	 <div class="member-head ns-bg-color">
+	 	<div class="member-edit"><img src="WAP_IMG/member/member-icon-edit.png" onclick="location.href='{:__URL('APP_MAIN/member/info?shop_id='.$shop_id)}'"></div>
+	 	<div class="member-head-top">
+		 	<div class="member-headimg">
+		 		{if condition="$member_info['user_info']['user_headimg'] eq ''"}
+					<img src="{:__IMG($default_headimg)}" />
+				{else/}
+					<img src="{:__IMG($member_info['user_info']['user_headimg'])}"/>
+				{/if}
+		 	</div>
+		 	<div class="member-name">{$member_info["user_info"]['nick_name']}</div>
+		 	<a href="{:__URL('APP_MAIN/login/qrcode&shop_id='.$shop_id)}">
+		 	<div class="member-qrcode"><img src="WAP_IMG/member/member-icon-qrcode.png"></div>
+		 	
+		 	</a>
+		 	<div class="clear"></div>
+	 	</div>
+	 	<div class="member-head-bottom">
+	 		<!-- 签到 -->
+	 		{if $member_info['level_name']}
+	 		<div class="head-bottom-level">
+	 			<img class="member-icon" src="WAP_IMG/member/member-icon-level.png">
+	 			<span>{$member_info['level_name']}</span>
+	 		</div>
+	 		{/if}
+	 		
+	 		{if condition="$integralconfig['sign_integral'] eq 1"}
+	 		<a href="{:__URL('APP_MAIN/member/signin?shop_id='.$shop_id)}">
+		 		<div class="head-bottom-sign">
+		 			<div class="head-sign">
+			 			<img class="member-icon" src="WAP_IMG/member/member-icon-sign.png">
+			 			{if condition="$isSign eq 0"}
+			 			<span class="sign-text" onclick="signIn();">{:lang('sign_in')}</span>
+						{else /}
+			 			<span class="sign-text" onclick="signIn();">{:lang('signed_in')}</span>
+						{/if}
+		 			</div>
+		 		</div>
+		 	</a>
+			{/if}
+	 		<div class="clear"></div>
+	 	</div>
+	 </div>
+	 
+	 <div class="member-account">
+	 	<a href="{:__URL('APP_MAIN/member/balance&shop_id='.$shop_id)}">
+		 	<div class="member-account-item">
+		 		<div class="member-account-num ns-text-color-black">{$member_info['balance']}</div>
+		 		<div class="member-account-text">余额</div>
+		 	</div>
+	 	</a>
+	 	<a href="{:__URL('APP_MAIN/member/point&shop_id='.$shop_id)}">
+	 	<div class="member-account-item">
+	 		<div class="member-account-num ns-text-color-black">{$member_info['point']}</div>
+	 		<div class="member-account-text">积分</div>
+	 	</div>
+	 	</a>
+	 	<a href="{:__URL('APP_MAIN/member/coupon&shop_id='.$shop_id)}">
+	 	<div class="member-account-item">
+	 		<div class="member-account-num ns-text-color-black">{$coupon_count}</div>
+	 		<div class="member-account-text">优惠券</div>
+	 	</div>
+	 	</a>
+	 </div>
+	 
+	 <div class="member-order">
+	 	<div class="member-order-head">
+	 		<a href="{:__URL('APP_MAIN/order/lists?shop_id='.$shop_id)}">
+	 		<div class="ns-text-color-black order-head-left">全部订单</div>
+	 		<div class="order-head-right">查看全部订单<img src="WAP_IMG/member/member-icon-next.png"></div>
+	 		</a>
+	 		<div class="clear"></div>
+	 	</div>
+	 	<div class="member-order-list">
+	 		{php}
+				$order_status_num = api("System.Order.orderCount",['order_status' => 0]);
+				$wait_pay = $order_status_num['data'];
+	 		{/php}
+	 		<a href="{:__URL('APP_MAIN/order/lists?status=0&shop_id='.$shop_id)}">
+			 	<div class="member-order-item">
+			 		{if $wait_pay > 0}
+			 		<div class="order-num ns-bg-color">{$wait_pay}</div>
+					{elseif $wait_pay > 99}
+				 		<div class="order-num ns-bg-color">99+</div>
+					{/if}
+			 		<div class="order-icon"><img src="WAP_IMG/member/order-icon-0.png"></div>
+			 		<div class="order-texr">{:lang('member_pending_payment')}</div>
+		 		</div>
+	 		</a>
+	 		
+	 		{php}
+				$order_status_num = api("System.Order.orderCount",['order_status' => 1]);
+				$wait_delivery = $order_status_num['data'];
+	 		{/php}
+	 		<a href="{:__URL('APP_MAIN/order/lists?status=1&shop_id='.$shop_id)}">
+			 	<div class="member-order-item">
+			 		{if $wait_delivery > 0}
+				 		<div class="order-num ns-bg-color">{$wait_delivery}</div>
+			        {elseif $wait_delivery > 99}
+				 		<div class="order-num ns-bg-color">99+</div>
+			        {/if}
+			 		<div class="order-icon"><img src="WAP_IMG/member/order-icon-1.png"></div>
+			 		<div class="order-texr">{:lang('member_shipment_pending')}</div>
+		 		</div>
+	 		</a>
+	 		
+	 		{php}
+				$order_status_num = api("System.Order.orderCount",['order_status' => 2]);
+				$wait_recieved = $order_status_num['data'];
+	 		{/php}
+	 		<a href="{:__URL('APP_MAIN/order/lists?status=2&shop_id='.$shop_id)}">
+			 	<div class="member-order-item">
+			 		{if $wait_recieved > 0}
+			 		<div class="order-num ns-bg-color">{$wait_recieved}</div>
+			        {elseif $wait_recieved > 99}
+			 		<div class="order-num ns-bg-color">99+</div>
+			        {/if}
+			 		<div class="order-icon"><img src="WAP_IMG/member/order-icon-2.png"></div>
+			 		<div class="order-texr">{:lang('member_goods_received')}</div>
+		 		</div>
+	 		</a>
+	 		<a href="{:__URL('APP_MAIN/order/lists?status=3&shop_id='.$shop_id)}">
+			 	<div class="member-order-item">
+			 		<div class="order-icon"><img src="WAP_IMG/member/order-icon-3.png"></div>
+			 		<div class="order-texr">{:lang('member_received_goods')}</div>
+		 		</div>
+	 		</a>
+	 		
+	 		{php}
+				$order_status_num = api("System.Order.orderCount",['order_status' => -1]);
+				$refunding = $order_status_num['data'];
+	 		{/php}
+	 		<a href="{:__URL('APP_MAIN/order/lists?status=-1&shop_id='.$shop_id)}">
+			 	<div class="member-order-item">
+			 		{if $refunding > 0}
+			 		<div class="order-num ns-bg-color">{$refunding}</div>
+			        {elseif $refunding > 99}
+			 		<div class="order-num ns-bg-color">99+</div>
+			        {/if}
+			 		<div class="order-icon"><img src="WAP_IMG/member/order-icon-4.png"></div>
+			 		<div class="order-texr">{:lang('refund_after_sale')}</div>
+		 		</div>
+	 		</a>
+	 		<div class="clear"></div>
+	 	</div>
+	 </div>
+	 
+	 {if NS_VERSION == NS_VER_B2C_FX && !empty($promoter_info)}
+	 <div class="member-promotion">
+ 		<a href="{:__URL('APP_MAIN/DistributionShop/usershopgoods')}">
+	 	<div class="promotion-item">
+	 		<img src="WAP_IMG/member/promotion-img1.png">
+	 	</div>
+	 	</a>
+ 		<a href="{:__URL('APP_MAIN/DistributionShop/userShopQrcode?shop_id='.$shop_id)}">
+		 	<div class="promotion-item">
+		 		<img src="WAP_IMG/member/promotion-img2.png">
+		 	</div>
+	 	</a>
+	 	<div class="clear"></div>
+	 </div>
+	 {/if}
+	 
+<!-- 2019.4.16++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	  <div class="member-order">
+	 	<div class="member-order-head">
+	 		
+	 		<div class="ns-text-color-black order-head-left">
+	 			{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
+	 			<a href="{:__URL('APP_MAIN/member/user_shop?shop_id='.$shop_id)}">
+	 			我的店铺(点击查看店铺数据)
+	 			</a>
+	 			{else/}
+	 			我的店铺
+	 			{/if}
+	 		</div>
+	 		{if $member_info['user_info']['user_shop'] == 0 && $member_info['user_info']['user_shop_agree'] == 1 }
+	 		<div class="order-head-right">开店审核中</div>
+	 		{/if}	
+
+	 		{if $member_info['user_info']['user_shop'] == 0 && $member_info['user_info']['user_shop_agree'] == 0 }
+	 			<div class="order-head-right"><a href="{:__URL('APP_MAIN/member/kaidian?shop_id='.$shop_id)}">立即申请开店<img src="WAP_IMG/member/member-icon-next.png"></a></div>
+	 		{/if} 		
+	 		<div class="clear"></div>
+	 	</div>
+ 	 	<div class="member-order-head">
+	 		我的店铺连接(长按复制)
+	 		<input type="text" value="{:__URL('APP_MAIN?user_shop_id='.$member_info['user_info']['uid'])}" style="width: 100%;">
+	 	</div>
+<!-- 	 	{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
+	 	<div class="member-order-list member-promotion">
+	 		<a href="">
+			 	<div class="member-order-item">
+			 		<div class="order-icon ns-text-color-black">￥</div>
+			 		<div class="order-texr">累计佣金</div>
+		 		</div>
+	 		</a>
+	 		<a href="">
+			 	<div class="member-order-item">
+			 		<div class="order-icon ns-text-color-black">￥</div>
+			 		<div class="order-texr">待审核</div>
+		 		</div>
+	 		</a>
+	 		<a href="">
+			 	<div class="member-order-item">
+			 		<div class="order-icon ns-text-color-black">￥</div>
+			 		<div class="order-texr">已提现</div>
+		 		</div>
+	 		</a>
+	 		<div class="clear"></div>
+	 	</div>
+	 	{/if} -->
+	 </div>
+<!-- 2019.4.16++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	 
+	 {if addon_is_exit('NsPintuan') == 1 && addon_is_exit('NsPresell') == 1 }
+ 	  <div class="member-order">
+	 	<div class="member-order-head">
+	 		<div class="ns-text-color-black order-head-left">订单中心</div>
+	 		<div class="clear"></div>
+	 	</div>
+	 	<div class="member-order-list member-order-center">
+		 	{php}
+	   		 $pintuan_order_num = api('System.Order.orderCount', ['order_type' => 4]);
+		 	{/php}
+	 		<a href="{:__URL('APP_MAIN/order/lists?order_type=4&shop_id='.$shop_id)}">
+			 	<div class="member-order-item">
+			 		<div class="order-icon ns-text-color-black">{$pintuan_order_num['data'] ? $pintuan_order_num['data'] : 0}</div>
+			 		<div class="order-texr">拼团订单</div>
+		 		</div>
+	 		</a>
+
+	 		{php}
+		    $yushou_order_num = api('System.Order.orderCount', ['is_virtual' => 6]);
+	 		{/php}
+	 		<a href="{:__URL('APP_MAIN/order/lists?order_type=6&shop_id='.$shop_id)}">
+			 	<div class="member-order-item">
+			 		<div class="order-icon ns-text-color-black">{$yushou_order_num['data'] ? $yushou_order_num['data'] : 0}</div>
+			 		<div class="order-texr">预售订单</div>
+		 		</div>
+	 		</a>
+	 		<div class="clear"></div>
+	 	</div>
+	 </div>
+	 {/if}
+	 
+	 <div class="member-nav-list">
+	 	<a href="{:__URL('APP_MAIN/member/info?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-info.png"> 
+		 			<span class="ns-text-color-black">个人资料</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 	<a href="{:__URL('APP_MAIN/member/address?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-addr.png"> 
+		 			<span class="ns-text-color-black">收货地址</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 </div>
+	 
+	 <div class="member-nav-list">
+		<a href="{:__URL('APP_MAIN/member/account?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-withdraw.png"> 
+		 			<span class="ns-text-color-black">提现账号</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+<!-- 		<a href="{:__URL('APP_MAIN/login/qrcode')}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-share.png"> 
+		 			<span class="ns-text-color-black">推广二维码</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a> -->
+		<a href="{:__URL('APP_MAIN/member/coupon?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-coupon.png"> 
+		 			<span class="ns-text-color-black">优惠券</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 </div>
+	 
+	 <div class="member-nav-list">
+	 	{if addon_is_exit('NsPintuan')}
+	 	<a href="{:__URL('APP_MAIN/pintuan/lists')}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-pintuan.png"> 
+		 			<span class="ns-text-color-black">我的拼单</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 	{/if}
+	 	{if addon_is_exit('NsBargain')}
+	 	<a href="{:__URL('APP_MAIN/member/bargain')}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-bargain.png"> 
+		 			<span class="ns-text-color-black">我的砍价</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 	{/if}
+		<a href="{:__URL('APP_MAIN/Verification/code?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-code.png"> 
+		 			<span class="ns-text-color-black">虚拟码</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+		<a href="{:__URL('APP_MAIN/member/winning?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-winning.png"> 
+		 			<span class="ns-text-color-black">中奖记录</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 	
+		<a href="{:__URL('APP_MAIN/member/collection?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-collect.png"> 
+		 			<span class="ns-text-color-black">收藏</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 	
+		<a href="{:__URL('APP_MAIN/member/footprint?shop_id='.$shop_id)}">
+		 	<div class="member-nav-item">
+		 		<div class="member-nav-left">
+		 			<img src="WAP_IMG/member/member-icon-fot.png"> 
+		 			<span class="ns-text-color-black">足迹</span>
+		 		</div>
+		 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div>
+		 		<div class="clear"></div>
+		 	</div>
+	 	</a>
+	 </div>
+	 
+<!-- 	 <div class="member-nav-list"> -->
+<!-- 	 	<div class="member-nav-item"> -->
+<!-- 	 		<div class="member-nav-left"> -->
+<!-- 	 			<img src="WAP_IMG/member/member-icon-join.png">  -->
+<!-- 	 			<span class="ns-text-color-black">商家加盟</span> -->
+<!-- 	 		</div> -->
+<!-- 	 		<div class="member-nav-right"><img src="WAP_IMG/member/member-icon-next.png"></div> -->
+<!-- 	 		<div class="clear"></div> -->
+<!-- 	 	</div> -->
+<!-- 	 </div> -->
+	 
+</div>
+<div class="h50"></div>
+<script type="text/javascript">
+function signIn(){
+	/* api("System.Member.signIn",{},function (res) {
+		if(res.data > 0){
+			toast('签到成功');
+			$('.sign-text').text("{:lang('signed_in')}");
+		}
+	}) */
+	
+}
+</script>
+{/block}

@@ -1,0 +1,66 @@
+{extend name="$base"/}
+{block name="resources"}
+<link rel="stylesheet" href="WAP_CSS/login_register.css" />
+{/block}
+{block name="head"}{/block}
+{block name="main"}
+{php}
+	$code_config = api("System.Login.loginVerifyCode");
+	$code_config = $code_config['data']['value'];
+
+	$register_visit = api("System.Login.getRegisterAndVisit");
+	$register_visit = $register_visit['data'];
+	$reg_config = json_decode($register_visit["value"], true);
+{/php}
+{if condition="$reg_config['is_register'] != 1 "}
+<script>location.href = __URL(APPMAIN + "/login/index");</script>
+{/if}
+<div class="content">
+	<div class="tit-info">
+		<div class="h3">完善基本的账号信息</div>
+		<p>完善了基本信息后，您可以直接把第三方登录的用户信息与您的注册账号进行绑定</p>
+	</div>
+	<div class="reg-box">
+		<div class="reg-cont">
+			<label class="login-txt" for="username">
+				<span>用户名</span>
+				<input type="text" name="username" id="username" placeholder="请输入用户名">
+			</label>
+		</div>
+		<div class="reg-cont">
+			<label for="password">
+				<span>{:lang('password')}</span>
+				<input type="password" name="password" id="password" placeholder="{:lang('please_input_password')}" >
+			</label>
+		</div>
+		<div class="reg-cont">
+			<label for="cfpassword"><span>{:lang('member_confirm_password')}</span><input
+				class="" type="password" name="cfpassword" id="cfpassword"
+				placeholder="{:lang('confirm_password')}">
+			</label>
+		</div>
+		{if condition="$code_config['pc'] eq 1"}
+		<div class="reg-cont" >
+			<label>
+				<span>{:lang('member_verification_code')}</span>
+				<input type="text" name="captcha" id="captcha"  placeholder="{:lang('please_enter_verification_code')}" maxlength="4">
+		        <img class="verifyimg" src=" {:__URL('SHOP_MAIN/captcha')}" onclick="this.src='{:__URL('SHOP_MAIN/captcha')}'"  alt="captcha"/>
+	        </label>
+		</div>
+	    {/if}
+		<button type="button" class="mui-btn mui-btn-danger ns-bg-color " onclick="perfectInfo()">完善信息</button>
+		<button type="button" class="mui-btn ns-border-color ns-text-color" onclick="location.href='{:__URL('APP_MAIN/login/bind')}';">已有账号</button>
+	</div>
+</div>
+<div class="footer">
+	<div class="copyright">
+		<div class="ft-copyright">
+			<a href="http://www.niushop.com.cn" target="_blank" >山西牛酷信息科技有限公司&nbsp;提供技术支持</a>
+		</div>
+	</div>
+</div>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script src="WAP_JS/register_ext.js"></script>
+{/block}

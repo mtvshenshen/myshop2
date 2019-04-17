@@ -1,0 +1,115 @@
+table tr th, table tr td {
+    padding: 0.5625rem 0.625rem;
+    font-size: 0.875rem;
+    color: #222222;
+}
+.my-account .account-box {
+    border-top: 1px solid #f77c52;
+    background: linear-gradient(#FE4445, #FF8458);
+    padding: 15px 0;
+    text-align: center;
+    padding-top: 45px;
+}
+.my-account .account-box .account-title {
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 45px;
+}
+.my-account .account-box .balace {
+    font-size: 42px;
+    color: #fff;
+}
+.detail-main table{
+    width:100%;border:none;margin-bottom: 54px;
+}
+.detail-main table tr{
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    width: 100%;
+    background: #FFFFFF;
+}
+.detail-main table tr td{float: left;}
+.detail-main table tr td:first-child img{
+    max-width: 44px;
+    height: auto;
+}
+.ns-table td {
+    width: 100%;
+}
+.ns-lf {
+    float: left;
+    color: #444;
+}
+.ns-rg {
+    font-size: 14px;
+    float: right;
+}
+.ns-rg-time {
+    font-size: 14px;
+    float: right
+}
+.account-option{
+    width:100%;
+    height:48px;
+}
+.account-option-left{
+    float: left;
+    margin-top: 21px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    border-top: 1px solid #f86126;
+    border-bottom: 1px solid #f86126;
+    border-right: 1px solid #f86126;
+    color: #fff;
+    width: 50%;
+}
+.account-option-right{
+    float: right;
+    border-left: 1px solid #f86126;
+    border-top: 1px solid #f86126;
+    border-bottom: 1px solid #f86126;
+    border-left: none;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+    width: 49.5%;
+    margin-top: 21px;
+}
+.my-account .account-box .bottom{
+    border: 1px solid #f56430;
+    padding: 7px 18px;
+    margin-top: 10px;
+    border-radius: 6%;
+    background: #ff8458;
+    color: #f7f7f7;
+}
+.style{
+    font-size: 14px;
+    padding-bottom: 5px;
+    margin-top: 17px;
+    color: #ffffff !important;
+}
+.empty-frame{
+    width:  100%;
+    margin: 60px auto 0;
+}
+.empty-frame span {
+    width:  100%;
+    text-align: center;
+    font-size: 12px;
+    float: left;
+    display: inline-block;
+    margin-top: 20px;
+    color: #cccccc;
+}
+.empty-frame .user-money {
+    background: url(../img/member/balance.png) no-repeat;
+    width: 110px;
+    height: 68px;
+    background-size: 100%;
+    display: inline-block;
+    margin-left: 34%;
+}

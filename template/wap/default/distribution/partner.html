@@ -1,0 +1,40 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/partner.css">
+{/block}
+{block name="head_operation"}{/block}
+{block name="main"}
+{php}
+	$partner = api("System.Distribution.partnerDetail");
+	$partner = $partner['data'];
+	$member_info = api('System.Member.memberDetail');
+	$member_info = $member_info['data'];
+{/php}
+{notempty name="$partner"}
+	<div class="main-content">
+		<div class="cells-title">会员名称：{$member_info.user_info.nick_name}</div>
+		<div class="cells">
+	        <div class="cell">
+	            <div class="cell-bd cell-primary">
+	                <p class="ns-text-color-black">股东等级：{$partner.level_name}</p>
+	            </div>
+	            <div class="cell-ft ns-text-color">分红比率&nbsp;:&nbsp;{$partner.commission_rate}</div>
+	        </div>
+	    </div>	
+	    <div class="cells-title">佣金</div>
+	    <div class="cells cells-access">
+	        <a class="cell" href="{:__URL('APP_MAIN/distribution/accountDetail','shop_id='.$shop_id.'&type_id=4')}">
+	            <div class="cell-bd cell-primary">
+	                <p class="ns-text-color-black">股东分红</p>
+	            </div>
+	            <div class="cell-ft ns-text-color">¥{$partner.commission_partner}</div>
+	        </a>
+	        
+	    </div>
+	</div>
+{else/}
+<script>location.href = __URL(APPMAIN + "/member/index");</script>
+{/notempty}
+{/block}
+{block name="footer"}{/block}
+{block name="script"}{/block}

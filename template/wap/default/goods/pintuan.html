@@ -1,0 +1,17 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/goods_pintuan.css">
+{/block}
+{block name="main"}
+{php}
+	$spelling_group_zone_adv = api('System.Shop.shopAdvPositionDetailByApKeyword', ['ap_keyword' => "spellingGroupZone"]);
+	$spelling_group_zone_adv = $spelling_group_zone_adv['data'];
+{/php}
+<div class="spelling-block"></div>
+<input type="hidden" id="page_count"><!-- 总页数 -->
+<input type="hidden" id="page" value="1"><!-- 当前页数 -->
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script src="WAP_JS/goods_pintuan.js"></script>
+{/block}

@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+.member-main {
+    background: #fff;
+    overflow: hidden;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+
+
+.table td{
+	line-height:20px;
+}
+
+
+.virtual-code{
+	line-height:33px;
+}

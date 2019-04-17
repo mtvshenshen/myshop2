@@ -1,0 +1,159 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_address.css">
+{/block}
+{block name="main"}
+{php}
+	$flag = request()->get('flag', '');
+	$url = request()->get('url', '');
+{/php}
+<input type="hidden" id="ref_url" value="{$pre_url}">
+<input type="hidden" value="{$flag}" id="hidden_flag" />
+<section class="head">
+	{if $flag==1}
+	<a class="head_back" id="backoutapp" href="{:__URL('APP_MAIN/member/index')}"><i class="icon-back"></i></a>
+	{elseif $flag==4}
+	<a class="head_back" id="backoutapp"  href="{:__URL('APP_MAIN/PintuanOrder/paymentorder')}"><i class="icon-back"></i></a>
+	{else}
+	<a class="head_back" id="backoutapp"  href="{:__URL('APP_MAIN/order/payment')}"><i class="icon-back"></i></a>
+	{/if}
+	<!-- <div class="head-title">{:lang('my_delivery_address')}</div>  -->
+</section>
+{php}
+ 	 // 固定的   接口名    属性名
+ 	 $applet_member = api("System.Member.memberAddressList");
+ 	 $list = $applet_member['data'];
+{/php}
+<ul class="side-nav address" id="ul">
+	{foreach name="list.data" item="address" key="k"}
+	{if condition="$address.is_default eq '1'"}
+	<li id="{$address.id}" class="current">
+	{else /}
+	<li id="{$address.id}" class="no-current">
+	{/if}
+	<div style="background: url('WAP_IMG/member/border_order_top.png');height: 2px;"></div>
+		<div class="div-simply">
+			<span class="payStatus">{:lang('member_receiving_information')}：</span>
+			<span class="payStatus"><span class="name">{$address.consigner}&nbsp;&nbsp;</span></span>
+			<div class="div-simply-div">
+				<a href="{:__URL('APP_MAIN/member/addressEdit?id='.$address['id'].'&flag='.$flag.'&url='.$url)}" class="div-simply-div">【{:lang('member_modify')}】</a>
+				{if condition="count($list) gt 1"}
+					<a href="javascript:void(0);" onclick="address_delete({$address.id},{$address.is_default});" class="div-simply-div">【{:lang('goods_delete')}】</a>
+				{/if}
+			</div>
+		</div>
+		<div class="div-simply" onclick='selectAddress({$address.id},this)'>
+			<span class="payStatus">{:lang('member_phone_number')}：</span>
+			<span class="payStatus"><span class="mobile">{$address.mobile}</span></span>
+		</div>
+		<a href="javascript:void(0)" class="classnone" style="padding: 5px;" id="mo" onclick='selectAddress({$address.id},this)'>
+			<span class="payStatus">{:lang('member_detailed_address')}：</span>
+			<span class="address">{$address.address_info}&nbsp;{$address.address}</span>
+			<span class="payStatus" style="float: right; line-height: 20px;"><i class="icon-success"></i></span>
+		</a>
+	</li>{/foreach}
+</ul>
+{if condition = "count($list.data) eq 0"}
+<img src="WAP_IMG/member_none_address.png" class="condition-img">
+<div class="addr-box">
+	<p class="addr-tip">{:lang('you_have_not_added_your_shipping_address_yet_add_one')}!</p>
+</div>
+{/if}
+<button class="btn-save ns-bg-color" onclick="window.location.href='{:__URL('APP_MAIN/Member/addressEdit?flag='.$flag.'&url='.$url)}';">{:lang('member_new_delivery_address')}</button>
+{if $is_weixin_browser}<button class="btn-getaddress ns-bg-color">一键获取微信地址</button>{/if}
+<!-- <script language="javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script> -->
+<script language="javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"> </script>
+<input type="hidden" id="appId" value="{$signPackage['appId']}">
+<input type="hidden" id="jsTimesTamp" value="{$signPackage['jsTimesTamp']}">
+<input type="hidden" id="jsNonceStr"  value="{$signPackage['jsNonceStr']}">
+<input type="hidden" id="jsSignature" value="{$signPackage['jsSignature']}">
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script type="text/javascript">
+function selectAddress(id,obj){
+	var ref_url = '{$url}';//$("#ref_url").val();
+	var flag = "{$flag}";
+	api("System.Member.modifyAddressDefault" , {"id" : id}, function(data){
+		var data = data['data'];
+		if (data > 0) {
+			$(".side-nav li").removeClass("current");
+			$(obj).parent().addClass("current");
+			//选择银行的时候也用到了，但是单店版没有
+			if(flag == "1"){
+				return;
+			}else if(flag == "2"){
+				window.location.href = __URL(APPMAIN+"/member/toReceiveThePrize");
+				return;
+			}
+			if(ref_url == 'cart'){
+				window.location.href = __URL(APPMAIN+"/order/payment");
+			}else{
+				window.location.reload();
+			}
+		}else{
+			toast(res["message"]);
+		}
+	})
+}
+function address_delete(id,is_default){
+	if(is_default == 1){
+		toast("{:lang('the_default_address_cannot_be_deleted')}");
+		return;
+	}
+	api("System.Member.addressDelete", {"id" : id}, function(res){
+		if (res["code"] == 0) {
+			toast("{:lang('member_delete_successfully')}");
+			window.location.reload();
+		} else {
+			toast(res["outmessage"]);
+		}
+	})
+}
+wx.config({
+	debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	appId: $("#appId").val(), // 必填，公众号的唯一标识
+	timestamp: $("#jsTimesTamp").val(), // 必填，生成签名的时间戳
+	nonceStr:  $("#jsNonceStr").val(), // 必填，生成签名的随机串
+	signature: $("#jsSignature").val(),// 必填，签名，见附录1
+	jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'openAddress'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+});
+$(".btn-getaddress").click(function(){
+	wx.ready(function(){
+		wx.checkJsApi({
+		    jsApiList: ['openAddress'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+		    success: function(res) {
+		    	if(!res.checkResult.openAddress){
+		    		toast("该公众号不支持该接口");
+		    	}
+		    }
+		});
+		wx.openAddress({
+			success: function (res) {
+				if(res.errMsg == 'openAddress:ok'){
+					var parmas = {
+						"consigner" : res.userName, // 收货人姓名,
+						"mobile" : res.telNumber, // 手机号
+						"province" : res.provinceName, // 省
+						"city" : res.cityName, // 市
+						"district" : res.countryName, // 县
+						"address" : res.detailInfo, // 详细地址
+						"zip_code" : res.postalCode // 邮编
+					};
+					api("System.Member.addWeixinAddress", parmas, function(data){
+						var data = data['data'];
+						if(data["code"] > 0){
+							toast("获取成功");
+						}else{
+							toast("获取失败");
+						}
+					})		
+				}else{
+					toast("请检测公众号");
+				}
+			}
+		});
+	});
+})
+</script>
+{/block}

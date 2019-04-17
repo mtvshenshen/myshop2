@@ -1,0 +1,169 @@
+img {
+    border: 0 none;
+    vertical-align: top;
+}
+a{
+    text-decoration: none;
+    color: #333;
+	-webkit-tap-highlight-color: transparent;
+    outline: 0;
+}
+
+.order-detail-wating-share {
+    padding: 10px 15px;
+    background: #fff;
+}
+
+.order-detail-wating-share time {
+    padding: 2px 5px;
+    background: #e5e5e5;
+    color: #555;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
+
+.order-detail-wating-share label {
+    font-size: 18px;
+    margin: 10px auto;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+.order-detail-wating-share button {
+    color: #fff;
+    border: 1px solid;
+    padding: 7px;
+    border-radius: 3px;
+    margin: 8px auto;
+    display: block;
+    width: 90%;
+    height: initial;
+    line-height: initial;
+    font-size: 14px;
+}
+
+.group-detail{
+    padding: 0px 10px;
+    background: #fff;
+    margin-top:10px;
+}
+
+.group-detail .list-item{
+    border-bottom: 1px solid #eee;
+}
+
+.group-detail .list-item .user-list{
+    padding:15px 0 0px 20px;
+    margin:0;
+}
+
+.group-detail .list-item .user-list li{
+    position: relative;
+    margin:0px 5px 10px 0;
+    display:inline-block;
+}
+
+.group-detail .list-item .user-list li .boss{
+    position:absolute;
+    left:-6px;
+    top:-6px;
+    background: #FFAB33;
+    color:#333;
+    border-radius:10px;
+    font-size:12px;
+    padding:0 5px;
+}
+
+.group-detail .list-item .user-list li img{
+    width:40px;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+    border-radius:50%;
+}
+
+.group-detail .goods-info{
+    line-height: 40px;
+}
+
+.group-detail .goods-info .item-title{
+    width: 30%;
+}
+
+.group-detail .goods-info .goods-name{
+    float: right;
+    color: #777;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    width: 70%;
+    text-align: right;
+}
+
+.mask-layer-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, .8);
+    z-index: 1000;
+	display:none;
+}
+
+.mask-layer-invite-friends {
+    z-index: 1001;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 10%;
+    left: 0;
+	display:none;
+}
+
+.mask-layer-invite-friends div {
+    text-align: right;
+    margin: 10px 10px 30px;
+}
+
+.mask-layer-invite-friends div img {
+    width: 50px;
+}
+
+.mask-layer-invite-friends h4 {
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.mask-layer-invite-friends h4 strong {
+	text-align: center;
+	font-size: 18px;
+}
+
+.mask-layer-loading {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    text-align: center;
+    display: none;
+}
+
+.mask-layer-loading img {
+    text-align: center;
+    color: #000;
+    font-size: 50px;
+    position: relative;
+    top: 50%;
+}
+
+
+

@@ -1,0 +1,35 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_withdrawal.css">
+{/block}
+{block name="main"}
+<div id="main" class="detail-main">
+	{php}
+		$withdraws = api("System.Member.withdrawRecordList", []);
+		$withdraws = $withdraws['data'];
+	{/php}
+	<div class="my-account"></div>
+	{if condition="count($withdraws.data) neq 0 "}
+	<table class="ns-table">
+		{volist name="withdraws.data" id="vo"}
+		<tr align="center">
+			<td style="padding-bottom: 0.2rem; font-size: 16px;">
+				<span class="ns-lf" style="color: #444;">{$vo['bank_name']}({$vo['status']})</span>
+				<span class="ns-rg">{$vo['cash']}</span>
+			</td>
+			<td style="padding-top: 0.2rem; font-size: 14px; color: #888;">
+				<span class="ns-lf">{$vo['account_number']}</span> <span class="ns-rg-time">{$vo['ask_for_date'] | getTimeStampTurnTime}</span>
+			</td>
+		</tr>
+		{/volist}
+	</table>
+	{else/}
+	<div>
+		<div class="empty-frame">
+			<i class="user-money"></i><span>{:lang('you_don_not_have_a_balance_record_yet')}！</span>
+		</div>
+	</div>
+	{/if}
+</div>
+{/block}
+{block name="footer"}{/block}

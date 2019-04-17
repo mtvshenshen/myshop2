@@ -1,0 +1,81 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_account.css">
+{/block}
+{block name="main"}
+{php}
+	$account_list = api("System.Member.accountQuery", []);
+	$account_list = $account_list['data'];
+{/php}
+<ul class="side-nav address" id="ul">
+	{foreach name="account_list" item="vo"}
+	{if condition="$vo.is_default eq '1'"}
+	<li id="{$vo.id}" class="current">
+	{else /}
+	<li id="{$vo.id}">
+	{/if}
+		<div class="imgs"></div>
+		<div class="div-simply">	
+			<span class="pay-status">{:lang('member_full_name')}：</span> 
+			<span class="pay-status"><span class="name">{$vo.realname}&nbsp;&nbsp;</span></span>
+			<div class="divs">
+				<a href="{:__URL('APP_MAIN/member/accountedit?shop_id='.$shop_id.'&id='.$vo['id'])}" style="display: inline-block; float: right;">【{:lang('member_modify')}】</a>
+				{if condition="count($account_list) neq 1"}
+				<a href="javascript:void(0);" onclick="account_delete({$vo.id});" style="display: inline-block;">【{:lang('goods_delete')}】</a>
+				{else/}
+				<a href="javascript:void(0);" onclick="account_delete({$vo.id});" style="display: none; float: right;">【{:lang('goods_delete')}】</a>
+				{/if}
+			</div>
+		</div>
+		<a href="javascript:void(0)" id="mo" onclick='checkAccount({$vo.id},this)'>
+			<div class="div-simply">
+				<span class="pay-status">{:lang('member_account_type')}：</span> <span class="pay-status"><span>{$vo.account_type_name}</span></span>
+			</div>
+			<div class="div-simply">
+				<span class="pay-status">{:lang('member_phone_number')}：</span> <span class="pay-status"><span>{$vo.mobile}</span></span>
+			</div> 
+			{switch name="$vo.account_type"}
+			{case value="1"}
+			<div class="div-simply" >
+				<span class="pay-status">{:lang('cash_account')}：</span> <span class="pay-status"><span>{$vo.account_number}</span></span>
+			</div>
+			<div class="div-simply" >
+				<span class="pay-status">{:lang('member_sub_branch_information')}：</span>
+				<span>{$vo.branch_bank_name}</span>
+<!-- 				<span class="pay-status" style="float: right; line-height: 20px;margin-right: 15px;"> -->
+<!-- 					<i class="icon-success"></i> -->
+<!-- 				</span> -->
+			</div>
+			{/case}
+			{case value="2"}
+			<!-- 微信 -->
+			{/case}
+			{case value="3"}
+			<div class="div-simply" >
+				<span class="pay-status">{:lang('cash_account')}：</span> <span class="pay-status"><span>{$vo.account_number}</span></span>
+			</div>
+			{/case}
+			{/switch}
+		</a>
+	</li> 
+	{/foreach}
+</ul>
+{if condition = "count($account_list) eq 0"}
+<!-- <img src="__TEMP__/{$style}/public/images/adds.png" style="margin: 0 auto; display: block; margin-top: 10px; height: 100px;"> -->
+<img src="WAP_IMG/login/member_none_account.png" style="margin: 10px auto 0; display: block;">
+<div class="addr-box">
+	<span class="iconfont address-icon"></span>
+	<p class="addr-tip">{:lang('you_have_not_added_your_account_yet_add_one')}!</p>
+</div>
+{/if}
+<button class="btn-save ns-bg-color" onclick="window.location.href=__URL(APPMAIN+'/member/accountedit?shop_id='+'{$shop_id}');">{:lang('new_account')}</button>
+
+<input type="hidden" value="{$shop_id}" id="shop_id"/>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script>
+var flag = {$flag};
+</script>
+<script src="WAP_JS/member_account.js"></script>
+{/block}

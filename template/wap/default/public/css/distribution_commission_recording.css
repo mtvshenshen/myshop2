@@ -1,0 +1,114 @@
+@CHARSET "UTF-8";
+
+.water-item {
+	background: #fff;
+	margin-bottom: 15px;
+	font-size: 15px;
+}
+
+.water-top {
+	padding: 10px 10px 8px;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.water-id {
+	
+}
+
+.water-time {
+	
+}
+
+.water-bottom {
+	padding: 10px 0px;
+}
+
+.water-info {
+	padding: 5px 10px 5px;
+}
+
+.water-name {
+	width: 33.333%;
+}
+
+.water-price {
+	width: 16%;
+	text-align: center
+}
+
+.cf-container {
+	height: 40px;
+	top: 0;
+	width: 100%;
+	z-index: 6;
+	background: #fff;
+	overflow: hidden;
+	font-size: 14px;
+	border-bottom: 1px solid #E2E2E2;
+}
+
+.cf-container .cf-content {
+	position: relative;
+	text-align: center;
+	top: 0;
+	white-space: nowrap;
+	z-index: 5;
+	overflow: hidden;
+	height: 40px;
+	text-align: center;
+}
+
+.cf-container .cf-tab-item {
+	display: inline-block;
+	padding: 0;
+	line-height: 39px;
+	text-align: center;
+	width: 30%;
+}
+
+.cf-container .cf-tab-item.select a {
+	border-bottom: 2px solid #FF6600;
+	padding-bottom: 0px;
+}
+
+.cf-container .selected {
+	border-bottom: 2px solid;
+	height: 38px;
+	display: inline-block;
+	position: relative
+}
+.cf-container .selected a{
+}
+
+.cf-tab-item a {
+	padding-right: 3px;
+	padding-left: 3px;
+	font-size: 14px;
+	display: block;
+}
+
+.empty-data {
+	color: #939393;
+	text-align: center;
+	margin-top: 100px;
+}
+
+.empty-data img {
+	margin-bottom: 20px;
+}
+
+.category-content-section {
+	margin-top: 0;
+}

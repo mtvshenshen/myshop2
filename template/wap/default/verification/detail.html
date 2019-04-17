@@ -1,0 +1,33 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" href="WAP_CSS/verification_detail.css">
+{/block}
+{block name="main"}
+{php}
+	$vg_id = request()->get('vg_id', '');
+	$info = api("System.Order.verificationDetail",['vg_id'=>$vg_id]);
+	$info = $info['data'];
+{/php}
+{notempty name="$info"}
+<div class="container">
+	<div class="verification-goods-info">
+		<div class="goods-img">
+			<img src="{:__IMG($info.picture.pic_cover_micro)}" alt="">
+		</div>
+		<p class="name">{$info.goods_name}</p>
+		<p class="desc">{$info.virtual_goods_name}</p>
+		<p class="desc">{$info.remark}</p>
+	</div>
+	<a href="{:__URL('APP_MAIN/verification/share','vg_id='.$info.virtual_goods_id)}" class="immediateUuse">立即使用</a>
+</div>
+<!-- 导航列表 -->
+<div class="list-container">
+	<ul>
+		<a href="{:__URL('APP_MAIN/member/index')}"><li><span class="title">会员中心</span><span class="tip">点击进入会员中心</span></li></a>
+	</ul>
+</div>
+{else/}
+<script>location.href = __URL(APPMAIN + "/login/index");</script>
+{/notempty}
+{/block}
+{block name="footer"}{/block}

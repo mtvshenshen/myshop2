@@ -1,0 +1,55 @@
+#main{
+    padding-top: 3px;
+}
+#main p{
+    padding: 5px;
+}
+.prompt{
+    margin: 5px auto;
+    background-color: #fff2c0;
+    color: #d8af12;
+}
+.promt-style{
+    margin-top: 16px;
+}
+.content .text{
+    margin:0px 8px;
+    margin-top: 15px;margin-bottom: 7px;
+}
+.text-p{
+    width: 74%;
+    float: right;
+    color: #d8af12;
+    margin-top: -11px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+.content input{
+    height: 30px;
+    width: 72%;
+    border:1px solid #ddd;
+    padding-left: 0px;
+    margin: 0 5px;padding-left: 3px;box-shadow: none;
+}
+.content .buttom input[type='button']{
+    display: block;
+    width: 90%;
+    margin: auto;
+    color: #fff;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 6px;
+    line-height: 21px;
+}
+.circle{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    text-align: center;
+    margin: 0 auto;
+    padding:11px;
+    border:1px solid;
+}
+.spans{
+    font-size:25px;
+}

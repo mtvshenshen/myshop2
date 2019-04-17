@@ -1,0 +1,61 @@
+@base: #e23435; //主色调，#FF0036
+@color-black: #333;
+
+body {
+  color: @color-black;
+}
+
+//背景色
+.ns-bg-color {
+  background-color: @base !important;
+}
+
+.ns-bg-color:hover, .ns-bg-color:focus, .ns-bg-color:active, .ns-bg-color:hover, .ns-bg-color:focus, .ns-bg-color-hover:hover, .ns-bg-color-hover.selected {
+  background-color: shade(@base, 10%) !important;
+}
+
+.ns-bg-color-hover:hover > a:hover {
+  color: #fff !important;
+}
+
+//文字颜色
+.ns-text-color {
+  color: @base !important;
+}
+
+.ns-text-color-black {
+  color: @color-black !important;
+}
+
+.ns-text-color-hover.selected, .ns-text-color-hover:hover {
+  color: @base !important;
+}
+
+//边框
+.ns-border-color, .ns-border-color-hover:hover, .ns-border-color-hover.selected {
+  border-color: @base !important;
+}
+
+//按钮
+.primary {
+  background-color: @base !important;
+  border-color: @base !important;
+}
+
+.primary:hover, .primary:focus, .primary:active, .primary.active {
+  background-color: shade(@base, 10%) !important;
+  border-color: shade(@base, 10%) !important;
+  color: #fff !important;
+}
+
+.checkbox > input:checked + label:before, .checkbox > input:checked + label:after {
+  background-color: @base !important;
+}
+
+.radio > input:checked + label:before {
+  border-color: @base !important;
+}
+
+.radio > input:checked + label:after {
+  background-color: @base !important;
+}

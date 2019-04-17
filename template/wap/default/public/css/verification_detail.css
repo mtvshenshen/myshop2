@@ -1,0 +1,133 @@
+* {
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+}
+
+a, img, button, input, select {
+    -webkit-tap-highlight-color: transparent;
+    outline: 0;
+}
+
+ img{
+ 	max-height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+ 	width:100%;
+ 	height:100%;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.container {
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.verification-goods-info {
+    background: url(../img/verification/verification_goods_detail.png) no-repeat;
+    width: 100%;
+    height: 110px;
+    background-size: 100% 100%;
+    /* text-align: center; */
+    padding: 30px 0 20px 0;
+}
+
+.verification-goods-info .goods-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.verification-goods-info .goods-img img {
+    max-height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.verification-goods-info .name, .verification-goods-info .desc {
+    padding: 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    line-height: 1.5;
+}
+
+.verification-goods-info .name {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.verification-goods-info .desc {
+    font-size: 12px;
+}
+
+.container .immediateUuse {
+    display: inline-block;
+    padding: 6px 40px;
+    border: 1px solid #89B485;
+    color: #89B485;
+    border-radius: 3px;
+    margin-top: 25px;
+}
+
+.list-container {
+    margin-top: 20px;
+    background: #fff;
+}
+
+.list-container ul {
+    padding: 0 15px;
+}
+
+.list-container ul li {
+    list-style: none;
+    min-height: 40px;
+    line-height: 40px;
+    border: none;
+    overflow: hidden;
+}
+
+.list-container ul li span.title {
+    color: #666;
+    font-size: 14px;
+    float: left;
+}
+
+.list-container ul li span.tip {
+    float: right;
+    color: #999;
+    font-size: 12px;
+}
+
+.mask-layer-loading {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    text-align: center;
+    display: none;
+}
+
+.mask-layer-loading img {
+    text-align: center;
+    color: #000000;
+    font-size: 50px;
+    position: relative;
+    top: 50%;
+}
+
+
+
+

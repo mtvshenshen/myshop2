@@ -1,0 +1,79 @@
+table tr th, table tr td {
+    padding: 0.5625rem 0.625rem;
+    font-size: 0.875rem;
+    color: #222222;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.my-account .account-box {
+    border-top: 1px solid #f77c52;
+    background: linear-gradient(#FE4445, #FF8458);
+    padding: 15px 0;
+    text-align: center;
+    padding-top: 45px;
+}
+.my-account .account-box .account-title {
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 45px;
+    color: #fff;
+}
+.my-account .account-box .balace {
+    font-size: 42px;
+    color: #fff;
+}
+.detail-main table tr{
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    width: 100%;
+    background: #FFFFFF;
+}
+.detail-main table tr td{float: left;}
+.detail-main table tr td:first-child img{
+    max-width: 44px;
+    height: auto;
+}
+.detail-main table tr td:last-child{
+    width: 100%;
+}
+.detail-main table tr td:last-child p{
+    line-height: 22px;
+    margin-bottom: 0px;
+    width: 100%;
+    font-size: 16px;
+}
+.detail-main table tr td:last-child .title{
+    float: left;
+    color: #2d2d2d;
+    font-size: 14px;
+}
+.detail-main .integral-declaration{
+    margin-bottom: 20px;
+}
+.detail-main .integral-declaration .declaration-title{
+    height: 35px;
+    line-height: 35px;
+    border-left: 3px solid #626262;
+    padding-left: 8px;
+    background: #fff;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+}
+.payment{
+    overflow: hidden;
+    line-height: 50px;
+    padding-left: 15px;
+    background: #fff;
+}
+.ns-table td{
+    width: 100%;
+}
+.p-style{
+    font-size: 15px;margin-top:8px;color: #fff;
+}
+.ns-table {
+    width: 100%;
+}

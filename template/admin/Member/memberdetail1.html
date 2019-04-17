@@ -1,0 +1,150 @@
+{extend name="admin/base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/member_detail.css" />
+{/block}
+{block name="main"}
+<div class="ns-main">
+	<!-- 第一部分 -->
+	<div class="main-first">
+		<div style="padding: 10px;">
+		<!-- 头像 -->
+		<div class="member-img">
+			{if condition="$member_detail['user_info']['user_headimg']"}
+				<img src="{:__IMG($member_detail['user_info']['user_headimg'])}">
+			{else /}
+				<img src="{:__IMG($default_headimg)}">
+			{/if}
+			
+		</div>
+		<!-- 内容 -->
+		<div class="main-info">
+			<div class="placeholder"></div>
+			<div class="info-detail">
+
+				<div class="col-sm-4">
+					{if condition="$member_detail['member_name']"}
+					<span class="ng-binding">用户名：{$member_detail['member_name']}</span>
+					{else /}
+					<span class="ng-binding">用户名：--</span>
+					{/if}
+				</div>
+				<div class="col-sm-4">
+					{if condition="$member_detail['level_name']"}
+					<span class="ng-binding">等级：{$member_detail['level_name']}</span>
+					{else /}
+					<span class="ng-binding">等级：--</span>
+					{/if}
+				</div>
+			</div>
+			<div class="info-detail">
+				<div class="col-sm-4">
+					<span class="ng-binding">积分：{$member_detail['point']}</span>
+					
+				</div>
+				<div class="col-sm-4">
+					<span class="ng-binding">余额：{$member_detail['balance']}</span>
+					
+				</div>
+			</div>
+			<div class="info-detail">
+				<div class="col-sm-4">
+					{if condition="$member_detail['label_name']"}
+					<span class="ng-binding">标签：{$member_detail['label_name']}</span>
+					{else /}
+					<span class="ng-binding">标签：--</span>
+					{/if}
+				</div>
+				<div class="col-sm-4">
+					{if condition="$member_detail['user_info']['current_login_time']"}
+					<span class="ng-binding">最后登录：{:date('Y-m-d H:i:s',$member_detail['user_info']['current_login_time'])}</span>
+					{else /}
+					<span class="ng-binding">最后登录：--</span>
+					{/if}
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<!-- 个人信息 -->
+	<div class="member-info">
+		<div>
+			<div class="clearfix"><h5 class="m-t-none text-md font-bold pull-left">个人信息</h5></div>
+			<div>
+				<div class="member-fileds-info">
+					<span>昵称：</span>
+					{if condition="$member_detail['user_info']['nick_name']"}
+					<span>{$member_detail['user_info']['nick_name']}</span>
+					{else /}
+					<span>--</span>
+					{/if}
+					
+				</div>
+				<div class="member-fileds-info">
+					<span>手机号：</span>
+					{if condition="$member_detail['user_info']['user_tel']"}
+					<span>{$member_detail['user_info']['user_tel']}</span>
+					{else /}
+					<span>--</span>
+					{/if}
+					
+				</div>
+				<div class="member-fileds-info">
+					<span>性别：</span>
+					{if condition="$member_detail['user_info']['sex'] eq 1"}
+						<span>男</span>
+					{elseif condition="$member_detail['user_info']['sex'] eq 2"}
+						<span>女</span>
+					{else /}
+						<span>保密</span>
+					{/if}
+				</div>
+				<div class="member-fileds-info">
+					<span>邮箱：</span>
+					{if condition="$member_detail['user_info']['user_email']"}
+					<span>{$member_detail['user_info']['user_email']}</span>
+					{else /}
+					<span>--</span>
+					{/if}
+					
+				</div>
+				<div class="member-fileds-info">
+					<span>QQ：</span>
+					{if condition="$member_detail['user_info']['user_qq']"}
+					<span>{$member_detail['user_info']['user_qq']}</span>
+					{else /}
+					<span>--</span>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 交易信息 -->
+	<div class="member-order">
+		<div>
+			<div class="clearfix"><h5 class="m-t-none text-md font-bold pull-left">交易信息</h5></div>
+			<div>
+				<div class="member-fileds-info">
+					<span>累计消费：</span>
+					<span>￥{$member_detail['order_money']}</span>
+				</div>
+				<div class="member-fileds-info">
+					<span>消费次数：</span>
+					<span>{$member_detail['order_count']}</span>
+				</div>
+				<div class="member-fileds-info">
+					<span>平均消费金额：</span>
+					<span>￥{$member_detail['avg_order_money']}</span>
+				</div>
+				<div class="member-fileds-info">
+					<span>最近消费时间：</span>
+					{if condition="$member_detail['last_pay_time']"}
+					<span>{:date('Y-m-d H:i:s',$member_detail['last_pay_time'])}</span>
+					{else /}
+					<span>--</span>
+					{/if}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

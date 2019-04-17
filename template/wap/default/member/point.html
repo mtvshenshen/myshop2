@@ -1,0 +1,53 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_point.css">
+{/block}
+{block name="main"}
+    {php}
+    	$member_info = api("System.Member.memberDetail");
+   	    $sum = $member_info['data']['point'];
+   	    $pointconfiginfo = api("System.Promotion.pointConfig", []);
+   	    $pointconfiginfo = $pointconfiginfo['data'];
+    {/php}
+    <div id="main" class="detail-main">
+		<div class="my-account">
+			<div class="account-box">
+				<p class="balace">{$sum}</p>
+				<p class="p-style">{:lang('goods_integral')}</p>
+			</div>
+		</div>
+		<div class="integral-declaration">
+			<div class="declaration-title">
+				{:lang('integral_declaration')}
+			</div>
+			<div class="declaration-content">
+				{$pointconfiginfo.desc}
+			</div>
+		</div>
+		{php}
+			$member_point_list = api("System.Member.accountRecordList", ["account_type"=>1]);
+			$member_point_list = $member_point_list['data'];
+		{/php}
+		{if condition="$member_point_list['total_count'] gt 0"}
+	    <table class="ns-table">
+	  			{volist name="member_point_list['data']" id="vo"}
+	  			<tr align="center">
+	  				<td style="padding-bottom: 0.2rem;font-size: 16px;">
+					    <span class="ns-lf" style="color: #444; float: left;">{$vo.type_name}</span>
+					    <span class="ns-rg ns-text-color" style="float: right;">{$vo.number|ceil}</span>
+					</td>	
+					<td style="padding-top: 0.2rem;font-size: 14px;color: #888;">
+						<span class="ns-lf" style="float: left;text-align: left;">{$vo.text}</span>
+						<span class="ns-rg-time" style="float: right;">{$vo.create_time | getTimeStampTurnTime}</span>
+					</td> 
+				</tr>
+	  			{/volist}
+	  	</table>
+		{else/}
+        <div>
+            <div class="emptyFrame"> <i class="user-balance"></i><span>{:lang('you_have_not_got_any_minutes_yet')}！</span></div>
+        </div>
+		{/if}
+   </div>
+{/block}
+{block name="footer"}{/block}

@@ -1,0 +1,93 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WEB_CSS/goods_cart.css">
+{/block}
+{block name="main"}
+{php}
+	$data = api('System.Goods.cartList');
+	$cart_list = $data['data']['cart_list'];
+	$goods_ladder_preferential = $data['data']['goods_ladder_preferential'];
+{/php}
+{if condition="!empty($cart_list)"}
+<div class="cart-list">
+	<ul class="cart-head">
+		<li>
+			<div class="cart-check">
+				<input type="checkbox" id="cheAll" checked="true" autocomplete="off" onclick="cart.checked(this,'all')" />
+				<label for="cheAll">{:lang('goods_select_all')}</label>
+			</div>
+			<span>{:lang('goods_product')}</span>
+		</li>
+		<li>{:lang('goods_shop_price')}</li>
+		<li>{:lang('goods_number')}</li>
+		<li>{:lang('goods_subtotal')}</li>
+		<li>{:lang('goods_operation')}</li>
+	</ul>
+	<div class="cart-body">
+		{foreach name="cart_list" item="cart_info" key="k"}
+		<ul class="cart-head list-item">
+			<li>
+				<input type="checkbox" value="{$cart_info.cart_id}"  name="select_check"  autocomplete="off" checked="true" onclick="cart.checked(this,'one')"/>
+				<a class="item-pic" target="_blank" href="{:__URL('SHOP_MAIN/goods/detail','goods_id='.$cart_info['goods_id'])}">
+					{if $cart_info['picture_info']['pic_cover_big']}
+					<img src="{:__IMG($cart_info['picture_info']['pic_cover_big'])}" />
+					{else /}
+					<img src="{:__IMG($default_goods_img)}" />
+					{/if}
+				</a>
+				<a class="item-text" href="{:__URL('SHOP_MAIN/goods/detail','goods_id='.$cart_info['goods_id'])}" target="_blank">
+					<span>{$cart_info.goods_name}</span>
+				</a>
+				<span class="specifications">{$cart_info.sku_name}</span>
+			</li>
+			<li class="price">
+				<span data-value="{$cart_info.price}">￥{$cart_info.price}</span>
+			</li>
+			<li>
+				<div class="item-counter">
+					<span class="reduce" onclick="cart.changeNumber(this)">-</span>
+					<input type="text" class="num"  value="{$cart_info.num}"  min="{if condition='$cart_info.min_buy > 0'}{$cart_info.min_buy}{else/}1{/if}" max="{if condition='$cart_info.max_buy > 0'}{$cart_info.max_buy}{else/}{$cart_info.stock}{/if}"  onchange="cart.changeNumber(this,'change');" data-value="{$cart_info.num}"/>
+					<span class="plus" onclick="cart.changeNumber(this)">+</span>
+				</div>
+			</li>
+			<li>
+				<span id="subtotal_{$cart_info.cart_id}" data-total="{$cart_info.price*$cart_info.num}" class="sum">￥{$cart_info.price*$cart_info.num}</span>
+			</li>
+			<li>
+				<span onclick="cart.deleteCart(this,'one')">{:lang('goods_delete')}</span>
+			</li>
+			<input type="hidden" name="sku_id" value="{$cart_info.sku_id}">
+		</ul>
+		{/foreach}
+	</div>
+	<div class="cart-foot">
+		<div class="foot-left">
+			<div class="cart-check">
+				<input  type="checkbox" id="cheAllOne" checked="true" name="cheAllOne" onclick="cart.checked(this,'all')" />
+				<label for="cheAllOne">全选</label>
+			</div>
+			<a onclick="cart.deleteCart(this,'selected')">删除选中的商品</a>
+			<a onclick="cart.deleteCart(this,'all')">清除购物车</a>
+		</div>
+		<div class="foot-right">
+			<span class="foot-text">
+				总价 :
+				<span class="total-price ns-text-color">￥200</span>
+			</span> 
+			<span class="balance ns-bg-color" onclick="cart.Settlement()">{:lang('goods_settle_accounts')}</span>
+
+		</div>
+	</div>
+</div>
+{else/}
+<div class="cart-empty">
+	<div class="message">
+		<span>{:lang('goods_empty_and_look')}~</span>
+		<a href="{:__URL('SHOP_MAIN')}" class="ns-text-color" title="{:lang('goods_go_shopping')}">{:lang('goods_go_shopping')}&gt;</a>
+	</div>
+</div>
+{/if}
+{/block}
+{block name="script"}
+<script src="WEB_JS/goods_cart.js"></script>
+{/block}

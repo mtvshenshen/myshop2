@@ -1,0 +1,29 @@
+{extend name="$base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="WEB_CSS/help.css" />
+{/block}
+{block name="main"}
+{php}
+$list = api("System.Shop.shopNoticeList");
+$list = $list['data']['data'];
+{/php}
+<ol class="breadcrumb">
+	<li><a href="{:__URL('SHOP_MAIN')}">{:lang('home_page')}</a></li>
+	<li class="active">{:lang('notice')}</li>
+</ol>
+<div class="detail">
+	{if condition="!empty($list)"}
+	<ul>
+		{volist name="$list" id="vo"}
+		<li class="clearfix">
+			<a href="{:__URL('SHOP_MAIN/notice/detail', 'id='.$vo.id)}" class="pull-left" target="_self" title="{$vo.notice_title}">{$vo.notice_title}</a>
+			<span class="pull-right">{$vo.create_time | getTimeStampTurnTime}</span>
+		</li>
+		{/volist}
+	</ul>
+	{else/}
+	<div>{:lang('no_notice')}</div>
+	{/if}
+</div>
+{/block}
+{block name="script"}{/block}

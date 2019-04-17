@@ -1,0 +1,147 @@
+{extend name="$base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="WAP_CSS/member_signin.css">
+{/block}
+{block name="main"}
+{php}
+	$flag = request()->get('flag', '');
+	$url = request()->get('url', '');
+	
+	$isSign 	= api("System.Member.isSignin", []);
+	$isSign  = $isSign['data'];
+	
+	$sign_records = api("System.Member.signInRecords", []);
+	$records = $sign_records['data'];
+	
+	$mon_t = date("t");
+	$year =  date("Y");
+	$month =  date("m");
+	$day = date("d");
+	
+	$BeginDate=date('Y-m-01', strtotime(date("Y-m-d")));
+	$week= Date("w", strtotime(Date($BeginDate))) ;
+
+
+
+	$sign_tips = api("System.Member.signInConfig", []);
+	$tips = $sign_tips['data'];
+	
+	
+	
+{/php}
+
+<div class="wrap">
+	<div class="signin-top">
+		<p class="signin_btn">
+			{if condition="$isSign eq 0"}
+			<div class="signin_statu">签到</div>
+			{else/}
+			<div class="signined_statu" >已签到</div>
+			{/if}
+		</p>
+		<p class="first_p">您已连续签到 <span>1</span>天</p>
+
+	</div>
+	<div class="signin-content">
+		<p class="kalenda-title"><span class="prev-month"></span><span class="curr_month">{$year}年{$month}月</span><span class="next-month"></span></p>
+		<p class="kalenda-tips">
+			{if condition="$tips['sign_integral'] neq 0"}
+				签到奖励 <span>{$tips.integral_info['sign_point']}积分</span>,
+			{/if}
+			{if condition="$tips['sign_coupon'] neq 0"}
+				 <span>{$tips.coupon_info['coupon_name']}</span>
+			{/if}
+		</p>
+		<ul class="week">
+			<li>日</li>
+			<li>一</li>
+			<li>二</li>
+			<li>三</li>
+			<li>四</li>
+			<li>五</li>
+			<li>六</li>
+		</ul>
+		<ul class="day">
+				{for start="0" end="$week" step="1" name="i"}
+					<li></li>
+				{/for}
+				{foreach name="records" item="vo" key="k"}
+					{if condition="$vo gt 0"}
+						<li><div class="already"><img src="WAP_IMG/member/day_select.png" alt="" /></div><p>已签到</p></li>
+					{else/}
+						{if $day == $k }
+							<li class="curr_day"><div class="curr_tips">{$k}</div></li>
+						{else/}	
+							<li>{$k}</li>
+						{/if}	
+					{/if}
+				{/foreach}
+		</ul>
+		
+	</div>
+	<div class="active-rule">活动规则</div>
+</div>
+
+
+
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script>
+
+
+	
+	var status =0;
+	var myDate = new Date();
+	var year = myDate.getFullYear();
+	var month = myDate.getMonth()+1;
+	var day = myDate.getDate();
+
+	
+	//获取当月多少天
+	function getMonthLength(date) {
+		  let d = new Date(date)
+		  d.setMonth(d.getMonth()+1)
+		  d.setDate('1')
+		  d.setDate(d.getDate()-1)
+		  return d.getDate()
+		}
+	var d = getMonthLength(year+'-'+month+'-'+day);
+	
+	//获取当月第一天为周几
+	var date=new Date();
+	date=new Date(date.setDate(1))
+	var weekday=myDate.getDay();
+	
+	var html = '';
+	for(var int=1;int<=weekday;int++){
+		html += '<li></li>';
+	}
+
+	for (var i=1;i<=d;i++)
+	{	
+		if(day == i && status == 0){
+			html += '<li class="curr_day"><div class="curr_tips">'+i+'</div></li>';
+		}else if(day == i && status == 1){
+			html += '<li><div class="already"><img src="WAP_IMG/member/day_select.png" alt="" /></div><p>已签到</p></li>';
+		}else{
+			html += '<li>'+i+'</li>';
+		}
+	}
+	//$('.signin-content .day').append(html);
+
+	$('.signin_statu').on('click',function(){
+		$('.signin_statu').hide();
+		$('.signin_btn').append('<div class="signined_statu" >已签到</div>');
+		$('.curr_day').html('');
+		$('.curr_day').append('<div class="already"><img src="WAP_IMG/member/day_select.png" alt="" /></div><p>已签到</p>');
+		api("System.Member.signIn",{},function (res) {
+			if(res.data > 0){
+				toast('签到成功');
+			} 
+		}) 
+	})
+	
+	
+</script>
+{/block}

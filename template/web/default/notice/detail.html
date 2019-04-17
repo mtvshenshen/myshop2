@@ -1,0 +1,39 @@
+{extend name="$base" /}
+{block name="resources"}
+<link type="text/css" rel="stylesheet" href="WEB_CSS/help.css" />
+<link type="text/css" rel="stylesheet" href="WEB_CSS/notice_detail.css" />
+{/block}
+{block name="main"}
+{php}
+	$info = api("System.Shop.shopNoticeInfo",['id'=>$id]);
+	$info = $info['data'];
+	
+	// 上一篇
+	$prev_info = api("System.Shop.shopNoticeList",['page_size'=>1,'condition'=>["id" => array("gt",$id)], 'order' => 'id asc']);
+	$prev_info = $prev_info['data']['data'];
+	
+	// 下一篇
+	$next_info = api("System.Shop.shopNoticeList",['page_size'=>1,'condition'=>["id" => array("lt",$id)], 'order' => 'id desc']);
+	$next_info = $next_info['data']['data'];
+{/php}
+{notempty name="$info"}
+<ol class="breadcrumb">
+	<li><a href="{:__URL('SHOP_MAIN/index')}">{:lang('home_page')}</a></li>
+	<li class="active"><a href="{:__URL('SHOP_MAIN/notice/lists')}">{:lang('notice')}</a></li>
+</ol>
+<div class="detail">
+	<h3 class="ns-border-color-gray help-tit">{$info['notice_title']}</h3>
+	<time class="create_time">发布时间：{$info.create_time|date="Y-m-d H:i:s",###}</time>
+	<div class="content help-detail">{$info['notice_content']|html_entity_decode}</div>
+	{notempty name="prev_info"}
+	<a href="{:__URL('SHOP_MAIN/notice/detail', 'id='.$prev_info[0]['id'])}" class="pull-left" target="_self" title="{$prev_info[0]['notice_title']}">上一篇：{$prev_info[0]['notice_title']}</a>
+	{/notempty}
+	{notempty name="next_info"}
+	<a href="{:__URL('SHOP_MAIN/notice/detail', 'id='.$next_info[0]['id'])}" class="pull-right" target="_self" title="{$next_info[0]['notice_title']}">下一篇：{$next_info[0]['notice_title']}</a>
+	{/notempty}
+</div>
+{else/}
+<script>location.href = __URL(SHOPMAIN);</script>
+{/notempty}
+{/block}
+{block name="script"}{/block}

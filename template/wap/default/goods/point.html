@@ -1,0 +1,68 @@
+{extend name="$base" /} 
+{block name="resources"}
+<link rel="stylesheet" href="WAP_CSS/goods_point.css">
+<link rel="stylesheet" href="WAP_PLUGIN/swiper/css/swiper.min.css"/>
+<script src="WAP_PLUGIN//swiper/js/swiper.min.js"></script>
+{/block}
+ {block name="main"}
+{php}
+    $point_adv = api('System.Shop.advDetail', ['ap_keyword' => 'WAP_POINT_SWIPER', 'export_type' => 'data']);
+
+    $page_index = request()->get('page_index', 1);
+
+    $order = "sales desc";//collects evaluates shares
+
+    $condition = array(
+        "ng.state" => 1,
+        "ng.point_exchange_type" => array('NEQ',0)
+    );
+    $goods_list = api('System.Goods.goodsList', ['page_index' => $page_index,'condition'=>$condition,'order'=>$order]);
+    $goods_list = $goods_list['data'];
+{/php}
+{notempty name="$point_adv['data']"}           
+   <div class="swiper-container">
+        <div class="swiper-wrapper">
+        {foreach name="$point_adv['data']['advs']" item="vo"}
+            <div class="swiper-slide">
+                <a href="{:__URL('APP_MAIN' . $vo['adv_url'])}" style="height:{$point_adv['data']['ap_height']}px;line-height:{$point_adv['data']['ap_height']}px;">
+                    <img src="{:__IMG($vo.adv_image)}" alt="{:lang('carousel_figure')}" class="w100">
+                </a>
+            </div>
+        {/foreach}
+        </div>
+    </div>
+{/notempty}
+
+<div class="exchange">
+&nbsp;&nbsp;<span>{:lang("goods_hot_exchange")}</span>
+</div>
+
+<section class="members-goodspic">
+    <ul>
+        {foreach name="$goods_list['data']"  item="good" key="k"}
+        <li class="gooditem">
+            <div class="img">
+                <a href="{:__URL('APP_MAIN/goods/detail?goods_id='.$good['goods_id'])}"><img class="lazy" src="{:__IMG($good['pic_cover_mid'])}"></a>
+            </div>
+            <div class="info">
+                <p class="goods-title">
+                    <a href="{:__URL('APP_MAIN/goods/detail?goods_id='.$good['goods_id'])}">{$good.goods_name}</a>
+                </p>
+                <p class="goods-price">
+                    <em class="ns-text-color">{:lang("goods_integral")}:{$good.point_exchange}</em>
+                </p>
+                <a href="{:__URL('APP_MAIN/goods/detail?goods_id='.$good['goods_id'])}"></a>
+            </div>
+        </li>
+        {/foreach}
+    </ul>
+</section>
+{/block}
+{block name="footer"}{/block}
+{block name="script"}
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+});
+</script>
+{/block}
