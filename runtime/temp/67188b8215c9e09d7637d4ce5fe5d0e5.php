@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1555492779;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1555568515;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -253,10 +253,12 @@
 	 		<?php endif; ?> 		
 	 		<div class="clear"></div>
 	 	</div>
+	 	<?php if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): ?>
  	 	<div class="member-order-head">
 	 		我的店铺连接(长按复制)
 	 		<input type="text" value="<?php echo __URL('http://127.0.0.1:8080/index.php/wap?user_shop_id='.$member_info['user_info']['uid']); ?>" style="width: 100%;">
 	 	</div>
+	 	<?php endif; ?>
 <!-- 	 	<?php if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): ?>
 	 	<div class="member-order-list member-promotion">
 	 		<a href="">

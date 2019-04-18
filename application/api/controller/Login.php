@@ -19,7 +19,8 @@ use data\service\Member;
 use think\Session;
 use data\service\Config as ConfigService;
 use data\service\promotion\PromoteRewardRule;
-
+use think\Db;
+use think\Model;
 /**
  * 登录、注册相关api
  * @author Administrator
@@ -147,8 +148,6 @@ class Login extends BaseApi
         $web_config = new ConfigService();
         $member = new Member();
         
-
-
         $user_name = isset($this->params['username']) ? $this->params['username'] : "";
         $password = isset($this->params['password']) ? $this->params['password'] : "";
         $email = isset($this->params['email']) ? $this->params['email'] : "";

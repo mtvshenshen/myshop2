@@ -212,10 +212,12 @@
 	 		{/if} 		
 	 		<div class="clear"></div>
 	 	</div>
+	 	{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
  	 	<div class="member-order-head">
 	 		我的店铺连接(长按复制)
 	 		<input type="text" value="{:__URL('APP_MAIN?user_shop_id='.$member_info['user_info']['uid'])}" style="width: 100%;">
 	 	</div>
+	 	{/if}
 <!-- 	 	{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
 	 	<div class="member-order-list member-promotion">
 	 		<a href="">
