@@ -2,7 +2,25 @@
 
 use think\Db;
 use think\Model;
+
+
+Db::table($this->table)->where($condition)->order($order)->limit(1)->select();
+
 Db::execute('update sys_user set user_shop=1 , user_shop_fen = 40 where uid='.$uid);
+
+			$data = [
+				'name' => $temp_arr['name'],
+				'title' => $temp_arr['title'],
+				'config' => json_encode($config_arr),
+				'status' => 1,
+				'desc' => $temp_arr['desc'],
+				'author' => $temp_arr['author'],
+				'version' => $temp_arr['version'],
+				'create_time' => time()
+			];
+			$res = Db::table("$table")->insert($data);
+
+
 
 
 git add README.md

@@ -646,8 +646,22 @@ class Member extends BaseController
 		if (!empty($uid)) {
 			if($user_shop == 0){
 				Db::execute('update sys_user set user_shop=1 , user_shop_fen = 40 where uid='.$uid);
+				$condition=array('uid'=>$uid);
+
+				if(Db::table('nfx_shop_user')->where($condition)->limit(1)->select()){
+					Db::execute('update nfx_shop_user set is_lock=0 where uid='.$uid);
+				}else{
+					$data = [
+						'uid' => $uid,
+						'audit_time' => time(),
+						'modify_time' => time()
+					];
+					$res = Db::table("nfx_shop_user")->insert($data);
+				}
+				
 			}else{
 				Db::execute('update sys_user set user_shop=0 where uid='.$uid);
+				Db::execute('update nfx_shop_user set is_lock=1 , lock_time = '.time().' , modify_time = '.time().' where uid='.$uid);
 			}
 		}
 		return AjaxReturn($retval);

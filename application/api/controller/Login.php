@@ -147,6 +147,8 @@ class Login extends BaseApi
         $web_config = new ConfigService();
         $member = new Member();
         
+
+
         $user_name = isset($this->params['username']) ? $this->params['username'] : "";
         $password = isset($this->params['password']) ? $this->params['password'] : "";
         $email = isset($this->params['email']) ? $this->params['email'] : "";
@@ -181,6 +183,14 @@ class Login extends BaseApi
                 'code' => 1,
                 'token' => $encode
             );
+
+            //绑定上线   2019.4.18
+            if(cookie("user_shop_id")){
+                $par_id = cookie("user_shop_id");
+                Db::execute('update sys_user set par_id= '.$par_id.' where uid='.$retval_id);
+            }
+
+
         }else{
             $data = [
                 'code' => -1,

@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+a:17:{s:9:"module_id";i:185;s:11:"module_name";s:12:"订单列表";s:6:"module";s:5:"admin";s:10:"controller";s:5:"order";s:6:"method";s:9:"orderlist";s:3:"pid";i:184;s:5:"level";i:2;s:3:"url";s:15:"order/orderlist";s:7:"is_menu";i:1;s:6:"is_dev";i:0;s:4:"sort";i:1;s:4:"desc";s:194:"相关教程：<a href="http://bbs.niushop.com.cn/forum.php?mod=viewthread&tid=2314&extra=page%3D2" target="_blank">http://bbs.niushop.com.cn/forum.php?mod=viewthread&tid=2314&extra=page%3D2</a>";s:14:"module_picture";s:0:"";s:10:"icon_class";s:0:"";s:15:"is_control_auth";i:1;s:11:"create_time";i:1480563210;s:11:"modify_time";N;}

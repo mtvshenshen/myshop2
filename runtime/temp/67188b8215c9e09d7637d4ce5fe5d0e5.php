@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1555480554;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1555492779;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +52,7 @@
  
 	$member_detail 	   = api('System.Member.memberDetail');
 	$member_info  	   = $member_detail['data'];
-var_dump($member_info);
+
     $promoter_info = [];
     if(addon_is_exit('Nsfx')){
 		$promoter_info = api('Nsfx.Distribution.promoterDetail');

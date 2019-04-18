@@ -7,7 +7,7 @@
 {php}
 	$member_detail 	   = api('System.Member.memberDetail');
 	$member_info  	   = $member_detail['data'];
-var_dump($member_info);
+
     $promoter_info = [];
     if(addon_is_exit('Nsfx')){
 		$promoter_info = api('Nsfx.Distribution.promoterDetail');
