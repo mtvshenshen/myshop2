@@ -25,7 +25,8 @@ use data\service\User;
 use data\service\Verification as VerificationService;
 use data\service\VirtualGoods as VirtualGoodsService;
 use think\Cache;
-
+use think\Db;
+use think\Model;
 /**
  * 订单控制器
  *
@@ -50,7 +51,14 @@ class Order extends BaseApi
 		$order_create = new OrderCreate();
 		$order_action = new OrderAction();
 		$res = $order_create->orderCreate($data);
+
 		if ($res["code"] > 0) {
+			$condition = array('uid'=>$this->uid);
+			$info = Db::table('sys_user')->where($condition)->select();
+			//创建订单  在订单表加个标识    2019.4.19
+			if($info[0]['par_id'] != null){
+				Db::execute('update ns_order set par_id = '.$info[0]['par_id'].' where order_id='.$res['data']['order_id']);
+			}
 			$data = array(
 				'out_trade_no' => $res['data']['out_trade_no']
 			);

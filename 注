@@ -6,6 +6,10 @@ use think\Model;
 
 Db::table($this->table)->where($condition)->order($order)->limit(1)->select();
 
+//查找上级
+$condition = array('uid'=>$uid);
+Db::table('sys_user')->where($condition)->select();
+
 Db::execute('update sys_user set user_shop=1 , user_shop_fen = 40 where uid='.$uid);
 
 			$data = [
@@ -22,8 +26,107 @@ Db::execute('update sys_user set user_shop=1 , user_shop_fen = 40 where uid='.$u
 
 
 
+创建订单  在订单表加个标识    ns_order      par_id 
+订单收货 创建 佣金订单  佣金未发放 (订单实付金额 pay_money 计算利润  再计算佣金   实付pay_money-运费shipping_money-成本) 
+15天后  佣金订单 佣金发放 
+
+
+问题：
+1、 实付金额   我使用ns_order         pay_money + user_platform_money  待测试
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 git add README.md
 git commit -m "first commit"
 git remote add origin https://github.com/mtvjiao/myshop.git
 git push -u origin master
+
+
+第一步：查看当前的git仓库状态，可以使用git status
+git status
+第二步：更新全部
+git add *
+第三步：接着输入git commit -m "更新说明"
+git commit -m "更新说明"
+第四步：先git pull,拉取当前分支最新代码
+git pull
+第五步：push到远程master分支上
+git push origin master

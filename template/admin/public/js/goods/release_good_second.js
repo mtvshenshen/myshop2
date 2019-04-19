@@ -1019,7 +1019,15 @@ function ValidateUserInput() {
 	} else {
 		$("#txtProductSalePrice").nextAll("span:last").hide();
 	}
-
+	//成本价格txtProductCostPrice
+	if (!IsNum("#txtProductCostPrice") || parseFloat($("#txtProductCostPrice").val()) < 0) {
+		$(".goods-nav ul li:eq(0)").click();
+		$("#txtProductCostPrice").nextAll("span:last").text("成本价格价不能为空，且不能为负数（计算利润用）").show();
+		$("#txtProductCostPrice").focus();
+		return false;
+	} else {
+		$("#txtProductCostPrice").nextAll("span:last").hide();
+	}
 	//保质期天数
 	if($("#shelf_life").val().length>0){
 		if(!IsPositiveNum("#shelf_life")){

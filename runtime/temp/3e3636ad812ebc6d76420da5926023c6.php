@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:9:{s:50:"addons/NsGoods/template/admin/Goods/editGoods.html";i:1553588451;s:48:"D:\phpStudy\WWW\niushop\template\admin\base.html";i:1553915410;s:65:"D:\phpStudy\WWW\niushop\template\admin\controlCommonVariable.html";i:1552613506;s:52:"D:\phpStudy\WWW\niushop\template\admin\urlModel.html";i:1552613544;s:65:"D:\phpStudy\WWW\niushop\template\admin\Goods\controlGoodsSku.html";i:1554119515;s:69:"D:\phpStudy\WWW\niushop\template\admin\Goods\controlGoodsPresell.html";i:1552613508;s:62:"D:\phpStudy\WWW\niushop\template\admin\Goods\fileAlbumImg.html";i:1553854072;s:54:"D:\phpStudy\WWW\niushop\template\admin\pageCommon.html";i:1552613506;s:54:"D:\phpStudy\WWW\niushop\template\admin\openDialog.html";i:1552613504;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:9:{s:50:"addons/NsGoods/template/admin/Goods/editGoods.html";i:1555639684;s:48:"D:\phpStudy\WWW\niushop\template\admin\base.html";i:1553915410;s:65:"D:\phpStudy\WWW\niushop\template\admin\controlCommonVariable.html";i:1552613506;s:52:"D:\phpStudy\WWW\niushop\template\admin\urlModel.html";i:1552613544;s:65:"D:\phpStudy\WWW\niushop\template\admin\Goods\controlGoodsSku.html";i:1554119515;s:69:"D:\phpStudy\WWW\niushop\template\admin\Goods\controlGoodsPresell.html";i:1552613508;s:62:"D:\phpStudy\WWW\niushop\template\admin\Goods\fileAlbumImg.html";i:1553854072;s:54:"D:\phpStudy\WWW\niushop\template\admin\pageCommon.html";i:1552613506;s:54:"D:\phpStudy\WWW\niushop\template\admin\openDialog.html";i:1552613504;}*/ ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -1536,15 +1536,15 @@ $(function(){
 			<dd>
 				<input class="goods_price input-common harf" type="number" id="txtProductSalePrice" <?php if($goods_info): ?>value="<?php echo $goods_info['price']; ?>"<?php else: ?> value = "0.00"<?php endif; ?> min="0" placeholder="0.00" 
 				/><em class="unit">元</em>
-				<span class="help-inline">商品销售价不能为空，且不能为负数</span>
+				<span class="help-inline">商品销售价不能为空，且不能为负数（计算利润用）</span>
 			</dd>
 		</dl>
 		<dl class="sku_type_1">
-			<dt>成本价格：</dt>
+			<dt><i class="required">*</i>成本价格：</dt>
 			<dd>
 				<input class="goods_price input-common harf" type="number" id="txtProductCostPrice" <?php if($goods_info): ?>value="<?php echo $goods_info['cost_price']; ?>"<?php endif; ?> min="0" placeholder="0.00" 
 				/><em class="unit">元</em>
-				<span class="help-inline">商品成本必须是数字，且不能为负数</span>
+				<span class="help-inline">商品成本价不能为空，且不能为负数</span>
 			</dd>
 		</dl>
 		

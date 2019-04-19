@@ -411,15 +411,15 @@ var goods_attribute_list = eval('{$goods_info.goods_attribute_list}');
 			<dd>
 				<input class="goods_price input-common harf" type="number" id="txtProductSalePrice" {if condition="$goods_info"}value="{$goods_info.price}"{else /} value = "0.00"{/if} min="0" placeholder="0.00" 
 				/><em class="unit">元</em>
-				<span class="help-inline">商品销售价不能为空，且不能为负数</span>
+				<span class="help-inline">商品销售价不能为空，且不能为负数（计算利润用）</span>
 			</dd>
 		</dl>
 		<dl class="sku_type_1">
-			<dt>成本价格：</dt>
+			<dt><i class="required">*</i>成本价格：</dt>
 			<dd>
 				<input class="goods_price input-common harf" type="number" id="txtProductCostPrice" {if condition="$goods_info"}value="{$goods_info.cost_price}"{/if} min="0" placeholder="0.00" 
 				/><em class="unit">元</em>
-				<span class="help-inline">商品成本必须是数字，且不能为负数</span>
+				<span class="help-inline">商品成本价不能为空，且不能为负数</span>
 			</dd>
 		</dl>
 		

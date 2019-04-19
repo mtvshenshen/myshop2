@@ -655,8 +655,9 @@ function ValidateUserInput() {
 		$("#txtProductCodeA").next("span").hide();
 	}
 	
-	//销售价格
-	if (!IsNum("#txtProductSalePrice") || parseFloat($("#txtProductSalePrice").val()) < 0) {
+	//销售价格txtProductSalePrice
+
+	if (!IsNum("#txtProductSalePrice") || parseFloat($("#txtProductSalePrice").val()) < 0.01) {
 		$(".goods-nav ul li:eq(0)").click();
 		$("#txtProductSalePrice").nextAll("span:last").text("商品销售价不能为空，且不能为负数").show();
 		$("#txtProductSalePrice").focus();
@@ -664,7 +665,17 @@ function ValidateUserInput() {
 	} else {
 		$("#txtProductSalePrice").nextAll("span:last").hide();
 	}
-	
+	//成本价格txtProductCostPrice
+	if (!IsNum("#txtProductCostPrice") || parseFloat($("#txtProductCostPrice").val()) < 0) {
+		$(".goods-nav ul li:eq(0)").click();
+		$("#txtProductCostPrice").nextAll("span:last").text("成本价格价不能为空，且不能为负数（计算利润）").show();
+		$("#txtProductCostPrice").focus();
+		return false;
+	} else {
+		$("#txtProductCostPrice").nextAll("span:last").hide();
+	}
+
+
 	//保质期天数
 	if($("#shelf_life").length>0 && $("#shelf_life").val().length>0){
 		if(!IsPositiveNum("#shelf_life")){
@@ -895,7 +906,7 @@ function ValidateUserInput() {
  */
 var flag = false;//防止重复提交
 function SubmitProductInfo(type, ADMIN_MAIN,SHOP_MAIN) {
-	
+
 	// 禁用按钮
 	var validateResult = ValidateUserInput(); // 验证用户输
 	if (!validateResult) {return false;}
