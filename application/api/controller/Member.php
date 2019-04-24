@@ -79,7 +79,18 @@ class Member extends BaseApi
 		}
 		return $this->outMessage($title, $member_detail);
 	}
-	
+	/**
+	 * 2019.4.24   分店会员佣金信息
+	 */
+	public function shopInfo()
+	{
+		$title = "分店会员佣金信息";
+		if (empty($this->uid)) {
+			return $this->outMessage($title, "", '-9999', "无法获取分店会员佣金信息");
+		}
+		$member_detail = Db::table('nfx_shop_user')->where(['uid'=>$this->uid])->limit(1)->select();
+		return $this->outMessage($title, $member_detail[0]);
+	}	
 	/**
 	 * 添加账户流水
 	 */

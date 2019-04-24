@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1555568515;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1556071726;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -240,7 +240,7 @@
 	 		<div class="ns-text-color-black order-head-left">
 	 			<?php if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): ?>
 	 			<a href="<?php echo __URL('http://127.0.0.1:8080/index.php/wap/member/user_shop?shop_id='.$shop_id); ?>">
-	 			我的店铺(点击查看店铺数据)
+	 			我的店铺(点击查看佣金订单记录)
 	 			</a>
 	 			<?php else: ?>
 	 			我的店铺
@@ -258,30 +258,32 @@
 	 		我的店铺连接(长按复制)
 	 		<input type="text" value="<?php echo __URL('http://127.0.0.1:8080/index.php/wap?user_shop_id='.$member_info['user_info']['uid']); ?>" style="width: 100%;">
 	 	</div>
-	 	<?php endif; ?>
-<!-- 	 	<?php if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): ?>
+	 	<?php endif; if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): 
+				$shopInfo 	   = api('System.Member.shopInfo');
+				$shop_data   = $shopInfo['data'];
+			 ?>
 	 	<div class="member-order-list member-promotion">
 	 		<a href="">
 			 	<div class="member-order-item">
-			 		<div class="order-icon ns-text-color-black">￥</div>
+			 		<div class="order-icon ns-text-color-black">￥<?php echo $shop_data['commossion_total']; ?></div>
 			 		<div class="order-texr">累计佣金</div>
 		 		</div>
 	 		</a>
 	 		<a href="">
 			 	<div class="member-order-item">
-			 		<div class="order-icon ns-text-color-black">￥</div>
-			 		<div class="order-texr">待审核</div>
+			 		<div class="order-icon ns-text-color-black">￥<?php echo $shop_data['commission_ke']; ?></div>
+			 		<div class="order-texr">佣金余额</div>
 		 		</div>
 	 		</a>
 	 		<a href="">
 			 	<div class="member-order-item">
-			 		<div class="order-icon ns-text-color-black">￥</div>
-			 		<div class="order-texr">已提现</div>
+			 		<div class="order-icon ns-text-color-black">￥<?php echo $shop_data['commission_cash']; ?></div>
+			 		<div class="order-texr">佣金转钱包金额</div>
 		 		</div>
 	 		</a>
 	 		<div class="clear"></div>
 	 	</div>
-	 	<?php endif; ?> -->
+	 	<?php endif; ?>
 	 </div>
 <!-- 2019.4.16++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	 

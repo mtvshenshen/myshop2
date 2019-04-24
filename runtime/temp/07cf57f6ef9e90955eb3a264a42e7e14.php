@@ -546,7 +546,7 @@ $is_virtual = $data['is_virtual']; // 是否是虚拟商品
 				<?php endif; ?>
 				<div class="tit">选择配送时间</div>
 				<ul class="clearfix shipping-time-list">
-					<?php $__FOR_START_13012__=3;$__FOR_END_13012__=10;for($i=$__FOR_START_13012__;$i < $__FOR_END_13012__;$i+=1){ ?>
+					<?php $__FOR_START_2012__=3;$__FOR_END_2012__=10;for($i=$__FOR_START_2012__;$i < $__FOR_END_2012__;$i+=1){ ?>
 						<li data-time="<?php echo strtotime($i." day"); ?>"><?php echo date('Y-m-d', strtotime($i." day")); ?>&nbsp;<?php echo $week_array[date('w', strtotime($i." day"))]; ?></li>
 					<?php } ?>
 				</ul>

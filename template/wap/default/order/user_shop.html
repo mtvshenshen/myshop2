@@ -1,0 +1,104 @@
+{extend name="$base" /}
+{block name="resources"}
+	<link rel="stylesheet" type="text/css" href="WAP_CSS/order_list.css">
+{/block}
+{block name="head_href"}{:__URL('APP_MAIN/member/index')}{/block}
+{block name="main"}
+
+<div class="main myorder">
+	<div class="tabs-content">
+		<div class="content active" id="list_content"></div>
+	</div>
+    <div id="pay" style="display: none"></div>
+    <input type="hidden" name="status_hidden" id="status_hidden" value="{$status}"/>
+    <input type="hidden" name="shop_id" id="shop_id" value="{$shop_id}"/>
+	<input type="hidden" id="page_count"><!-- 总页数 -->
+	<input type="hidden" id="page" value="1"><!-- 当前页数 -->
+	<input type="hidden" id="status" value="all">
+</div>
+
+{/block}
+{block name="script"}
+<script src="WAP_JS/order.js"></script>
+<script>
+$(function(){
+
+	GetDataList(1);
+
+});
+var is_load = false;//防止重复加载
+function GetDataList(page){
+	if(page == undefined || page == "") page = 1;
+	$("#page").val(page);//设置当前页
+
+	if(is_load) return;
+	is_load = true;
+	api("System.Order.shopOrder",{'shop_id':$('#shop_id').val(),"page":page },function (res) {
+		var data = res.data;
+		$("#page_count").val(data['page_count']);//总页数
+		if(page == 1){
+			var datahtml="";
+		}else if(page > 1){
+			var datahtml = $('#list_content').html();
+		}
+		if(data['data'].length==0){
+			datahtml+='<div class="myorder-none" ><i class="icon-none"></i><span class="none_01">{:lang("member_no_order_yet")}</span><span class="none_02">{:lang("member_go_and_see")}</span><span class="none_03"><a href="{:__URL('APP_MAIN/goods/lists')}">{:lang("member_look_around")}</a></span></div>';
+		}else{
+			for(var i=0;i<data['data'].length;i++){
+				var ordersitem=data['data'][i];
+				datahtml+='<div class="list-myorder">';
+				datahtml+='<div class="ordernumber"><span class="order-num f12 ns-text-color-black">'+ordersitem['order_no']+'</span><span class="order-date f12" >'+timeStampTurnTime(ordersitem['create_time'])+'</span></div>';
+				datahtml+='<ul class="ul-product">';
+
+				for(var j=0;j<ordersitem['order_item_list'].length;j++){
+					var goodsitem=ordersitem['order_item_list'][j];
+					var gift_flag = ordersitem['order_item_list'][j]['gift_flag'];
+					datahtml+='<li>';
+					datahtml+='<span class="pic">';
+					datahtml+='<img src="'+__IMG(goodsitem['picture']['pic_cover_micro'])+'"></span>';
+					datahtml+='<div class="text">';
+					datahtml+='<span class="pro-name f12 ns-text-color-black">'+goodsitem['goods_name']+'</span>';
+					if(gift_flag > 0){
+						datahtml+='<div class="pro-pric"><span class="f12">{:lang("goods_price")}:</span><b class="f12 f-no ns-text-color-black">￥'+goodsitem['price']+'</b><i class="ns-bg-color gift-mark">赠品</i></div>';
+					}else{
+						datahtml+='<div class="pro-pric"><span class="f12">{:lang("goods_price")}:</span><b class="f12 f-no ns-text-color-black">￥'+goodsitem['price']+'</b></div>';
+					}
+
+					datahtml+='<div class="pro-pric"><span class="f12">{:lang("goods_number")}:</span><b class="f12 f-no ns-text-color-black">'+goodsitem['num']+'{:lang("goods_piece")}</b></div>';
+					datahtml+='</div>';
+
+					datahtml+='</li>';
+
+				}
+				datahtml+='<div class="pro-pric margin0" style="color:red"><span class="f12">订单佣金:</span><b class="f12 f-no ns-text-color-red">'+goodsitem['commission_money']+'</b></div>';
+				datahtml+='</ul>';
+			}
+
+
+		}
+		is_load = false;
+		$('#list_content').html(datahtml);
+	});
+}
+
+//滑动到底部加载
+$(window).scroll(function(){
+	var totalheight = parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+	var content_box_height = parseFloat($("#list_content").height());
+	if(totalheight - content_box_height >= 80){
+		if(!is_load){
+			var page = parseInt($("#page").val()) + 1;//页数
+			var total_page_count = $("#page_count").val(); // 总页数
+			var status = $('#status').val();
+			if(page > total_page_count){
+				return false;
+			}else{
+				GetDataList(status,page);
+			}
+		}
+	}
+})
+ 
+</script>
+{/block}
+{block name="footer"}{/block}

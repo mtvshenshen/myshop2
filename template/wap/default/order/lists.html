@@ -110,9 +110,9 @@ function GetDataList(status,page){
 							}
 						}
 					}
-					if(ordersitem['order_status'] == 4  && goodsitem['customer_info'] == null){
+					if(ordersitem['order_status'] == 3  && goodsitem['customer_info'] == null){
 						datahtml+='<a href=\''+__URL('APP_MAIN/Order/aftersale?order_goods_id='+goodsitem['order_goods_id'])+'\'"><span class="order-operating-item">申请售后</span></a>&nbsp;&nbsp;';
-					}else if(ordersitem['order_status'] == 4 && goodsitem['customer_info']!=null){
+					}else if(ordersitem['order_status'] == 3 && goodsitem['customer_info']!=null){
 						datahtml+='<a href=\''+__URL('APP_MAIN/Order/aftersale?order_goods_id='+goodsitem['order_goods_id'])+'\'"><span class="order-operating-item">查看售后</span></a>&nbsp;&nbsp;';
 					}
 					if(goodsitem['refund_status']!=0){

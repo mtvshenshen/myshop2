@@ -202,13 +202,13 @@ class Events
 			$config = new Config();
 			$config_info = $config->getConfig(0, 'ORDER_DELIVERY_COMPLETE_TIME');
 			
-			if ($config_info['value'] != '') {
-				$complete_time = $config_info['value'];
-			} else {
+			// if ($config_info['value'] != '') {
+			// 	$complete_time = $config_info['value'];
+			// } else {
 				$complete_time = 7;//7天
-			}
-			$time = time() - 3600 * 24 * $complete_time;//订单自动完成
-			
+			// }
+			// $time = time() - 3600 * 24 * $complete_time;//订单自动完成
+			$time = time() - 60;//订单自动完成  测试
 			$condition = array(
 				'order_status' => 3,
 				'sign_time' => array( 'LT', $time )
@@ -234,6 +234,74 @@ class Events
 		}
 	}
 	
+
+	// /**
+	//  * 交易完成后15天  返利 2019.4.23   改逻辑  暂时不用了
+	//  */
+	// public function ordersCompleteShop()
+	// {
+		
+	// 	try {
+			
+	// 		$complete_time = 15;
+
+	// 		// $time = time() - 3600 * 24 * $complete_time;
+	// 		$time = time() - 60; //测试
+	// 		$condition = array(
+	// 			'order_status' => 4,
+	// 			'sign_time' => array( 'LT', $time )
+	// 		);
+	// 		$order_list = $order_model->getQuery($condition, 'order_id', '');
+			
+	// 		if (!empty($order_list)) {
+	// 			foreach ($order_list as $k => $v) {
+	// 				if (!empty($v['order_id'])) {
+	// 					Db::execute('update nfx_shop_user_distribution set is_issue=1  where order_id='.$v['order_id']);
+ //                        $order_list = Db::table('nfx_shop_user_distribution')->where(['order_id'=>$v['order_id']])->limit(1)->select();
+	// 					// $condition = array('order_id'=>$order_id);
+	// 					// $info = Db::table('ns_order')->where($condition)->select();
+	// 					// if($info[0]['par_id'] != null){
+	// 					// 	//创建订单  订单收货 创建 佣金订单  佣金未发放    2019.4.19
+
+	// 					// 	$goods = Db::table('ns_order_goods')->where(array('order_id'=>$order_id))->select();
+	// 					// 	foreach ($goods as $key => $value) {
+	// 					// 		$cost_total += $value['cost_price'];
+	// 					// 	}
+	// 					// 	$goods_money = $info[0]['pay_money'] + $info[0]['user_platform_money'] - $info[0]['shipping_money'];
+	// 					// 	$goods_return = $goods_money-$cost_total;
+	// 					// 	$par = Db::table('sys_user')->where(['uid'=>$info[0]['par_id']])->select();
+	// 					// 	$commission_rate = $par[0]['user_shop_fen'];
+	// 					// 	$commission_money = round($goods_return*$commission_rate/100,2);
+
+	// 					// 	$datas = [
+	// 					// 		'par_id' => $info[0]['par_id'],//对应的推销员id
+	// 					// 		'order_id' => $order_id,
+	// 					// 		'goods_money' => $goods_money , //订单项商品实付金额 pay_money - shipping_money
+	// 					// 		'goods_cost' =>  $cost_total,//订单项商品总成本
+	// 					// 		'goods_return' => $goods_return,//商品利润
+	// 					// 		'commission_rate' => $commission_rate,//佣金比率
+	// 					// 		'commission_money' => $commission_money,//佣金金额
+	// 					// 		'create_time' => time()
+	// 					// 	];
+	// 					// 	Db::table("nfx_shop_user_distribution")->insert($datas);
+	// 					// 	// 2019.4.22 给开店员表 添加 还未到账佣金 
+	// 					// 	Db::execute('update nfx_shop_user set commission_fan =commission_fan+'.$commission_money.' where uid='.$info[0]['par_id']);	
+	// 					// }
+	// 				}
+					
+	// 			}
+				
+	// 		}			
+			
+			
+
+	// 		return 1;
+	// 	} catch (\Exception $e) {
+	// 		return $e->getMessage();
+	// 	}
+	// }
+
+
 	/**
 	 * 限时折扣自动开始以及自动关闭
 	 */

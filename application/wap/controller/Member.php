@@ -159,6 +159,13 @@ class Member extends BaseWap
 		return $this->view($this->style . "member/kaidian");
 	}
 	/**
+	 * 开店员佣金订单表
+	 */
+	public function user_shop()
+	{
+		return $this->view($this->style . "order/user_shop");
+	}	
+	/**
 	 * 会员申请开店页面
 	 */
 	public function kaidianshenqing()

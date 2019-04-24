@@ -22,6 +22,9 @@ use data\service\OrderRefund;
 use data\service\OrderQuery;
 use data\service\OrderCreate;
 use data\service\User;
+use data\model\NfxShopUserDistributionModel;
+use data\model\NsOrderGoodsModel;
+use data\model\AlbumPictureModel;
 use data\service\Verification as VerificationService;
 use data\service\VirtualGoods as VirtualGoodsService;
 use think\Cache;
@@ -207,7 +210,58 @@ class Order extends BaseApi
 		$order_list['statusNum'] = $order_query->getOrderStatusNum($condition);
 		return $this->outMessage($title, $order_list);
 	}
-	
+	/**
+	 * 2019.4.24 获取当前会员的所属佣金订单列表
+	 */
+	public function shopOrder()
+	{
+		$title = "获取当前会员的所属佣金订单列表";
+		if (empty($this->uid)) {
+			return $this->outMessage($title, null, '-9999', "无法获取会员登录信息");
+		}
+		
+		$page_index = isset($this->params['page']) ? $this->params['page'] : 1;
+		$page_size = isset($this->params['page_size']) ? $this->params['page_size'] : PAGESIZE;
+
+		$condition['par_id'] = $this->uid;
+
+		$order_model = new NfxShopUserDistributionModel();
+		// 查询主表
+		$order = 'create_time desc';
+		$order_list = $order_model->pageQuery($page_index, $page_size, $condition, $order, '*');
+		foreach ($order_list['data'] as $key => $value) {
+			$order_no = Db::table('ns_order')->where(['order_id'=> $value['order_id']])->limit(1)->select();
+			$order_list['data'][$key]['order_no'] = $order_no[0]['order_no'];
+
+			$order_item = new NsOrderGoodsModel();
+			$order_item_list = $order_item->getQuery([
+				'order_id' => $value['order_id']
+			], '*', '');
+			foreach ($order_item_list as $key_item => $v_item) {
+				$picture = new AlbumPictureModel();
+				$goods_picture = $picture->get($v_item['goods_picture']);
+				if (empty($goods_picture)) {
+					$goods_picture = array(
+						'pic_cover' => '',
+						'pic_cover_big' => '',
+						'pic_cover_mid' => '',
+						'pic_cover_small' => '',
+						'pic_cover_micro' => '',
+						"upload_type" => 1,
+						"domain" => ""
+					);
+				}
+				
+				$order_item_list[ $key_item ]['picture'] = $goods_picture;
+			}
+			$order_list['data'][$key]['order_item_list'] = $order_item_list;
+
+
+
+		}
+
+		return $this->outMessage($title, $order_list);
+	}	
 	/**
 	 * 订单详情
 	 */

@@ -499,7 +499,58 @@ class OrderAction extends OrderService
 		    $this->calculateOrderMansong($order_id);
 		    // 判断是否需要在本阶段赠送积分
 		    $this->giveGoodsOrderPoint($order_id, 1);
-		    
+
+
+			$condition = array('order_id'=>$order_id);
+			$info = Db::table('ns_order')->where($condition)->select();
+			if($info[0]['par_id'] != null){
+				//订单完成(收货7天后)   创建 佣金订单  佣金 发放    2019.4.19
+
+				$goods = Db::table('ns_order_goods')->where(array('order_id'=>$order_id))->select();
+				// $re_good = Db::table('ns_customer_service')->where(array('order_id'=>$order_id))->select();
+				// $re_good_ids = array();
+				// if(!empty($re_good[0])){
+				// 	foreach ($re_good as $k => $v) {
+				// 		$re_good_ids[] = $v['goods_id'];
+				// 	}					
+				// }
+				// foreach ($goods as $key => $value) {
+				// 	if(in_array($value['goods_id'],$re_good_ids)){
+				// 		continue;
+				// 	}else{
+				// 		$cost_total += $value['cost_price'];
+				// 	}
+				// }
+
+				foreach ($goods as $key => $value) {
+					if($value['refund_status'] != 0){
+						$cost_total += $value['goods_money'];
+					}else{
+						$cost_total += $value['cost_price'];
+					}
+				}
+				$goods_money = $info[0]['pay_money'] + $info[0]['user_platform_money'] - $info[0]['shipping_money'];
+				$goods_return = $goods_money-$cost_total;
+				$par = Db::table('sys_user')->where(['uid'=>$info[0]['par_id']])->select();
+				$commission_rate = $par[0]['user_shop_fen'];
+				$commission_money = round($goods_return*$commission_rate/100,2);
+
+				$datas = [
+					'par_id' => $info[0]['par_id'],//对应的推销员id
+					'order_id' => $order_id,
+					'goods_money' => $goods_money , //订单项商品实付金额 pay_money - shipping_money
+					'goods_cost' =>  $cost_total,//订单项商品总成本
+					'goods_return' => $goods_return,//商品利润
+					'commission_rate' => $commission_rate,//佣金比率
+					'commission_money' => $commission_money,//佣金金额
+					'create_time' => time()
+				];
+				Db::table("nfx_shop_user_distribution")->insert($datas);
+				// 2019.4.22 给开店员表 添加 还未到账佣金 
+				Db::execute('update nfx_shop_user set commission_ke = commission_ke+'.$commission_money.' , commossion_total = commossion_total + '.$commission_money.' where uid='.$info[0]['par_id']);	
+			}		
+
+
 		    //消息推送
 		    runhook("Notify", "orderComplete", array(
 		        "order_id" => $order_id
@@ -918,34 +969,6 @@ class OrderAction extends OrderService
 	public function OrderTakeDelivery($order_id)
 	{
 
-			$condition = array('buyer_id'=>$this->uid,'order_id'=>$order_id);
-			$info = Db::table('ns_order')->where($condition)->select();
-			if($info[0]['par_id'] != null){
-				//创建订单  订单收货 创建 佣金订单  佣金未发放    2019.4.19
-
-				$goods = Db::table('ns_order_goods')->where(array('order_id'=>$order_id))->select();
-				foreach ($goods as $key => $value) {
-					$cost_total += $value['cost_price'];
-				}
-				$goods_money = $info[0]['pay_money'] + $info[0]['user_platform_money'] - $info[0]['shipping_money'];
-				$goods_return = $goods_money-$cost_total;
-				$par = Db::table('sys_user')->where(['uid'=>$info[0]['par_id']])->select();
-				$commission_rate = $par[0]['user_shop_fen'];
-				$commission_money = round($goods_return*$commission_rate/100,2);
-				$datas = [
-					'promoter_id' => $info[0]['par_id'],//对应的推销员id
-					'order_id' => $order_id,
-					'goods_money' => $goods_money , //订单项商品实付金额 pay_money - shipping_money
-					'goods_cost' =>  $cost_total,//订单项商品总成本
-					'goods_return' => $goods_return,//商品利润
-					'commission_rate' => $commission_rate,//佣金比率
-					'commission_money' => $commission_money,//佣金金额
-					'create_time' => time()
-				];
-				Db::table("nfx_shop_user_distribution")->insert($datas);				
-			}
-
-			exit;
 	    //订单收货
 	    $this->order->startTrans();
 	    try {
@@ -965,8 +988,6 @@ class OrderAction extends OrderService
 	            "remark" => "订单收货"
 	        );
 	        $this->addOrderAction($data);
-
-
 
 
 	        

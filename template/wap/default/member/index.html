@@ -197,7 +197,7 @@
 	 		<div class="ns-text-color-black order-head-left">
 	 			{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
 	 			<a href="{:__URL('APP_MAIN/member/user_shop?shop_id='.$shop_id)}">
-	 			我的店铺(点击查看店铺数据)
+	 			我的店铺(点击查看佣金订单记录)
 	 			</a>
 	 			{else/}
 	 			我的店铺
@@ -218,29 +218,33 @@
 	 		<input type="text" value="{:__URL('APP_MAIN?user_shop_id='.$member_info['user_info']['uid'])}" style="width: 100%;">
 	 	</div>
 	 	{/if}
-<!-- 	 	{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
+ 	 	{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
+	 	 	{php}
+				$shopInfo 	   = api('System.Member.shopInfo');
+				$shop_data   = $shopInfo['data'];
+			{/php}
 	 	<div class="member-order-list member-promotion">
 	 		<a href="">
 			 	<div class="member-order-item">
-			 		<div class="order-icon ns-text-color-black">￥</div>
+			 		<div class="order-icon ns-text-color-black">￥{$shop_data['commossion_total']}</div>
 			 		<div class="order-texr">累计佣金</div>
 		 		</div>
 	 		</a>
-	 		<a href="">
+	 		<a href="{:__URL('APP_MAIN/order/zhuan?shop_id='.$shop_id)}">
 			 	<div class="member-order-item">
-			 		<div class="order-icon ns-text-color-black">￥</div>
-			 		<div class="order-texr">待审核</div>
+			 		<div class="order-icon ns-text-color-black">￥{$shop_data['commission_ke']}</div>
+			 		<div class="order-texr">佣金余额(点击转钱包)</div>
 		 		</div>
 	 		</a>
 	 		<a href="">
 			 	<div class="member-order-item">
-			 		<div class="order-icon ns-text-color-black">￥</div>
-			 		<div class="order-texr">已提现</div>
+			 		<div class="order-icon ns-text-color-black">￥{$shop_data['commission_cash']}</div>
+			 		<div class="order-texr">佣金转钱包金额</div>
 		 		</div>
 	 		</a>
 	 		<div class="clear"></div>
 	 	</div>
-	 	{/if} -->
+	 	{/if}
 	 </div>
 <!-- 2019.4.16++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	 

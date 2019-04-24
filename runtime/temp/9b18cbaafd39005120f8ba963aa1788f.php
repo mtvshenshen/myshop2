@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:37:"template/wap\default\order\lists.html";i:1553861282;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:37:"template/wap\default\order\lists.html";i:1555999126;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -171,9 +171,9 @@ function GetDataList(status,page){
 							}
 						}
 					}
-					if(ordersitem['order_status'] == 4  && goodsitem['customer_info'] == null){
+					if(ordersitem['order_status'] == 3  && goodsitem['customer_info'] == null){
 						datahtml+='<a href=\''+__URL('http://127.0.0.1:8080/index.php/wap/Order/aftersale?order_goods_id='+goodsitem['order_goods_id'])+'\'"><span class="order-operating-item">申请售后</span></a>&nbsp;&nbsp;';
-					}else if(ordersitem['order_status'] == 4 && goodsitem['customer_info']!=null){
+					}else if(ordersitem['order_status'] == 3 && goodsitem['customer_info']!=null){
 						datahtml+='<a href=\''+__URL('http://127.0.0.1:8080/index.php/wap/Order/aftersale?order_goods_id='+goodsitem['order_goods_id'])+'\'"><span class="order-operating-item">查看售后</span></a>&nbsp;&nbsp;';
 					}
 					if(goodsitem['refund_status']!=0){
