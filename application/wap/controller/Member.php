@@ -152,7 +152,7 @@ class Member extends BaseWap
 	}
 
 	/**
-	 * 会员申请开店页面
+	 * 会员申请开店页面 2019.4.22
 	 */
 	public function kaidian()
 	{
@@ -176,6 +176,13 @@ class Member extends BaseWap
 				Db::execute('update sys_user set user_shop_agree=1 where uid='.$uid);
 		}
 		return AjaxReturn($retval);	
+	}	
+	/**
+	 * 开店员佣金转余额页面
+	 */
+	public function zhuan()
+	{
+		return $this->view($this->style . "member/user_shop_zhuan");
 	}		
 	/**
 	 * 积分兑换余额

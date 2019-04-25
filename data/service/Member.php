@@ -2067,7 +2067,7 @@ class Member extends User
 			'modify_date' => time()
 		);
 		$balance_withdraw->save($data);
-		// 添加账户流水
+		// 添加账户流水 4.24
 		$member_account->addMemberAccountData($shop_id, 2, $uid, 0, -$cash, 8, $balance_withdraw->id, "会员余额提现");
 		if ($balance_withdraw->id) {
 			$params['id'] = $balance_withdraw->id;

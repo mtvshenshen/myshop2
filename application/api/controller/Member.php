@@ -33,6 +33,7 @@ use data\service\User;
 use data\service\Verification;
 use data\service\WebSite;
 use data\service\Weixin;
+use data\model\NsMemberAccountModel;
 use think\Request;
 use think\Session;
 use data\service\VirtualGoods as VirtualGoodsService;
@@ -90,7 +91,50 @@ class Member extends BaseApi
 		}
 		$member_detail = Db::table('nfx_shop_user')->where(['uid'=>$this->uid])->limit(1)->select();
 		return $this->outMessage($title, $member_detail[0]);
+	}
+	/**
+	 * 2019.4.25   分店员佣金转余额操作
+	 */
+	public function zhuanhuan()
+	{
+		$title = "分店员佣金转余额操作";
+		if (empty($this->uid)) {
+			return $this->outMessage($title, "", '-9999', "无法获取分店会员佣金信息");
+		}
+		$user = new NsMemberAccountModel();
+		$user->startTrans();		
+
+		try {
+			$member_detail = Db::table('nfx_shop_user')->where(['uid'=>$this->uid])->select();
+			$yue = $member_detail[0]['commission_ke'];
+			// $user_info = Db::table('ns_member_account')->where(['uid'=>$this->uid])->select();
+			// if(empty($user_info[0])){
+
+			// 	$data = array(
+			// 		'uid' => $this->uid,
+			// 		'balance' => $yue
+			// 	);
+			// 	$user->save($data);
+			// }else{ 
+			// 	$data = array(
+			// 		'balance' => $user_info[0]['balance'] + $yue
+			// 	);
+			// 	$user->save($data,['uid' => $this->uid]);
+			// }
+			Db::execute('update nfx_shop_user set commission_ke = 0 , commission_cash = commission_cash + '. $yue .' where uid='.$this->uid);
+			$member_account = new MemberAccountService();
+			$member_account->addMemberAccountData(0, 2, $this->uid, 1, $yue, 10 , 0, '佣金转余额');
+			$user->commit();
+			return $this->outMessage($title, $member_detail[0]);
+		} catch (\Exception $e) {
+			$user->rollback();
+			return $e->getMessage();
+		}
+		
+		
 	}	
+
+
 	/**
 	 * 添加账户流水
 	 */

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1556071726;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1556089261;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -269,10 +269,10 @@
 			 		<div class="order-texr">累计佣金</div>
 		 		</div>
 	 		</a>
-	 		<a href="">
+	 		<a href="<?php echo __URL('http://127.0.0.1:8080/index.php/wap/member/zhuan?shop_id='.$shop_id); ?>">
 			 	<div class="member-order-item">
 			 		<div class="order-icon ns-text-color-black">￥<?php echo $shop_data['commission_ke']; ?></div>
-			 		<div class="order-texr">佣金余额</div>
+			 		<div class="order-texr">佣金余额(点击转钱包)</div>
 		 		</div>
 	 		</a>
 	 		<a href="">
