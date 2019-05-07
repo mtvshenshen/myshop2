@@ -1,0 +1,24 @@
+{extend name="$base" /}
+{block name="resources"}
+	<link rel="stylesheet" type="text/css" href="WAP_CSS/order_list.css">
+{/block}
+{block name="head_href"}{:__URL('APP_MAIN/member/index')}{/block}
+{block name="main"}
+<div class="cf-container" style="height: auto">
+	<div class="cf-edge" data-reactid="3"></div>
+	<ul class="cf-content" data-reactid="4" style="height: auto">
+		<li class="cf-tab-item " data-type="0" style="width: 47%;">用户名</li>
+		<li class="cf-tab-item" data-type="1" style="width: 47%;">注册时间</li>
+	</ul>
+{foreach name="users" item="vo"}	
+	<ul class="cf-content" data-reactid="4" style="height: auto">
+		<li class="cf-tab-item " data-type="0" style="width: 47%;">{$vo.nick_name}</li>
+		<li class="cf-tab-item" data-type="1" style="width: 47%;">{$vo.reg_time | getTimeStampTurnTime}</li>
+	</ul>
+{/foreach}
+</div>
+
+{/block}
+
+
+{block name="footer"}{/block}

@@ -192,7 +192,17 @@
 <!-- 2019.4.16++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 	  <div class="member-order">
-	 	<div class="member-order-head">
+ 		{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
+	 	<div class="member-order-head"> 		
+	 		<div class="ns-text-color-black order-head-left">
+	 			<a href="{:__URL('APP_MAIN/member/shop_user?shop_id='.$shop_id)}">
+	 			我的下级(点击查看下级信息)
+	 			</a>
+	 		</div>
+	 		<div class="clear"></div>
+	 	</div>
+ 		{/if}	 	
+ 		<div class="member-order-head">
 	 		
 	 		<div class="ns-text-color-black order-head-left">
 	 			{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
@@ -203,6 +213,7 @@
 	 			我的店铺
 	 			{/if}
 	 		</div>
+
 	 		{if $member_info['user_info']['user_shop'] == 0 && $member_info['user_info']['user_shop_agree'] == 1 }
 	 		<div class="order-head-right">开店审核中</div>
 	 		{/if}	
@@ -212,6 +223,10 @@
 	 		{/if} 		
 	 		<div class="clear"></div>
 	 	</div>
+
+
+
+
 	 	{if $member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1 }
  	 	<div class="member-order-head">
 	 		我的店铺连接(长按复制)

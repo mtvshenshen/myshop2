@@ -9,8 +9,8 @@
 <div class="cf-container" data-reactid="2">
 	<div class="cf-edge" data-reactid="3"></div>
 <ul class="cf-content" data-reactid="4">
-		<li class="cf-tab-item " data-type="0" style="width: 47%;"><a href="javascript:;" class="selected ns-text-color-hover ns-border-color-hover">已完成</a></li>
-		<li class="cf-tab-item" data-type="1" style="width: 47%;"><a href="{:__URL('APP_MAIN/member/user_shopd?shop_id='.$shop_id)}" class="ns-text-color-hover">进行中</a></li>
+		<li class="cf-tab-item " data-type="0" style="width: 47%;"><a href="{:__URL('APP_MAIN/member/user_shop?shop_id='.$shop_id)}" class="ns-border-color-hover">已完成</a></li>
+		<li class="cf-tab-item" data-type="1" style="width: 47%;"><a href="#" class="selected ns-text-color-hover ns-text-color-hover">进行中</a></li>
 	</ul>
 </div>
 	
@@ -42,7 +42,7 @@ function GetDataList(page){
 
 	if(is_load) return;
 	is_load = true;
-	api("System.Order.shopOrder",{'shop_id':$('#shop_id').val(),"page":page },function (res) {
+	api("System.Order.shopO",{'shop_id':$('#shop_id').val(),"page":page },function (res) {
 		var data = res.data;
 		$("#page_count").val(data['page_count']);//总页数
 		if(page == 1){
@@ -73,13 +73,19 @@ function GetDataList(page){
 						datahtml+='<div class="pro-pric"><span class="f12">{:lang("goods_price")}:</span><b class="f12 f-no ns-text-color-black">￥'+goodsitem['price']+'</b></div>';
 					}
 
+				// var goods_money = ordersitem['pay_money'] + ordersitem['user_platform_money'] - ordersitem['shipping_money'];
+				// var goods_return = $goods_money-$cost_total;
+				// var par = Db::table('sys_user')->where(['uid'=>$info[0]['par_id']])->select();
+				// var commission_rate = $par[0]['user_shop_fen'];
+				// var commission_money = round($goods_return*$commission_rate/100,2);
+
 					datahtml+='<div class="pro-pric"><span class="f12">{:lang("goods_number")}:</span><b class="f12 f-no ns-text-color-black">'+goodsitem['num']+'{:lang("goods_piece")}</b></div>';
 					datahtml+='</div>';
 
 					datahtml+='</li>';
 
 				}
-				datahtml+='<div class="pro-pric margin0" style="color:red"><span class="f12">订单佣金:</span><b class="f12 f-no ns-text-color-red">'+ mmo +'元</b></div>';
+				datahtml+='<div class="pro-pric margin0" style="color:red"><span class="f12">'+ordersitem['status_name']+'-----订单佣金:</span><b class="f12 f-no ns-text-color-red">'+ mmo +'元</b></div>';
 				datahtml+='</ul>';
 			}
 

@@ -32,13 +32,13 @@ Db::execute('update sys_user set user_shop=1 , user_shop_fen = 40 where uid='.$u
 
 
 问题：
-1、 实付金额   我使用ns_order         pay_money + user_platform_money  待测试
+1、 实付金额   我使用ns_order         pay_money + user_platform_money  
 
 
 
 
 
-
+{$vo.reg_time | getTimeStampTurnTime}
 
 
 

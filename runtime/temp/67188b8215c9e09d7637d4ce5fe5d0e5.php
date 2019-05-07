@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1556089261;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:38:"template/wap\default\member\index.html";i:1557199234;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -235,7 +235,17 @@
 <!-- 2019.4.16++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 	  <div class="member-order">
-	 	<div class="member-order-head">
+ 		<?php if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): ?>
+	 	<div class="member-order-head"> 		
+	 		<div class="ns-text-color-black order-head-left">
+	 			<a href="<?php echo __URL('http://127.0.0.1:8080/index.php/wap/member/shop_user?shop_id='.$shop_id); ?>">
+	 			我的下级(点击查看下级信息)
+	 			</a>
+	 		</div>
+	 		<div class="clear"></div>
+	 	</div>
+ 		<?php endif; ?>	 	
+ 		<div class="member-order-head">
 	 		
 	 		<div class="ns-text-color-black order-head-left">
 	 			<?php if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): ?>
@@ -246,6 +256,7 @@
 	 			我的店铺
 	 			<?php endif; ?>
 	 		</div>
+
 	 		<?php if($member_info['user_info']['user_shop'] == 0 && $member_info['user_info']['user_shop_agree'] == 1): ?>
 	 		<div class="order-head-right">开店审核中</div>
 	 		<?php endif; if($member_info['user_info']['user_shop'] == 0 && $member_info['user_info']['user_shop_agree'] == 0): ?>
@@ -253,6 +264,10 @@
 	 		<?php endif; ?> 		
 	 		<div class="clear"></div>
 	 	</div>
+
+
+
+
 	 	<?php if($member_info['user_info']['user_shop'] == 1 && $member_info['user_info']['user_shop_agree'] == 1): ?>
  	 	<div class="member-order-head">
 	 		我的店铺连接(长按复制)

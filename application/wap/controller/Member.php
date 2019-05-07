@@ -19,7 +19,8 @@ namespace app\wap\controller;
 use data\service\Config;
 use think\Request;
 use think\Session;
-
+use think\Db;
+use think\Model;
 /**
  * 会员
  *
@@ -164,7 +165,27 @@ class Member extends BaseWap
 	public function user_shop()
 	{
 		return $this->view($this->style . "order/user_shop");
+	}
+	/**
+	 * 开店员佣金订单表
+	 */
+	public function user_shopd()
+	{
+		return $this->view($this->style . "order/user_shopd");
 	}	
+	/**
+	 * 开店员我的下级
+	 */
+	public function shop_user()
+	{
+
+
+		$users = Db::table('sys_user')->where(['par_id'=>$this->uid])->order("reg_time desc")->select();
+		$this->assign('users', $users);
+		return $this->view($this->style . "order/shop_user");
+	}
+
+
 	/**
 	 * 会员申请开店页面
 	 */

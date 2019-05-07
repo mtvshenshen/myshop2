@@ -521,7 +521,7 @@ class OrderAction extends OrderService
 				// 		$cost_total += $value['cost_price'];
 				// 	}
 				// }
-
+			    $cost_total = 0;
 				foreach ($goods as $key => $value) {
 					if($value['refund_status'] != 0){
 						$cost_total += $value['goods_money'];

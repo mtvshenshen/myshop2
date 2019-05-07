@@ -256,12 +256,61 @@ class Order extends BaseApi
 			}
 			$order_list['data'][$key]['order_item_list'] = $order_item_list;
 
-
+// var_dump($order_list['data']);
 
 		}
 
 		return $this->outMessage($title, $order_list);
-	}	
+	}
+
+	/**
+	 * 获取当前会员的订单列表
+	 */
+	public function shopO()
+	{
+		$title = "获取当前会员的所属佣金订单列表进行中";
+		if (empty($this->uid)) {
+			return $this->outMessage($title, null, '-9999', "无法获取会员登录信息");
+		}
+		
+		$page_index = isset($this->params['page']) ? $this->params['page'] : 1;
+		$page_size = isset($this->params['page_size']) ? $this->params['page_size'] : PAGESIZE;
+		
+		$condition['par_id'] = $this->uid;
+		$condition['is_deleted'] = 0;
+		$condition['order_status'] = array(
+			'in',
+			'1,2,3'
+		);		
+
+		// 还要考虑状态逻辑
+		$order_query = new OrderQuery();
+		$order_list = $order_query->getOrderList($page_index, $page_size, $condition, 'create_time desc');
+		foreach ($order_list['data'] as $k => $v) {
+			$goods = Db::table('ns_order_goods')->where(array('order_id'=>$v['order_id']))->select();
+
+			$cost_total = 0;
+			foreach ($goods as $key => $value) {
+				if($value['refund_status'] != 0){
+					$cost_total += $value['goods_money'];
+				}else{
+					$cost_total += $value['cost_price'];
+				}
+			}
+
+			$goods_money = $v['pay_money'] + $v['user_platform_money'] - $v['shipping_money'];
+			$goods_return = $goods_money-$cost_total;
+			$par = Db::table('sys_user')->where(['uid'=>$v['par_id']])->select();
+			$commission_rate = $par[0]['user_shop_fen'];
+			$commission_money = round($goods_return*$commission_rate/100,2);
+			$order_list['data'][$k]['commission_money']=$commission_money ;
+		}		
+		$order_list['statusNum'] = $order_query->getOrderStatusNum($condition);
+		return $this->outMessage($title, $order_list);
+	}
+
+
+
 	/**
 	 * 订单详情
 	 */

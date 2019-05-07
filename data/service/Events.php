@@ -201,7 +201,7 @@ class Events
 			
 			$config = new Config();
 			$config_info = $config->getConfig(0, 'ORDER_DELIVERY_COMPLETE_TIME');
-			
+			// 2019.4.26
 			// if ($config_info['value'] != '') {
 			// 	$complete_time = $config_info['value'];
 			// } else {

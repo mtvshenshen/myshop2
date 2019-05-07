@@ -47,7 +47,7 @@
 		<?php break; case "2": ?>
 			<!-- 一行两个 -->
 			<div class="layout-one">
-				<?php $__FOR_START_11811__=0;$__FOR_END_11811__=2;for($i=$__FOR_START_11811__;$i < $__FOR_END_11811__;$i+=1){ ?>
+				<?php $__FOR_START_29490__=0;$__FOR_END_29490__=2;for($i=$__FOR_START_29490__;$i < $__FOR_END_29490__;$i+=1){ ?>
 				<div class="<?php echo $rand_str; ?>-item">
 					<?php if($info['type'] == 1): ?>
 					<a href="<?php echo __URL('http://127.0.0.1:8080/index.php'.$info['advs'][$i]['adv_url']); ?>"  target="_blank">
@@ -62,7 +62,7 @@
 		<?php break; case "3": ?>
 			<!-- 一行三个 -->
 			<div class="layout-two">
-				<?php $__FOR_START_19750__=0;$__FOR_END_19750__=3;for($i=$__FOR_START_19750__;$i < $__FOR_END_19750__;$i+=1){ ?>
+				<?php $__FOR_START_17584__=0;$__FOR_END_17584__=3;for($i=$__FOR_START_17584__;$i < $__FOR_END_17584__;$i+=1){ ?>
 				<div class="<?php echo $rand_str; ?>-item">
 					<?php if($info['type'] == 1): ?>
 					<a href="<?php echo __URL('http://127.0.0.1:8080/index.php'.$info['advs'][$i]['adv_url']); ?>"  target="_blank">
@@ -77,7 +77,7 @@
 		<?php break; case "4": ?>
 			<!-- 一行四个 -->
 			<div class="layout-three">
-				<?php $__FOR_START_5081__=0;$__FOR_END_5081__=4;for($i=$__FOR_START_5081__;$i < $__FOR_END_5081__;$i+=1){ ?>
+				<?php $__FOR_START_6210__=0;$__FOR_END_6210__=4;for($i=$__FOR_START_6210__;$i < $__FOR_END_6210__;$i+=1){ ?>
 				<div class="<?php echo $rand_str; ?>-item">
 					<?php if($info['type'] == 1): ?>
 					<a href="<?php echo __URL('http://127.0.0.1:8080/index.php'.$info['advs'][$i]['adv_url']); ?>"  target="_blank">
@@ -119,7 +119,7 @@
 					</div>
 				</div>
 				<div class="<?php echo $rand_str; ?>-right">
-					<?php $__FOR_START_18602__=1;$__FOR_END_18602__=3;for($i=$__FOR_START_18602__;$i < $__FOR_END_18602__;$i+=1){ ?>
+					<?php $__FOR_START_19967__=1;$__FOR_END_19967__=3;for($i=$__FOR_START_19967__;$i < $__FOR_END_19967__;$i+=1){ ?>
 					<div class="<?php echo $rand_str; ?>-item">
 						<?php if($info['type'] == 1): ?>
 						<a href="<?php echo __URL('http://127.0.0.1:8080/index.php'.$info['advs'][$i]['adv_url']); ?>"  target="_blank">
@@ -147,7 +147,7 @@
 					</div>
 				</div>
 				<div class="<?php echo $rand_str; ?>-buttom">
-					<?php $__FOR_START_26061__=1;$__FOR_END_26061__=3;for($i=$__FOR_START_26061__;$i < $__FOR_END_26061__;$i+=1){ ?>
+					<?php $__FOR_START_9836__=1;$__FOR_END_9836__=3;for($i=$__FOR_START_9836__;$i < $__FOR_END_9836__;$i+=1){ ?>
 					<div class="<?php echo $rand_str; ?>-item">
 						<?php if($info['type'] == 1): ?>
 						<a href="<?php echo __URL('http://127.0.0.1:8080/index.php'.$info['advs'][$i]['adv_url']); ?>"  target="_blank">
@@ -187,7 +187,7 @@
 						</div>
 					</div>
 					<div class="<?php echo $rand_str; ?>-buttom">
-						<?php $__FOR_START_16459__=2;$__FOR_END_16459__=4;for($i=$__FOR_START_16459__;$i < $__FOR_END_16459__;$i+=1){ ?>
+						<?php $__FOR_START_6701__=2;$__FOR_END_6701__=4;for($i=$__FOR_START_6701__;$i < $__FOR_END_6701__;$i+=1){ ?>
 						<div class="<?php echo $rand_str; ?>-item">
 							<?php if($info['type'] == 1): ?>
 							<a href="<?php echo __URL('http://127.0.0.1:8080/index.php'.$info['advs'][$i]['adv_url']); ?>"  target="_blank">
