@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:40:"template/wap\default\login\register.html";i:1553928965;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:40:"template/wap\default\login\register.html";i:1557217176;s:54:"D:\phpStudy\WWW\niushop\template\wap\default\base.html";i:1553848818;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -272,7 +272,7 @@ $notice = $notice['data'];
 	var min_length_str = "<?php echo $wap_register_info['reg_config']['pwd_len']; ?>";
 	var regex_str = "<?php echo $wap_register_info['reg_config']['pwd_complexity']; ?>";
 	var username_verify = "<?php echo $wap_register_info['reg_config']['name_keyword']; ?>";
-	
+	var uurl = "<?php echo $login_pre_url; ?>";console.log(uurl);
 </script>
 <script src="/template/wap/default/public/js/register.js"></script>
 

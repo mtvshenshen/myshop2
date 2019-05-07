@@ -190,6 +190,9 @@ class Login extends BaseWap
 	 */
 	public function index()
 	{
+		// var_dump($_SESSION['login_pre_url']);
+		// var_dump(__URL(__URL__ . $_SERVER['HTTP_REFERER']));
+		$_SESSION['login_pre_url'] = __URL(__URL__ . $_SERVER['HTTP_REFERER']);
 		if (request()->isAjax()) {
 			$token = request()->post('token', "");
 			if (!empty($token)) {
@@ -449,6 +452,9 @@ class Login extends BaseWap
 		$config = new Config();
 		$reg_config_info = $config->getRegisterAndVisit(0);
 		$reg_config = json_decode($reg_config_info["value"], true);
+		if (!empty($_SESSION['login_pre_url'])) {
+			$this->assign("login_pre_url", $_SESSION['login_pre_url']);
+		}	
 		if (trim($reg_config['register_info']) == "" || $reg_config['is_register'] == 0) {
 			$this->error("抱歉,商城暂未开放注册!");
 		}

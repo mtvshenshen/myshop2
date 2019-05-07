@@ -141,7 +141,12 @@ function register_member(){
 				data: {token: data.token},
 				success: function (code) {
 					if (code == 1) {
-						location.href = __URL(APPMAIN+"/member/index");
+						if(uurl == null || uurl == ""){
+							location.href = __URL(APPMAIN+"/member/index");
+						}else{
+							location.href = uurl;
+						}
+						
 					} 
 				}
 			});
